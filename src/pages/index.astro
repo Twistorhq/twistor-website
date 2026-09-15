@@ -1,0 +1,154 @@
+---
+const products = [
+  {
+    slug: 'dental-front-office',
+    name: 'Dental AI Front Office',
+    tagline: 'Never lose a patient to voicemail again.',
+    blurb: 'AI answers every call, confirms appointments, texts back missed calls in under a minute, and books directly inside your practice management software — with a monthly report showing recovered revenue.',
+  },
+  {
+    slug: 'trades-front-office',
+    name: 'Trades AI Front Office',
+    tagline: 'Every call answered. Every urgent job triaged.',
+    blurb: 'For HVAC, plumbing, roofing, and electrical shops: AI reception that triages urgency and posts jobs straight to your dispatch board.',
+  },
+  {
+    slug: 'dispatch-os',
+    name: 'Dispatch OS',
+    tagline: 'One board that runs your phones and your schedule.',
+    blurb: 'Jobs arrive by phone, email, or web. AI answers, triages, schedules, and confirms — while you watch a single dispatch board.',
+  },
+  {
+    slug: 'compliance-agent',
+    name: 'Compliance Evidence Agent',
+    tagline: 'Your audit evidence, collected continuously.',
+    blurb: 'An agent living in your repos and cloud accounts, continuously collecting SOC 2 / HIPAA evidence and opening PRs when something drifts.',
+  },
+  {
+    slug: 'data-analytics',
+    name: 'Managed Data + Analytics',
+    tagline: 'Your data team, done for you.',
+    blurb: 'Pipelines from your SaaS tools into a clean warehouse, dashboards you actually read, and a monthly KPI memo in plain English.',
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Aera Analytics — The company that does it all</title>
+    <meta name="description" content="Aera Analytics builds AI systems that answer your phones, recover your revenue, and run your operations — one platform, every product." />
+    <style>
+      :root { --ink: #0f172a; --muted: #475569; --accent: #2563eb; --bg: #f8fafc; }
+      * { box-sizing: border-box; }
+      body { font-family: system-ui, -apple-system, sans-serif; margin: 0; color: var(--ink); background: #fff; line-height: 1.6; }
+      header, main, footer { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+      header { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 24px; }
+      .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; }
+      .logo span { color: var(--accent); }
+      nav a { margin-left: 20px; color: var(--muted); text-decoration: none; font-weight: 500; }
+      .hero { padding: 72px 0 56px; }
+      .hero h1 { font-size: 3rem; line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 16px; }
+      .hero h1 span { color: var(--accent); }
+      .hero p { font-size: 1.2rem; color: var(--muted); max-width: 640px; }
+      .cta-row { margin-top: 28px; display: flex; gap: 12px; }
+      .btn { display: inline-block; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+      .btn-primary { background: var(--accent); color: #fff; }
+      .btn-ghost { border: 1px solid #cbd5e1; color: var(--ink); }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 24px 0 72px; }
+      .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background: var(--bg); }
+      .card h3 { margin: 0 0 4px; font-size: 1.15rem; }
+      .card .tagline { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin: 0 0 8px; }
+      .card p { color: var(--muted); font-size: 0.95rem; margin: 0 0 12px; }
+      .card a { color: var(--accent); font-weight: 600; text-decoration: none; }
+      .platform { background: var(--ink); color: #fff; padding: 64px 0; margin-top: 24px; }
+      .platform .inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+      .platform h2 { font-size: 2rem; margin: 0 0 12px; letter-spacing: -0.02em; }
+      .platform p { color: #94a3b8; max-width: 680px; }
+      .platform ul { color: #cbd5e1; columns: 2; max-width: 680px; padding-left: 20px; }
+      footer { padding: 40px 24px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
+      .placeholder { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 24px; color: var(--muted); margin: 24px 0; }
+      .placeholder strong { color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Aera<span>Analytics</span></div>
+      <nav>
+        <a href="#products">Products</a>
+        <a href="#platform">Platform</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>The company that <span>does it all.</span></h1>
+        <p>
+          Aera Analytics builds AI systems that answer your phones, recover your
+          revenue, and run your operations. One platform, every product —
+          designed, deployed, and supported by a senior engineering team.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Book a demo</a>
+          <a class="btn btn-ghost" href="#products">See the products</a>
+        </div>
+      </section>
+
+      <section id="products">
+        <h2>Products</h2>
+        <div class="grid">
+          {products.map((p) => (
+            <div class="card">
+              <h3>{p.name}</h3>
+              <p class="tagline">{p.tagline}</p>
+              <p>{p.blurb}</p>
+              <a href={`/products/${p.slug}/`}>Learn more →</a>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <section class="platform" id="platform">
+      <div class="inner">
+        <h2>One platform underneath it all: Aera Core</h2>
+        <p>
+          Every Aera product runs on the same production platform — voice AI,
+          business texting, agent orchestration, and your data — so each new
+          product inherits the reliability of all the others.
+        </p>
+        <ul>
+          <li>AI voice reception with human escalation</li>
+          <li>Business SMS: reminders, confirmations, text-back</li>
+          <li>Stateful agent workflows with audit trails</li>
+          <li>Real integrations — your PMS, dispatch board, CRM</li>
+          <li>Per-client data isolation and spend controls</li>
+          <li>Monitored 24/7 with automatic rollback</li>
+        </ul>
+      </div>
+    </section>
+
+    <main>
+      <section id="contact">
+        <h2>Talk to us</h2>
+        <div class="placeholder">
+          <strong>[PLACEHOLDER — contact form / booking link]</strong><br />
+          Contact form and scheduling link go here once the domain and
+          booking tool are configured. No inquiries are collected yet.
+        </div>
+        <div class="placeholder">
+          <strong>[PLACEHOLDER — proof section]</strong><br />
+          Case studies, recovered-revenue numbers, and client quotes will
+          appear here only after real pilots produce real results.
+          Nothing here is invented.
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 Aera Analytics LLC · Denver, Colorado · Built on Aera Core
+    </footer>
+  </body>
+</html>
