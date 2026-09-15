@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://aeraanalytics.com',
+  site: 'https://twistor.ai',
 });

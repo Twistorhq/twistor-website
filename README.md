@@ -1,11 +1,11 @@
-# Aera Website
+# Twistor Website
 
-The premier marketing site for Aera Analytics — "the company that does it all."
+The premier marketing site for Twistor — "the company that does it all."
 Built with [Astro](https://astro.build), deployed as a static site.
 
 ## Pages
 
-- `/` — homepage: positioning, product grid, Aera Core platform section
+- `/` — homepage: positioning, product grid, Twistor Core platform section
 - `/products/dental-front-office/` — Dental AI Front Office
 - `/products/trades-front-office/` — Trades AI Front Office
 - `/products/dispatch-os/` — Dispatch OS
