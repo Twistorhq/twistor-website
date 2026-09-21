@@ -11,7 +11,6 @@ import {
   TextArea,
   Selector,
   Banner,
-  Field,
 } from '@astryxdesign/core';
 
 const PRODUCTS = [
@@ -92,43 +91,35 @@ export default function AstryxPilot() {
             setSubmitted(true);
           }}
         >
-          <Field>
-            <TextInput
-              label="Full name"
-              name="name"
-              isRequired
-              autoComplete="name"
-              placeholder="e.g. Maria Delgado"
-            />
-          </Field>
-          <Field>
-            <TextInput
-              label="Shop phone"
-              name="phone"
-              type="tel"
-              isRequired
-              autoComplete="tel"
-              description="The number your customers already call."
-              placeholder="(303) 555-0148"
-            />
-          </Field>
-          <Field>
-            <Selector
-              label="Business type"
-              name="business-type"
-              isRequired
-              options={BUSINESS_TYPES}
-            />
-          </Field>
-          <Field>
-            <TextArea
-              label="What eats your front desk's time?"
-              name="notes"
-              isOptional
-              description="Missed calls, scheduling chaos, no-shows — give us the honest version."
-              placeholder="e.g. We miss calls every Saturday and nobody follows up."
-            />
-          </Field>
+          <TextInput
+            label="Full name"
+            name="name"
+            isRequired
+            autoComplete="name"
+            placeholder="e.g. Maria Delgado"
+          />
+          <TextInput
+            label="Shop phone"
+            name="phone"
+            type="tel"
+            isRequired
+            autoComplete="tel"
+            description="The number your customers already call."
+            placeholder="(303) 555-0148"
+          />
+          <Selector
+            label="Business type"
+            name="business-type"
+            isRequired
+            options={BUSINESS_TYPES}
+          />
+          <TextArea
+            label="What eats your front desk's time?"
+            name="notes"
+            isOptional
+            description="Missed calls, scheduling chaos, no-shows — give us the honest version."
+            placeholder="e.g. We miss calls every Saturday and nobody follows up."
+          />
           <div className="pilot-row">
             <Button label="Request my demo" clickAction={() => setSubmitted(true)} />
           </div>

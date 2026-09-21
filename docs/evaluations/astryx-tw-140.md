@@ -103,6 +103,14 @@ Caveats before any production use:
    belongs to Dre and does not exist yet — ticket it before any production form.
 6. If rejected: delete the branch; `git checkout main` leaves the site
    untouched (only new files + config on the branch; `dist/` is gitignored).
+7. **Meta governance risk** — Astryx is pre-1.0 AND Meta-owned, so the
+   roadmap answers to a corporate maintainer, not a community. A
+   deprecation, pivot, or re-license could strand adopters on a dead-end
+   component set; budget for it before any adopt decision. The explicit
+   exit strategy is `swizzle`: Astryx's CLI ejects any component's source
+   into our own tree, so if the library ever goes sideways we keep the
+   components we depend on, fully owned, with zero runtime dependency on
+   Meta's release cadence.
 
 ## Workarounds / limitations (honest log)
 
