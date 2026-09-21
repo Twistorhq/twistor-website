@@ -1,0 +1,87 @@
+---
+// INTERACTIVE SURFACE — TW-150 Astryx adoption (branch rollout/tw-150-astryx).
+// First adopted surface: Twistor Trades dispatch board. Sample data only.
+//
+// SCOPE: routes under src/pages/surfaces/** are interactive product surfaces
+// and MAY use Astryx through src/components/ui. They are noindex, unlinked
+// from marketing pages, and ship zero React to any other route.
+// The marketing site (/, /products/**) must never import Astryx — enforced
+// by `npm run guard`.
+import DispatchBoard from '../../components/DispatchBoard';
+import '@astryxdesign/core/reset.css';
+import '@astryxdesign/theme-neutral/theme.css';
+import '../../styles/astryx-twistor-tokens.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+    <title>Dispatch board — Twistor interactive surface</title>
+    <meta
+      name="description"
+      content="Internal adoption surface: Twistor Trades dispatch board built on the Astryx design system. Sample data only, not a production surface."
+    />
+    <style>
+      .surface-shell { max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; }
+      .surface-banner {
+        background: #0f172a; color: #fff; padding: 10px 24px;
+        font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em;
+      }
+      .surface-banner strong { color: #93c5fd; }
+      .board-stack > * + * { margin-top: 24px; }
+      .board-filters {
+        display: grid; gap: 16px; margin: 16px 0 8px;
+        grid-template-columns: minmax(240px, 1fr) minmax(200px, 280px);
+        align-items: end;
+      }
+      @media (max-width: 640px) { .board-filters { grid-template-columns: 1fr; } }
+      .board-count { color: #475569; font-size: 0.9rem; }
+      .board-empty {
+        padding: 32px; text-align: center; color: #475569;
+        border: 1px dashed #cbd5e1; border-radius: 8px;
+      }
+      .board-grid {
+        list-style: none; margin: 16px 0 0; padding: 0;
+        display: grid; gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      .job-card > * + * { margin-top: 10px; }
+      .job-card h3 { margin: 0; font-size: 1.1rem; }
+      .job-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+      .job-summary { font-weight: 600; color: #2563eb; margin: 0; }
+      .job-meta { margin: 0; display: grid; gap: 6px; font-size: 0.92rem; }
+      .job-meta > div { display: grid; grid-template-columns: 72px 1fr; gap: 8px; }
+      .job-meta dt { color: #475569; font-weight: 600; }
+      .job-meta dd { margin: 0; }
+      .job-done { color: #475569; font-size: 0.9rem; margin: 0; }
+      footer.surface-footer {
+        max-width: 1200px; margin: 0 auto; padding: 24px;
+        border-top: 1px solid #e2e8f0; color: #475569; font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="surface-banner" role="note">
+      <strong>Adoption surface</strong> — Dispatch board on Astryx (TW-150).
+      Sample data only. Not linked from any marketing page.
+    </div>
+    <div class="surface-shell twistor-brand" data-astryx-theme="neutral">
+      <main>
+        <h1>Dispatch board</h1>
+        <p>
+          First interactive surface adopted on the Astryx design system, styled
+          with Twistor brand tokens. Search and status filters work live;
+          advancing a job updates local state only — nothing is sent anywhere.
+        </p>
+        <DispatchBoard client:load />
+      </main>
+    </div>
+    <footer class="surface-footer">
+      Twistor Astryx adoption — branch <code>rollout/tw-150-astryx</code>.
+      Adoption guide: <code>docs/astryx-adoption.md</code>.
+    </footer>
+  </body>
+</html>
