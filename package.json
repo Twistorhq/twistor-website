@@ -1,1 +1,1 @@
-{"dependencies":{"astro":"^4.16.0"},"name":"twistor-website","private":true,"scripts":{"build":"astro build","dev":"astro dev","preview":"astro preview"},"type":"module","version":"0.1.0"}
+{"dependencies":{"@astrojs/react":"^4.4.2","@astryxdesign/core":"^0.6.2","@astryxdesign/theme-neutral":"^0.6.2","@stylexjs/stylex":"^0.19.1","astro":"^4.16.0","react":"^19.3.0","react-dom":"^19.3.0"},"name":"twistor-website","private":true,"scripts":{"build":"astro build","dev":"astro dev","preview":"astro preview"},"type":"module","version":"0.1.0"}
