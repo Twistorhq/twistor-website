@@ -5,6 +5,7 @@
 import AstryxPilot from '../../components/AstryxPilot';
 import '@astryxdesign/core/reset.css';
 import '@astryxdesign/theme-neutral/theme.css';
+import '../../styles/astryx-twistor-tokens.css'; // shared Twistor brand tokens (TW-150)
 ---
 
 <html lang="en">
@@ -19,21 +20,7 @@ import '@astryxdesign/theme-neutral/theme.css';
       content="Internal evaluation of the Astryx design system against Twistor brand tokens. Not a production surface."
     />
     <style>
-      /* Twistor brand tokens mapped onto Astryx's neutral theme.
-         No fork, no component wrapping — pure CSS custom-property overrides
-         scoped to the theme root, exactly as Astryx's theming model intends. */
-      [data-astryx-theme="neutral"].twistor-brand {
-        --color-accent: #2563eb;            /* Twistor accent blue */
-        --color-accent-muted: #dbeafe;
-        --color-text-primary: #0f172a;      /* Twistor ink */
-        --color-text-secondary: #475569;   /* Twistor muted */
-        --color-background-body: #ffffff;
-        --color-background-surface: #f8fafc;
-        --font-family-body: system-ui, -apple-system, "Segoe UI", sans-serif;
-        --font-family-heading: system-ui, -apple-system, "Segoe UI", sans-serif;
-        --radius-element: 8px;             /* match twistor.co buttons */
-      }
-
+      /* Twistor brand tokens live in src/styles/astryx-twistor-tokens.css (TW-150). */
       .demo-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 72px; }
       .demo-banner {
         background: #0f172a; color: #fff; padding: 10px 24px;
