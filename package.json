@@ -11,7 +11,7 @@
   "name": "twistor-website",
   "private": true,
   "scripts": {
-    "build": "astro build",
+    "build": "npm run guard && astro build",
     "dev": "astro dev",
     "preview": "astro preview",
     "guard": "node scripts/check-astryx-scope.mjs"

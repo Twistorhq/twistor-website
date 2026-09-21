@@ -6,7 +6,8 @@
 // zero network I/O; status changes are local UI state for the adoption demo.
 //
 // All Astryx usage goes through src/components/ui (the swizzle boundary);
-// this file never imports '@astryxdesign/core' directly.
+// this file only imports Twistor's wrapper components, never the vendor
+// design-system package directly.
 import {useMemo, useState} from 'react';
 import {
   TwButton,

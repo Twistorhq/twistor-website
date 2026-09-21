@@ -138,7 +138,11 @@ through the `ui/` boundary, all client-side state, zero network I/O.
   consistent with the evaluation's ~147 kB figure; cost stays quarantined to
   interactive routes via Astro islands.
 - Keyboard/contrast: structural a11y verified from SSR HTML + vendor a11y
-  suites; Twistor-token contrasts computed above (all AA).
+  suites; Twistor-token contrasts computed above (all AA). One caveat: the
+  status filter's combobox `aria-controls` references a listbox that the
+  vendor Selector renders only on interaction — it is absent from the SSR
+  HTML, so interactive-listbox behavior could not be verified without a live
+  browser.
 - **Limitation (honest):** no live-browser run was available to this agent
   (no browser control in this environment) — no screenshots, no manual
   keyboard walkthrough. Same limitation was logged and accepted in TW-140.

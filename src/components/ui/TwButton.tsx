@@ -29,7 +29,7 @@ export function TwButton({label, variant = 'primary', isDisabled, onPress}: TwBu
       label={label}
       variant={variant}
       isDisabled={isDisabled}
-      clickAction={onPress ? () => onPress() : undefined}
+      clickAction={onPress}
     />
   );
 }
