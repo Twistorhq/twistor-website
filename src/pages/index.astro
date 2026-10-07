@@ -123,6 +123,69 @@ const products = [
       #contact { padding: 64px 0; }
       .placeholder { border: 2px dashed var(--line); border-radius: 12px; padding: 24px; color: var(--muted); margin: 24px 0; font-size: 1rem; }
       .placeholder strong { color: var(--ink); }
+      .leak { padding: 72px 0 24px; }
+      .leak-card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        padding: 32px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 48px;
+      }
+      .field { margin-bottom: 28px; }
+      .field:last-child { margin-bottom: 0; }
+      .field label { display: block; font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+      .field .hint { display: block; color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
+      .field-row { display: flex; align-items: center; gap: 16px; }
+      .field-row output { min-width: 76px; text-align: right; font-weight: 700; font-size: 1.1rem; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--line);
+        margin: 0;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 3px solid var(--surface);
+        box-shadow: 0 1px 4px rgba(28, 26, 23, 0.3);
+        cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 3px solid var(--surface);
+        box-shadow: 0 1px 4px rgba(28, 26, 23, 0.3);
+        cursor: pointer;
+      }
+      input[type="range"]:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 4px; }
+      .leak-results { border-left: 1px solid var(--line); padding-left: 40px; }
+      .leak-kicker { color: var(--accent-text); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; }
+      .leak-amount { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+      .leak-figure-month .leak-amount { font-size: 3rem; color: var(--ink); }
+      .leak-figure-year .leak-amount { font-size: 1.75rem; color: var(--muted); }
+      .leak-results .per { color: var(--muted); font-size: 1rem; margin-left: 8px; }
+      .leak-results .btn { margin: 20px 0 8px; }
+      .leak-math { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 16px; }
+      .leak-math summary { cursor: pointer; font-weight: 600; color: var(--accent-text); }
+      .leak-math p { font-size: 0.95rem; color: var(--muted); }
+      .leak-math .equation { font-family: ui-monospace, SFMono-Regular, monospace; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; color: var(--ink); font-size: 0.95rem; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      @media (max-width: 720px) {
+        .leak-card { grid-template-columns: 1fr; gap: 28px; }
+        .leak-results { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
+      }
       footer { padding: 40px 24px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
       @media (max-width: 640px) {
         .hero h1 { font-size: 2.2rem; }
@@ -151,6 +214,65 @@ const products = [
         <div class="cta-row">
           <a class="btn btn-primary" href="#contact">Book a demo</a>
           <a class="btn btn-ghost" href="#products">See the products</a>
+        </div>
+      </section>
+
+      <section class="leak" id="leak-calculator" aria-labelledby="leak-heading">
+        <h2 class="section-title" id="leak-heading">How much revenue is walking out your door?</h2>
+        <p class="section-sub">
+          Every missed call is a job you almost won. Set the sliders to your
+          shop's numbers and see what those calls cost you.
+        </p>
+        <div class="leak-card">
+          <div class="leak-inputs">
+            <div class="field">
+              <label for="leak-calls">Missed calls per week</label>
+              <span class="hint" id="leak-calls-hint">Calls that hit voicemail or rang out, 0 to 50.</span>
+              <div class="field-row">
+                <input type="range" id="leak-calls" min="0" max="50" step="1" value="8" aria-describedby="leak-calls-hint" />
+                <output id="leak-calls-out" for="leak-calls">8</output>
+              </div>
+            </div>
+            <div class="field">
+              <label for="leak-value">Average job value</label>
+              <span class="hint" id="leak-value-hint">What one won job is worth on average, $100 to $5,000.</span>
+              <div class="field-row">
+                <input type="range" id="leak-value" min="100" max="5000" step="50" value="850" aria-describedby="leak-value-hint" />
+                <output id="leak-value-out" for="leak-value">$850</output>
+              </div>
+            </div>
+            <div class="field">
+              <label for="leak-rate">Close rate</label>
+              <span class="hint" id="leak-rate-hint">Share of quoted jobs you normally win, 10% to 90%.</span>
+              <div class="field-row">
+                <input type="range" id="leak-rate" min="10" max="90" step="1" value="40" aria-describedby="leak-rate-hint" />
+                <output id="leak-rate-out" for="leak-rate">40%</output>
+              </div>
+            </div>
+          </div>
+          <div class="leak-results">
+            <p class="leak-kicker">Estimated revenue leaking</p>
+            <p class="leak-figure-month"><span class="leak-amount" id="leak-month">$11,778</span><span class="per">/month</span></p>
+            <p class="leak-figure-year"><span class="leak-amount" id="leak-year">$141,331</span><span class="per">/year</span></p>
+            <a class="btn btn-primary" href="/products/trades-front-office/">See what Twistor recovers</a>
+            <details class="leak-math">
+              <summary>How this number is calculated</summary>
+              <p>
+                <strong>The concept: expected lost revenue.</strong> Every
+                missed call is demand that reached you and got nothing back.
+                This prices the jobs you almost won.
+              </p>
+              <p class="equation">leak / month = missed calls / week × 4.33 × avg job value × close rate</p>
+              <p>
+                <strong>Why it works:</strong> your close rate says what share
+                of those callers you would have won. The job value says what
+                each was worth. 4.33 is the average number of weeks in a
+                month. Multiply the three and the leak stops being a feeling
+                and becomes a figure you can act on.
+              </p>
+            </details>
+            <p class="sr-only" aria-live="polite" id="leak-live"></p>
+          </div>
         </div>
       </section>
 
@@ -219,5 +341,80 @@ const products = [
     <footer>
       © 2026 Twistor LLC · Denver, Colorado · Built on Twistor Core
     </footer>
+
+    <script>
+      (function () {
+        var callsEl = document.getElementById('leak-calls');
+        var valueEl = document.getElementById('leak-value');
+        var rateEl = document.getElementById('leak-rate');
+        var callsOut = document.getElementById('leak-calls-out');
+        var valueOut = document.getElementById('leak-value-out');
+        var rateOut = document.getElementById('leak-rate-out');
+        var monthEl = document.getElementById('leak-month');
+        var yearEl = document.getElementById('leak-year');
+        var liveEl = document.getElementById('leak-live');
+        var fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var raf = null;
+        var liveTimer = null;
+        var displayed = { month: 0, year: 0 };
+
+        function targets() {
+          var calls = Number(callsEl.value);
+          var value = Number(valueEl.value);
+          var rate = Number(rateEl.value) / 100;
+          var month = calls * 4.33 * value * rate;
+          return { month: month, year: month * 12 };
+        }
+
+        function render(t) {
+          monthEl.textContent = fmt.format(Math.round(t.month));
+          yearEl.textContent = fmt.format(Math.round(t.year));
+        }
+
+        function announce(t) {
+          clearTimeout(liveTimer);
+          liveTimer = setTimeout(function () {
+            liveEl.textContent = 'Estimated revenue leaking: ' +
+              fmt.format(Math.round(t.month)) + ' per month, ' +
+              fmt.format(Math.round(t.year)) + ' per year.';
+          }, 100);
+        }
+
+        function animate(to) {
+          if (reduceMotion) { displayed = to; render(to); announce(to); return; }
+          if (raf) cancelAnimationFrame(raf);
+          var fromMonth = displayed.month;
+          var fromYear = displayed.year;
+          var start = null;
+          var dur = 450;
+          function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            var e = 1 - Math.pow(1 - p, 3);
+            displayed = {
+              month: fromMonth + (to.month - fromMonth) * e,
+              year: fromYear + (to.year - fromYear) * e
+            };
+            render(displayed);
+            if (p < 1) { raf = requestAnimationFrame(step); }
+            else { announce(to); }
+          }
+          raf = requestAnimationFrame(step);
+        }
+
+        function update() {
+          callsOut.textContent = callsEl.value;
+          valueOut.textContent = fmt.format(Number(valueEl.value));
+          rateOut.textContent = rateEl.value + '%';
+          animate(targets());
+        }
+
+        [callsEl, valueEl, rateEl].forEach(function (el) {
+          el.addEventListener('input', update);
+        });
+        update();
+      })();
+    </script>
   </body>
 </html>
