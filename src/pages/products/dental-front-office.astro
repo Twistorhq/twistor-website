@@ -1,4 +1,5 @@
 ---
+import '@fontsource/bricolage-grotesque/700.css';
 ---
 <html lang="en">
   <head>
@@ -6,20 +7,26 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/webp" href="/logo-mark.webp" />
     <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
-    <title>Dental AI Front Office — Twistor</title>
+    <title>Dental AI Front Office | Twistor</title>
     <meta name="description" content="Never lose a patient to voicemail again." />
     <style>
-      body { font-family: system-ui, -apple-system, sans-serif; margin: 0; color: #0f172a; line-height: 1.6; }
+      :root { --bg: #0a0a0f; --surface: #13131b; --ink: #f5f3ff; --muted: #a7a3bd; --accent: #8b5cf6; --line: #26262f; }
+      body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; margin: 0; color: var(--ink); background: var(--bg); line-height: 1.6; font-size: 1rem; }
       header, main, footer { max-width: 800px; margin: 0 auto; padding: 0 24px; }
       header { padding-top: 24px; padding-bottom: 8px; }
-      header a { color: #2563eb; text-decoration: none; font-weight: 600; }
-      h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin: 24px 0 8px; }
-      .tagline { color: #2563eb; font-weight: 600; font-size: 1.15rem; margin: 0 0 16px; }
-      .price { display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 16px; font-weight: 700; margin: 8px 0 24px; }
+      header a { color: var(--accent); text-decoration: none; font-weight: 600; }
+      h1, h2 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+      h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin: 24px 0 8px; font-weight: 700; }
+      h2 { font-size: 1.5rem; margin: 32px 0 8px; font-weight: 700; }
+      .tagline { color: var(--accent); font-weight: 600; font-size: 1.15rem; margin: 0 0 16px; }
+      .price { display: inline-block; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 16px; font-weight: 700; margin: 8px 0 24px; font-size: 1rem; }
+      p { font-size: 1rem; color: var(--muted); }
       ul { padding-left: 20px; }
-      li { margin-bottom: 8px; }
-      .placeholder { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; color: #64748b; margin: 24px 0; }
-      footer { padding: 40px 24px; color: #64748b; font-size: 0.9rem; border-top: 1px solid #e2e8f0; margin-top: 48px; }
+      li { margin-bottom: 8px; color: var(--ink); font-size: 1rem; }
+      li::marker { color: var(--accent); }
+      .placeholder { border: 2px dashed var(--line); border-radius: 12px; padding: 20px; color: var(--muted); margin: 24px 0; font-size: 1rem; }
+      .placeholder strong { color: var(--ink); }
+      footer { padding: 40px 24px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); margin-top: 48px; }
     </style>
   </head>
   <body>
@@ -30,8 +37,8 @@
       <div class="price">$2,500 setup + $750/mo</div>
       <h2>What it does</h2>
       <ul>
-          <li>AI voice receptionist answers every call — books, reschedules, and triages urgency</li>
-          <li>Real booking inside your Dentrix / Open Dental — no retyping</li>
+          <li>AI voice receptionist answers every call: books, reschedules, and triages urgency.</li>
+          <li>Real booking inside your Dentrix / Open Dental. Nothing retyped.</li>
           <li>SMS reminders and confirmations that cut no-shows</li>
           <li>Instant missed-call text-back in under a minute</li>
           <li>Automated review requests with unhappy-patient routing</li>
@@ -40,11 +47,11 @@
       <h2>Who it's for</h2>
       <p>Solo and small-group dental practices (1–5 chairs) that miss calls during procedures.</p>
       <div class="placeholder">
-        <strong>[PLACEHOLDER — demo video / screenshots]</strong><br />
+        <strong>[PLACEHOLDER: demo video / screenshots]</strong><br />
         Product demo goes here once the pilot build is running.
       </div>
       <div class="placeholder">
-        <strong>[PLACEHOLDER — proof]</strong><br />
+        <strong>[PLACEHOLDER: proof]</strong><br />
         Client results appear here only after real deployments produce real numbers. Nothing invented.
       </div>
     </main>
