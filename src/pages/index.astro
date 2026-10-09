@@ -46,7 +46,21 @@ const products = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+    <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
     <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
+    <meta property="og:title" content="Twistor | The company that does it all" />
+    <meta
+      property="og:description"
+      content="Twistor builds AI systems that answer your phones, recover your revenue, and run your operations. One platform, every product."
+    />
+    <meta property="og:url" content="https://twistor.co/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Twistor | The company that does it all" />
+    <meta
+      name="twitter:description"
+      content="Twistor builds AI systems that answer your phones, recover your revenue, and run your operations. One platform, every product."
+    />
     <title>Twistor | The company that does it all</title>
     <meta
       name="description"
@@ -102,7 +116,6 @@ const products = [
         background: var(--surface);
         margin-bottom: 20px;
       }
-      .featured .kicker { color: var(--accent-text); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
       .featured h3 { margin: 0 0 4px; font-size: 1.6rem; font-weight: 700; }
       .featured .tagline { color: var(--accent-text); font-weight: 600; font-size: 1rem; margin: 0 0 12px; }
       .featured p { color: var(--muted); font-size: 1rem; margin: 0 0 16px; max-width: 720px; }
@@ -121,8 +134,19 @@ const products = [
       .platform li { margin-bottom: 8px; }
       .platform li::marker { color: var(--accent); }
       #contact { padding: 64px 0; }
-      .placeholder { border: 2px dashed var(--line); border-radius: 12px; padding: 24px; color: var(--muted); margin: 24px 0; font-size: 1rem; }
-      .placeholder strong { color: var(--ink); }
+      .contact-card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        padding: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .contact-card h3 { margin: 0 0 8px; font-size: 1.4rem; font-weight: 700; }
+      .contact-card p { color: var(--muted); margin: 0; max-width: 560px; font-size: 1rem; }
       .leak { padding: 72px 0 24px; }
       .leak-card {
         border: 1px solid var(--line);
@@ -182,10 +206,46 @@ const products = [
       .leak-math p { font-size: 0.95rem; color: var(--muted); }
       .leak-math .equation { font-family: ui-monospace, SFMono-Regular, monospace; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; color: var(--ink); font-size: 0.95rem; }
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      .tradeview { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 64px 0; }
+      .tradeview .inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+      .tradeview h2 { font-size: 2rem; margin: 0 0 12px; letter-spacing: -0.02em; font-weight: 700; }
+      .tradeview .lede { color: var(--muted); max-width: 680px; font-size: 1rem; margin: 0 0 8px; }
+      .sample-tag {
+        display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+        color: var(--accent-text); border: 1px solid var(--accent-text); border-radius: 6px; padding: 4px 10px; margin: 0 0 20px;
+      }
+      .tv-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; align-items: stretch; margin: 0 0 24px; }
+      #tv-map { height: 380px; border: 1px solid var(--line); border-radius: 12px; background: #EDE8DF; z-index: 0; }
+      .tv-map-fallback { display: none; border: 1px solid var(--line); border-radius: 12px; background: #EDE8DF; padding: 32px; color: var(--muted); text-align: center; }
+      .tv-side { border: 1px solid var(--line); border-radius: 12px; padding: 24px; background: var(--bg); display: flex; flex-direction: column; }
+      .tv-side h3 { margin: 0 0 4px; font-size: 1.1rem; font-weight: 700; }
+      .tv-side .tv-sub { color: var(--muted); font-size: 0.9rem; margin: 0 0 16px; }
+      .tv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); font-size: 0.95rem; }
+      .tv-row .tv-label { color: var(--muted); }
+      .tv-row .tv-val { font-weight: 700; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+      .tv-total { margin-top: auto; padding-top: 16px; }
+      .tv-total .tv-amount { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 2.2rem; letter-spacing: -0.02em; color: var(--ink); }
+      .tv-total .tv-per { color: var(--muted); font-size: 0.9rem; }
+      .tv-cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+      .tv-note { color: var(--muted); font-size: 0.9rem; margin: 0; }
+      :global(.tv-pin-wrap) { background: none; border: none; }
+      :global(.tv-pin) {
+        background: var(--accent); color: #1C1A17; font-weight: 700; font-size: 0.75rem;
+        border: 2px solid #FFFFFF; border-radius: 999px; padding: 3px 8px; white-space: nowrap;
+        box-shadow: 0 1px 4px rgba(28, 26, 23, 0.35); font-family: system-ui, sans-serif;
+      }
+      .leaflet-container { font-family: system-ui, sans-serif; }
+      @media (max-width: 720px) {
+        .tv-grid { grid-template-columns: 1fr; }
+        #tv-map { height: 280px; }
+      }
       @media (max-width: 720px) {
         .leak-card { grid-template-columns: 1fr; gap: 28px; }
         .leak-results { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
       }
+      a:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 4px; }
+      .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+      summary:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 4px; }
       footer { padding: 40px 24px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
       @media (max-width: 640px) {
         .hero h1 { font-size: 2.2rem; }
@@ -279,11 +339,10 @@ const products = [
       <section id="products">
         <h2 class="section-title">Products</h2>
         <p class="section-sub">
-          Five products, one platform. We started with the trades, where a
+          Five products, one platform. Our wedge is the trades, where a
           missed call is a missed job.
         </p>
         <div class="featured">
-          <p class="kicker">Our wedge</p>
           <h3>{featured.name}</h3>
           <p class="tagline">{featured.tagline}</p>
           <p>{featured.blurb}</p>
@@ -301,6 +360,42 @@ const products = [
         </div>
       </section>
     </main>
+
+    <section class="tradeview" aria-labelledby="tv-heading">
+      <div class="inner">
+        <h2 id="tv-heading">Trade View: the leaks, on a map</h2>
+        <p class="lede">
+          Every pin is money sitting still: a follow-up nobody made, a quote
+          nobody chased, a customer quietly shopping around. This is the shape
+          of what Trade View watches for your shop, every morning.
+        </p>
+        <p><span class="sample-tag">Sample data — fictional shops</span></p>
+        <div class="tv-grid">
+          <div>
+            <div id="tv-map" role="img" aria-label="Sample map of the Denver metro area with pins showing fictional missed-revenue amounts"></div>
+            <div class="tv-map-fallback" id="tv-map-fallback">
+              The interactive map needs a network connection. The sample totals
+              are listed here instead — and your shop's real map is one click away.
+            </div>
+          </div>
+          <div class="tv-side">
+            <h3>Sample leak ledger</h3>
+            <p class="tv-sub">Fictional shops, Denver metro. Your numbers would be real.</p>
+            <div class="tv-row"><span class="tv-label">Missed follow-ups</span><span class="tv-val">$7,050</span></div>
+            <div class="tv-row"><span class="tv-label">Stale quotes</span><span class="tv-val">$9,500</span></div>
+            <div class="tv-row"><span class="tv-label">At-risk customers</span><span class="tv-val">$7,400</span></div>
+            <div class="tv-total">
+              <div class="tv-amount">$23,950</div>
+              <div class="tv-per">sitting still in this sample map</div>
+            </div>
+          </div>
+        </div>
+        <div class="tv-cta-row">
+          <a class="btn btn-primary" href="https://twistorhq.github.io/lbt-os/app/tradeview">See your shop's real map</a>
+          <p class="tv-note">The live Trade View, running on the platform.</p>
+        </div>
+      </div>
+    </section>
 
     <section class="platform" id="platform">
       <div class="inner">
@@ -322,26 +417,66 @@ const products = [
     </section>
 
     <main>
-      <section id="contact">
-        <h2 class="section-title">Talk to us</h2>
-        <div class="placeholder">
-          <strong>[PLACEHOLDER: contact form / booking link]</strong><br />
-          Contact form and scheduling link go here once the domain and
-          booking tool are configured. No inquiries are collected yet.
-        </div>
-        <div class="placeholder">
-          <strong>[PLACEHOLDER: proof section]</strong><br />
-          Case studies, recovered-revenue numbers, and client quotes will
-          appear here only after real pilots produce real results.
-          Nothing here is invented.
+      <section id="contact" aria-labelledby="contact-heading">
+        <h2 class="section-title" id="contact-heading">Talk to us</h2>
+        <p class="section-sub">
+          Tell us about your shop and what the phones are doing to you.
+          We reply within one business day.
+        </p>
+        <div class="contact-card">
+          <div>
+            <h3>Book a demo</h3>
+            <p>
+              Thirty minutes, your numbers, our math. We'll show you exactly
+              what your missed calls are costing and what Twistor would catch.
+            </p>
+          </div>
+          <a class="btn btn-primary" href="mailto:twistorhq@gmail.com?subject=Demo%20request%20—%20Twistor">Email us to book</a>
         </div>
       </section>
     </main>
 
     <footer>
-      © 2026 Twistor LLC · Denver, Colorado · Built on Twistor Core
+      © 2026 Twistor Holdings LLC · Denver, Colorado · Built on Twistor Core
     </footer>
 
+    <script is:inline src="/vendor/leaflet/leaflet.js"></script>
+    <script is:inline>
+      // Mini Trade View teaser — SAMPLE/FICTIONAL data only. Deliberately a
+      // taste of the real /app/tradeview: pins + totals, no dossiers, no
+      // layers, no data connection.
+      (function () {
+        var mapEl = document.getElementById('tv-map');
+        var fallbackEl = document.getElementById('tv-map-fallback');
+        if (!mapEl || typeof window.L === 'undefined') {
+          if (mapEl) mapEl.style.display = 'none';
+          if (fallbackEl) fallbackEl.style.display = 'block';
+          return;
+        }
+        var map = window.L.map('tv-map', { scrollWheelZoom: false }).setView([39.73, -104.96], 10);
+        window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        // Fictional sample shops — Denver metro. Never real customers.
+        var pins = [
+          { lat: 39.7362, lng: -104.9847, label: '$4.2k', kind: 'Missed follow-up' },
+          { lat: 39.7047, lng: -105.0814, label: '$2.9k', kind: 'Missed follow-up' },
+          { lat: 39.7294, lng: -104.8319, label: '$6.1k', kind: 'Stale quote' },
+          { lat: 39.8028, lng: -105.0875, label: '$3.4k', kind: 'Stale quote' },
+          { lat: 39.6132, lng: -104.8827, label: '$5.5k', kind: 'At-risk customer' },
+          { lat: 39.7661, lng: -105.0772, label: '$1.9k', kind: 'At-risk customer' }
+        ];
+        pins.forEach(function (p) {
+          var icon = window.L.divIcon({
+            className: 'tv-pin-wrap',
+            html: '<span class="tv-pin" title="Sample: ' + p.kind + ' ' + p.label + '">' + p.label + '</span>',
+            iconSize: null
+          });
+          window.L.marker([p.lat, p.lng], { icon: icon, keyboard: false }).addTo(map);
+        });
+      })();
+    </script>
     <script>
       (function () {
         var callsEl = document.getElementById('leak-calls');

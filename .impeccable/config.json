@@ -1,0 +1,11 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "cream-palette"
+    ],
+    "ignoreFiles": [
+      "dist/vendor/**"
+    ],
+    "ignoreValues": []
+  }
+}
