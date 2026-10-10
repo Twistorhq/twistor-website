@@ -14,8 +14,14 @@
     "build": "npm run guard && astro build",
     "dev": "astro dev",
     "preview": "astro preview",
-    "guard": "node scripts/check-astryx-scope.mjs"
+    "guard": "node scripts/check-astryx-scope.mjs",
+    "test:a11y": "node --test scripts/accessibility/*.test.mjs",
+    "audit:a11y": "node scripts/accessibility/collect.mjs"
   },
   "type": "module",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "axe-core": "4.14.0"
+  }
 }
