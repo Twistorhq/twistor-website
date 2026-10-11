@@ -13,14 +13,19 @@ but noindex is not access control. Do not put private product/customer data here
 Review in this order:
 
 1. Audience: property managers / housing operators and established trade firms.
-2. Eyebrow: `DENVER PILOT IN PREPARATION`.
+2. Eyebrow: `COMING SOON TO DENVER`.
 3. Headline: `Every request. A clear next step.`
-4. Supporting line: `For the people managing properties. And the trades keeping them running.`
-5. Description: `We're building a shared maintenance workflow—from a resident's first report to an approved provider and a documented closeout.`
-6. CTA: `See the workflow concept`. It navigates to the illustrative card; it does
-   not imply an open waitlist or a service booking.
+4. Supporting line: `Keep property maintenance moving—from the first report to the finished job.`
+5. Description: `Connect residents, property teams, and trusted service providers in one place.`
+6. CTAs: `Get early access` and `Bring your trade business`. Both are disabled
+   until signup storage is connected. Adjacent copy says registration opens soon.
+   Header `How it works` navigates to the sample request card.
 7. Visual: midnight navy, existing Twistor blue, pale green accent; one clearly
    labeled fictional work order. This is a proposed direction, not approved brand.
+
+October 10 revision: owner requested customer-facing production copy and asked
+to apply the proposed revision. Removed internal iteration/development language
+from the page; retain a discreet sample-request label. No launch approval implied.
 
 Acceptance for this iteration: owner agrees with target audience and wording,
 then desktop/mobile visual review, readable type, functioning anchor navigation
