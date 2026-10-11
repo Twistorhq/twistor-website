@@ -13,12 +13,12 @@ but noindex is not access control. Do not put private product/customer data here
 Review in this order:
 
 1. Audience: property managers / housing operators and established trade firms.
-2. Eyebrow: `COMING SOON TO DENVER`.
+2. Eyebrow: `PROPERTY MAINTENANCE. CONNECTED.`
 3. Headline: `Every request. A clear next step.`
-4. Supporting line: `Keep property maintenance moving—from the first report to the finished job.`
-5. Description: `Connect residents, property teams, and trusted service providers in one place.`
+4. Supporting line: `Property maintenance moves forward—from the first report to the finished job.`
+5. Description: `Twistor Trades connects residents, property teams, and trusted service providers in one place.`
 6. CTAs: `Get early access` and `Bring your trade business`. Both are disabled
-   until signup storage is connected. Adjacent copy says registration opens soon.
+   until signup storage is connected. Adjacent copy says registration is closed.
    Header `How it works` navigates to the sample request card.
 7. Visual: midnight navy, existing Twistor blue, pale green accent; one clearly
    labeled fictional work order. This is a proposed direction, not approved brand.
@@ -26,6 +26,9 @@ Review in this order:
 October 10 revision: owner requested customer-facing production copy and asked
 to apply the proposed revision. Removed internal iteration/development language
 from the page; retain a discreet sample-request label. No launch approval implied.
+Follow-up owner direction: all customer copy uses present tense. Workflow labels
+now use active present-tense verbs. The v3 HTML filename provides a distinct
+review link; it does not change the section scope or activate live service.
 
 Acceptance for this iteration: owner agrees with target audience and wording,
 then desktop/mobile visual review, readable type, functioning anchor navigation

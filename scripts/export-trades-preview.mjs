@@ -15,4 +15,5 @@ html=html.replaceAll('href="/"','href="#main"');
 if(/<script\b|<form\b|href="\/_astro\//.test(html)) throw Error('Review must be self-contained and read-only');
 await mkdir(resolve(root,'docs/previews'),{recursive:true});
 await writeFile(resolve(root,'docs/previews/trades-hero-01.html'),html);
+await writeFile(resolve(root,'docs/previews/trades-hero-present-tense-v3.html'),html);
 console.log('Exported docs/previews/trades-hero-01.html');
