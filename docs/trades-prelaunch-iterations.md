@@ -1,7 +1,8 @@
 # Trades prelaunch — section-by-section review
 
 Owner direction October 10, 2026: iterate section by section and copy by copy.
-No section below is owner-approved yet. Do not interpret the implementation of a
+Header/hero present-tense copy approved by Justynn October 10, 2026 at 19:12 Denver;
+owner also requested working links. Later sections remain unapproved. Do not interpret implementation of a
 draft as copy approval, public launch authorization or readiness of live dispatch.
 
 ## Iteration 01 — header and hero only
@@ -17,8 +18,9 @@ Review in this order:
 3. Headline: `Every request. A clear next step.`
 4. Supporting line: `Property maintenance moves forward—from the first report to the finished job.`
 5. Description: `Twistor Trades connects residents, property teams, and trusted service providers in one place.`
-6. CTAs: `Get early access` and `Bring your trade business`. Both are disabled
-   until signup storage is connected. Adjacent copy says registration is closed.
+6. CTAs: `Get early access` and `Bring your trade business`. Both open their
+   audience-specific status panels using native fragment links and CSS :target.
+   Panels explain registration is closed; no data collection or false enrollment.
    Header `How it works` navigates to the sample request card.
 7. Visual: midnight navy, existing Twistor blue, pale green accent; one clearly
    labeled fictional work order. This is a proposed direction, not approved brand.
@@ -29,6 +31,10 @@ from the page; retain a discreet sample-request label. No launch approval implie
 Follow-up owner direction: all customer copy uses present tense. Workflow labels
 now use active present-tense verbs. The v3 HTML filename provides a distinct
 review link; it does not change the section scope or activate live service.
+V4 makes all navigation actionable: brand/home, skip link, workflow anchor,
+both audience panels, cross-panel navigation and return links. The export points
+the brand link at the local overview so it works without a web server. Source
+continues to use the corporate homepage. No JavaScript is required.
 
 Acceptance for this iteration: owner agrees with target audience and wording,
 then desktop/mobile visual review, readable type, functioning anchor navigation
