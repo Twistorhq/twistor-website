@@ -52,8 +52,8 @@ export default function AstryxPilot() {
   return (
     <div className="pilot-stack">
       <Breadcrumbs>
-        <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem href="/demo/astryx-pilot">Design evaluations</BreadcrumbItem>
+        <BreadcrumbItem href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/`}>Home</BreadcrumbItem>
+        <BreadcrumbItem href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/demo/astryx-pilot`}>Design evaluations</BreadcrumbItem>
         <BreadcrumbItem>Astryx pilot</BreadcrumbItem>
       </Breadcrumbs>
 

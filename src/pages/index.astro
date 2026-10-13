@@ -39,14 +39,15 @@ const products = [
       'Pipelines from your SaaS tools into a clean warehouse, dashboards you actually read, and a monthly KPI memo in plain English.',
   },
 ];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
-    <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
+    <link rel="stylesheet" href={base + "/vendor/leaflet/leaflet.css"} />
     <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
     <meta property="og:title" content="Twistor | The company that does it all" />
     <meta
@@ -328,7 +329,7 @@ const products = [
             <p class="leak-kicker">Estimated revenue leaking</p>
             <p class="leak-figure-month"><span class="leak-amount" id="leak-month">$11,778</span><span class="per">/month</span></p>
             <p class="leak-figure-year"><span class="leak-amount" id="leak-year">$141,331</span><span class="per">/year</span></p>
-            <a class="btn btn-primary" href="/products/trades-front-office/">See what Twistor recovers</a>
+            <a class="btn btn-primary" href={base + "/products/trades-front-office/"}>See what Twistor recovers</a>
             <details class="leak-math">
               <summary>How this number is calculated</summary>
               <p>
@@ -467,8 +468,8 @@ const products = [
       © 2026 Twistor Holdings LLC · Denver, Colorado · Built on Twistor Core
     </footer>
 
-    <script is:inline src="/vendor/leaflet/leaflet.js"></script>
-    <script is:inline src="/scripts/tv-overlays.js"></script>
+    <script is:inline src={base + "/vendor/leaflet/leaflet.js"}></script>
+    <script is:inline src={base + "/scripts/tv-overlays.js"}></script>
     <script is:inline>
       // Mini Trade View teaser — real public overlays when available (TW-446),
       // clearly-labeled sample pins otherwise (TW-448). Deliberately a taste

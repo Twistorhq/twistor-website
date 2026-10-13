@@ -11,6 +11,7 @@ import DispatchBoard from '../../components/DispatchBoard';
 import '@astryxdesign/core/reset.css';
 import '@astryxdesign/theme-neutral/theme.css';
 import '../../styles/astryx-twistor-tokens.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <html lang="en">
@@ -18,7 +19,7 @@ import '../../styles/astryx-twistor-tokens.css';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
     <title>Dispatch board — Twistor interactive surface</title>
     <meta
       name="description"
