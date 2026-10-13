@@ -48,12 +48,28 @@ Each layer entry:
 
 - **Attribution + "as of" are mandatory.** A layer without them is treated as
   failed and falls back to sample.
-- **Per-layer isolation.** One layer failing never blocks the other
-  (self-healing: `Promise.allSettled`, 8s timeout per layer via AbortController).
+- **Per-layer isolation.** One layer failing never blocks the other. The
+  consumer wraps each `fetch(bounds)` call in its own 8s settle-guard timer —
+  no `AbortSignal` is passed to `fetch`, so a slow source simply resolves as
+  failed and that layer falls back to sample. (There is no
+  `Promise.allSettled`; the loader maps each layer to a never-rejecting
+  promise and uses `Promise.all`.)
+- **Module load cap.** The real-module script tag gets 4s to load; after that
+  the consumer proceeds with stubs.
+- **Layer whitelist.** Only the stable ids `permits` and `weather` are
+  rendered by the teaser. Extra layers in a real module are ignored.
+- **Pin-color contrast.** Pin colors must hold ≥4.5:1 contrast against white
+  text — the page renders pin labels in white over the layer color.
+  `isValidLayer` additionally requires colors as 6-digit hex (`#rrggbb`)
+  and `sourceUrl` as `https://`.
+- **`detail` is reserved.** The contract example includes an optional
+  `detail` string per pin; the teaser does not render it (reserved for the
+  full `/app/tradeview` dossier lane).
 - **CORS-friendly sources only.** The fetch runs browser-direct; NWS
   (`api.weather.gov`) and Denver's Socrata endpoint qualify. No API keys.
 - **Honest labeling.** Real layers render with their attribution and "as of"
-  time. Sample fallback pins are always labeled "Sample".
+  time. Sample fallback pins are always labeled "Sample". The page headline
+  and lede also switch with the data state (see `renderChrome`).
 - **Teaser scope.** The page renders pins + toggles + legend only. No dossiers,
   no extra layers UI, no data connect. The CTA still routes to the live
   `/app/tradeview`.

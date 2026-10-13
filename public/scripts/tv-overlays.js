@@ -61,13 +61,15 @@
   }
 
   // ---- validation -----------------------------------------------------------
+  // Hardened: color must be a 6-digit hex (blocks CSS ;-injection via the
+  // style attribute); sourceUrl must be https (blocks javascript: URLs).
   function isValidLayer(l) {
     return !!(l && typeof l.id === 'string' && l.id &&
       typeof l.label === 'string' && l.label &&
       typeof l.attribution === 'string' && l.attribution &&
-      typeof l.sourceUrl === 'string' && l.sourceUrl &&
+      typeof l.sourceUrl === 'string' && /^https:\/\//.test(l.sourceUrl) &&
       typeof l.fetch === 'function' &&
-      typeof l.color === 'string' && l.color);
+      typeof l.color === 'string' && /^#[0-9a-fA-F]{6}$/.test(l.color));
   }
 
   function normalizePin(p, layer) {
@@ -160,9 +162,12 @@
 
     return loadRealModule().then(function (real) {
       var candidates = [];
+      // Teaser scope: only the two stable layer ids are rendered. Extra
+      // real layers are ignored (documented in the contract).
+      var ALLOWED_IDS = ['permits', 'weather'];
       if (real && real.version === 1 && Array.isArray(real.layers)) {
         real.layers.forEach(function (l) {
-          if (isValidLayer(l)) { l.isSample = false; candidates.push(l); }
+          if (isValidLayer(l) && ALLOWED_IDS.indexOf(l.id) !== -1) { l.isSample = false; candidates.push(l); }
         });
       }
       // Ensure both expected layers exist; fill gaps with stubs.

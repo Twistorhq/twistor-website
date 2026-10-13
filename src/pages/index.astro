@@ -377,16 +377,17 @@ const products = [
 
     <section class="tradeview" aria-labelledby="tv-heading">
       <div class="inner">
-        <h2 id="tv-heading">Trade View: real signals, on a live map</h2>
-        <p class="lede">
-          Live public signals from the Denver metro — building permits and
-          weather alerts, the same radar that watches your shop every morning.
-          This is public data; your shop's private leak map is one click away.
+        <h2 id="tv-heading">Trade View: the shape of your leak map</h2>
+        <p class="lede" id="tv-lede">
+          Sample pins showing the shape of what Trade View watches for your
+          shop, every morning. Live public signals connect here soon — your
+          shop's private leak map is one click away.
         </p>
         <p><span class="sample-tag" id="tv-data-tag">Sample data — fictional shops</span></p>
         <div class="tv-grid">
           <div>
             <div id="tv-map" role="img" aria-label="Sample map of the Denver metro area with pins showing fictional missed-revenue amounts"></div>
+            <p class="sr-only" aria-live="polite" id="tv-status"></p>
             <div class="tv-map-fallback" id="tv-map-fallback">
               The interactive map needs a network connection. The sample totals
               are listed here instead — and your shop's real map is one click away.
@@ -411,7 +412,7 @@ const products = [
           </div>
           <div class="tv-side tv-live-panel" id="tv-panel-live" hidden>
             <h3>Live public signals</h3>
-            <p class="tv-sub">Public data, Denver metro. Updated live.</p>
+            <p class="tv-sub">Public data, Denver metro. Fetched live from public sources.</p>
             <div id="tv-live-rows"></div>
             <p class="tv-note" style="margin-top: auto; padding-top: 16px;">Your shop's private leak map — missed follow-ups, stale quotes, at-risk customers — is one click away.</p>
           </div>
@@ -530,6 +531,29 @@ const products = [
 
         function renderChrome(data) {
           var anyLive = data.anyLive;
+          var headingEl = document.getElementById('tv-heading');
+          var ledeEl = document.getElementById('tv-lede');
+          var statusEl = document.getElementById('tv-status');
+          // Headline and lede are honest in both states (never claim real
+          // signals while showing sample pins).
+          if (headingEl) {
+            headingEl.textContent = anyLive
+              ? 'Trade View: real signals, on a live map'
+              : 'Trade View: the shape of your leak map';
+          }
+          if (ledeEl) {
+            ledeEl.textContent = anyLive
+              ? 'Live public signals from the Denver metro \u2014 building permits and weather alerts, the same radar that watches your shop every morning. This is public data; your shop\u2019s private leak map is one click away.'
+              : 'Sample pins showing the shape of what Trade View watches for your shop, every morning. Live public signals connect here soon \u2014 your shop\u2019s private leak map is one click away.';
+          }
+          if (statusEl) {
+            var counts = data.layers.map(function (l) {
+              return l.pins.length + ' ' + l.label.toLowerCase() + (l.isSample ? ' (sample)' : '');
+            }).join(', ');
+            statusEl.textContent = anyLive
+              ? 'Live public data loaded: ' + counts + '.'
+              : 'Showing sample map data.';
+          }
           if (tagEl) {
             if (anyLive) {
               tagEl.className = 'live-tag';
