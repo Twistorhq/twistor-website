@@ -1,11 +1,12 @@
 ---
 import '@fontsource/bricolage-grotesque/700.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
     <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
     <meta property="og:title" content="Trades AI Front Office | Twistor" />
     <meta property="og:description" content="Every call answered. Every urgent job triaged." />
@@ -38,7 +39,7 @@ import '@fontsource/bricolage-grotesque/700.css';
     </style>
   </head>
   <body>
-    <header><a href="/">← Twistor</a></header>
+    <header><a href={base + "/"}>← Twistor</a></header>
     <main>
       <h1>Trades AI Front Office</h1>
       <p class="tagline">Every call answered. Every urgent job triaged.</p>
