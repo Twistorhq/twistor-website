@@ -37,9 +37,12 @@ Ticket: TW-448 (surge TW-470). Builder: Sofia Reyes. Date: 2026-10-12/13.
 3. **Missing asOf:** real layer without `asOf` → treated as failed → stub (attribution+as-of are mandatory).
 4. **Bad pins:** NaN/missing coordinates dropped; valid pins kept; layer stays live.
 
-## Em-dash count (user-visible copy, nit 10 follow-up)
+## Em-dash count (user-visible copy)
 
-4 usages: "Sample data — fictional shops" (tag), "Live public data — Denver metro" (tag), and one each in the two lede variants. All in short labels/sentences, none in saturation. Builder's earlier "two" undercounted; corrected here.
+7 usages, all in short labels/sentences, none in saturation: sample tag (1),
+sample lede (1), fallback paragraph (1), live-panel note (em-dash pair, 2),
+live tag (1, set via JS), live lede (1, set via JS). (Earlier drafts of this
+doc said 2, then 4 — corrected to 7 after Rosa's count.)
 
 ## Outstanding (not this diff)
 
