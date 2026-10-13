@@ -1,0 +1,66 @@
+---
+// DEMO / EVALUATION ROUTE ONLY — TW-140 (branch sofia/tw-140-astryx).
+// Not linked from any live page. Evaluating Meta's Astryx design system as a
+// candidate shared UI base for Twistor products.
+import AstryxPilot from '../../components/AstryxPilot';
+import '@astryxdesign/core/reset.css';
+import '@astryxdesign/theme-neutral/theme.css';
+import '../../styles/astryx-twistor-tokens.css'; // shared Twistor brand tokens (TW-150)
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+    <title>Astryx pilot — Twistor design evaluation</title>
+    <meta
+      name="description"
+      content="Internal evaluation of the Astryx design system against Twistor brand tokens. Not a production surface."
+    />
+    <style>
+      /* Twistor brand tokens live in src/styles/astryx-twistor-tokens.css (TW-150). */
+      .demo-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 72px; }
+      .demo-banner {
+        background: #0f172a; color: #fff; padding: 10px 24px;
+        font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em;
+      }
+      .demo-banner strong { color: #93c5fd; }
+      .pilot-stack > * + * { margin-top: 24px; }
+      .pilot-stack section > * + * { margin-top: 12px; }
+      .pilot-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+      .pilot-grid {
+        display: grid; gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      .pilot-grid h3 { margin: 0; font-size: 1.15rem; }
+      .pilot-tagline { font-weight: 600; color: #2563eb; }
+      footer.demo-footer {
+        max-width: 1080px; margin: 0 auto; padding: 24px;
+        border-top: 1px solid #e2e8f0; color: #475569; font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-banner" role="note">
+      <strong>Internal evaluation</strong> — Astryx design-system pilot (TW-140).
+      This page is not linked from anywhere and ships nothing to production.
+    </div>
+    <div class="demo-shell twistor-brand" data-astryx-theme="neutral">
+      <main>
+        <h1>Astryx pilot under Twistor brand</h1>
+        <p>
+          Representative Astryx components — buttons, form inputs, cards, and
+          navigation — rendered with Twistor&rsquo;s brand tokens to test
+          theming effort, accessibility posture, and fit for Twistor products.
+        </p>
+        <AstryxPilot client:load />
+      </main>
+    </div>
+    <footer class="demo-footer">
+      Twistor design evaluation — branch <code>sofia/tw-140-astryx</code>.
+      Nothing here is a production surface.
+    </footer>
+  </body>
+</html>

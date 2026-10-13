@@ -1,0 +1,21 @@
+/* Twistor brand tokens mapped onto Astryx's neutral theme (TW-150 adoption).
+ *
+ * No fork, no component wrapping — pure CSS custom-property overrides scoped
+ * to the theme root, exactly as Astryx's theming model intends.
+ *
+ * IMPORT RULE: this file (and any @astryxdesign CSS) may ONLY be imported by
+ * interactive-surface routes under src/pages/surfaces/** and the
+ * src/pages/demo/** evaluation sandbox. Marketing routes (src/pages/index.astro,
+ * src/pages/products/**) must never import it — enforced by `npm run guard`.
+ */
+[data-astryx-theme="neutral"].twistor-brand {
+  --color-accent: #2563eb;            /* Twistor accent blue */
+  --color-accent-muted: #dbeafe;
+  --color-text-primary: #0f172a;      /* Twistor ink */
+  --color-text-secondary: #475569;   /* Twistor muted */
+  --color-background-body: #ffffff;
+  --color-background-surface: #f8fafc;
+  --font-family-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-family-heading: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-element: 8px;             /* match twistor.co buttons */
+}
