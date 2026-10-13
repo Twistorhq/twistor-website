@@ -228,9 +228,23 @@ const products = [
       .tv-total .tv-per { color: var(--muted); font-size: 0.9rem; }
       .tv-cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
       .tv-note { color: var(--muted); font-size: 0.9rem; margin: 0; }
+      .live-tag {
+        display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+        color: #1C1A17; background: var(--accent); border-radius: 6px; padding: 4px 10px; margin: 0 0 20px;
+      }
+      .tv-toggles { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0 4px; font-size: 0.9rem; }
+      .tv-toggles label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ink); }
+      .tv-toggles input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-text); cursor: pointer; }
+      .tv-toggles input[type="checkbox"]:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 2px; }
+      .tv-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 8px 0 0; font-size: 0.85rem; color: var(--muted); }
+      .tv-legend .tv-dot { display: inline-block; width: 12px; height: 12px; border-radius: 999px; margin-right: 6px; vertical-align: baseline; }
+      .tv-attrib { font-size: 0.8rem; color: var(--muted); margin: 12px 0 0; }
+      .tv-attrib a { color: var(--accent-text); }
+      .tv-live-panel .tv-row .tv-val { font-family: system-ui, sans-serif; font-size: 0.9rem; }
+      .tv-asof { display: block; font-size: 0.78rem; color: var(--muted); font-weight: 400; }
       :global(.tv-pin-wrap) { background: none; border: none; }
       :global(.tv-pin) {
-        background: var(--accent); color: #1C1A17; font-weight: 700; font-size: 0.75rem;
+        background: var(--tv-pin-bg, var(--accent)); color: #1C1A17; font-weight: 700; font-size: 0.75rem;
         border: 2px solid #FFFFFF; border-radius: 999px; padding: 3px 8px; white-space: nowrap;
         box-shadow: 0 1px 4px rgba(28, 26, 23, 0.35); font-family: system-ui, sans-serif;
       }
@@ -363,13 +377,13 @@ const products = [
 
     <section class="tradeview" aria-labelledby="tv-heading">
       <div class="inner">
-        <h2 id="tv-heading">Trade View: the leaks, on a map</h2>
+        <h2 id="tv-heading">Trade View: real signals, on a live map</h2>
         <p class="lede">
-          Every pin is money sitting still: a follow-up nobody made, a quote
-          nobody chased, a customer quietly shopping around. This is the shape
-          of what Trade View watches for your shop, every morning.
+          Live public signals from the Denver metro — building permits and
+          weather alerts, the same radar that watches your shop every morning.
+          This is public data; your shop's private leak map is one click away.
         </p>
-        <p><span class="sample-tag">Sample data — fictional shops</span></p>
+        <p><span class="sample-tag" id="tv-data-tag">Sample data — fictional shops</span></p>
         <div class="tv-grid">
           <div>
             <div id="tv-map" role="img" aria-label="Sample map of the Denver metro area with pins showing fictional missed-revenue amounts"></div>
@@ -377,8 +391,14 @@ const products = [
               The interactive map needs a network connection. The sample totals
               are listed here instead — and your shop's real map is one click away.
             </div>
+            <div class="tv-toggles" role="group" aria-label="Map layers" id="tv-toggles" hidden>
+              <label><input type="checkbox" id="tv-toggle-permits" checked> <span id="tv-toggle-permits-label">Building permits</span></label>
+              <label><input type="checkbox" id="tv-toggle-weather" checked> <span id="tv-toggle-weather-label">Weather alerts</span></label>
+            </div>
+            <div class="tv-legend" id="tv-legend" hidden></div>
+            <p class="tv-attrib" id="tv-attrib" hidden></p>
           </div>
-          <div class="tv-side">
+          <div class="tv-side" id="tv-panel-sample">
             <h3>Sample leak ledger</h3>
             <p class="tv-sub">Fictional shops, Denver metro. Your numbers would be real.</p>
             <div class="tv-row"><span class="tv-label">Missed follow-ups</span><span class="tv-val">$7,050</span></div>
@@ -388,6 +408,12 @@ const products = [
               <div class="tv-amount">$23,950</div>
               <div class="tv-per">sitting still in this sample map</div>
             </div>
+          </div>
+          <div class="tv-side tv-live-panel" id="tv-panel-live" hidden>
+            <h3>Live public signals</h3>
+            <p class="tv-sub">Public data, Denver metro. Updated live.</p>
+            <div id="tv-live-rows"></div>
+            <p class="tv-note" style="margin-top: auto; padding-top: 16px;">Your shop's private leak map — missed follow-ups, stale quotes, at-risk customers — is one click away.</p>
           </div>
         </div>
         <div class="tv-cta-row">
@@ -441,16 +467,21 @@ const products = [
     </footer>
 
     <script is:inline src="/vendor/leaflet/leaflet.js"></script>
+    <script is:inline src="/scripts/tv-overlays.js"></script>
     <script is:inline>
-      // Mini Trade View teaser — SAMPLE/FICTIONAL data only. Deliberately a
-      // taste of the real /app/tradeview: pins + totals, no dossiers, no
-      // layers, no data connection.
+      // Mini Trade View teaser — real public overlays when available (TW-446),
+      // clearly-labeled sample pins otherwise (TW-448). Deliberately a taste
+      // of the real /app/tradeview: pins + toggles + legend, no dossiers,
+      // no data connection. One layer failing never breaks the map.
       (function () {
         var mapEl = document.getElementById('tv-map');
         var fallbackEl = document.getElementById('tv-map-fallback');
-        if (!mapEl || typeof window.L === 'undefined') {
+        function showFallback() {
           if (mapEl) mapEl.style.display = 'none';
           if (fallbackEl) fallbackEl.style.display = 'block';
+        }
+        if (!mapEl || typeof window.L === 'undefined' || !window.TwistorTvOverlays) {
+          showFallback();
           return;
         }
         var map = window.L.map('tv-map', { scrollWheelZoom: false }).setView([39.73, -104.96], 10);
@@ -458,22 +489,124 @@ const products = [
           maxZoom: 19,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        // Fictional sample shops — Denver metro. Never real customers.
-        var pins = [
-          { lat: 39.7362, lng: -104.9847, label: '$4.2k', kind: 'Missed follow-up' },
-          { lat: 39.7047, lng: -105.0814, label: '$2.9k', kind: 'Missed follow-up' },
-          { lat: 39.7294, lng: -104.8319, label: '$6.1k', kind: 'Stale quote' },
-          { lat: 39.8028, lng: -105.0875, label: '$3.4k', kind: 'Stale quote' },
-          { lat: 39.6132, lng: -104.8827, label: '$5.5k', kind: 'At-risk customer' },
-          { lat: 39.7661, lng: -105.0772, label: '$1.9k', kind: 'At-risk customer' }
-        ];
-        pins.forEach(function (p) {
-          var icon = window.L.divIcon({
-            className: 'tv-pin-wrap',
-            html: '<span class="tv-pin" title="Sample: ' + p.kind + ' ' + p.label + '">' + p.label + '</span>',
-            iconSize: null
+
+        var tagEl = document.getElementById('tv-data-tag');
+        var togglesEl = document.getElementById('tv-toggles');
+        var legendEl = document.getElementById('tv-legend');
+        var attribEl = document.getElementById('tv-attrib');
+        var panelSample = document.getElementById('tv-panel-sample');
+        var panelLive = document.getElementById('tv-panel-live');
+        var liveRows = document.getElementById('tv-live-rows');
+        var layerGroups = {};
+
+        function esc(s) {
+          return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function renderPins(layer) {
+          var group = window.L.layerGroup();
+          layer.pins.forEach(function (p) {
+            var title = (p.isSample ? 'Sample: ' : '') + p.label;
+            var icon = window.L.divIcon({
+              className: 'tv-pin-wrap',
+              html: '<span class="tv-pin" style="--tv-pin-bg:' + esc(layer.color) + '" title="' + esc(title) + '">' + esc(p.label) + '</span>',
+              iconSize: null
+            });
+            window.L.marker([p.lat, p.lng], { icon: icon, keyboard: false }).addTo(group);
           });
-          window.L.marker([p.lat, p.lng], { icon: icon, keyboard: false }).addTo(map);
+          return group;
+        }
+
+        function setAriaLabel(data) {
+          var parts = data.layers.filter(function (l) { return l.pins.length; }).map(function (l) {
+            return l.pins.length + ' ' + l.label.toLowerCase() + (l.isSample ? ' (sample)' : '');
+          });
+          var desc = parts.length ? parts.join(', ') : 'no pins';
+          mapEl.setAttribute('aria-label',
+            (data.anyLive ? 'Live public-data map' : 'Sample map') +
+            ' of the Denver metro area: ' + desc + '.');
+        }
+
+        function renderChrome(data) {
+          var anyLive = data.anyLive;
+          if (tagEl) {
+            if (anyLive) {
+              tagEl.className = 'live-tag';
+              tagEl.textContent = 'Live public data — Denver metro';
+            } else {
+              tagEl.className = 'sample-tag';
+              tagEl.textContent = 'Sample data — fictional shops';
+            }
+          }
+          var showLive = anyLive;
+          if (panelSample) panelSample.hidden = showLive;
+          if (panelLive) panelLive.hidden = !showLive;
+          if (showLive && liveRows) {
+            var html = '';
+            data.layers.forEach(function (l) {
+              html += '<div class="tv-row"><span class="tv-label">' + esc(l.label) +
+                '<span class="tv-asof">' + (l.isSample ? 'sample' : 'as of ' + esc(l.asOfLabel)) + '</span></span>' +
+                '<span class="tv-val">' + l.pins.length + ' in view</span></div>';
+            });
+            liveRows.innerHTML = html;
+          }
+          if (togglesEl) togglesEl.hidden = false;
+          if (legendEl) {
+            legendEl.hidden = false;
+            var lh = '';
+            data.layers.forEach(function (l) {
+              lh += '<span><span class="tv-dot" style="background:' + esc(l.color) + '"></span>' + esc(l.label) + '</span>';
+            });
+            legendEl.innerHTML = lh;
+          }
+          if (attribEl) {
+            var live = data.layers.filter(function (l) { return l.live && !l.isSample; });
+            if (live.length) {
+              attribEl.hidden = false;
+              var ah = 'Sources: ';
+              ah += live.map(function (l) {
+                var name = esc(l.attribution);
+                var bit = l.sourceUrl ? '<a href="' + esc(l.sourceUrl) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+                return bit + ' (as of ' + esc(l.asOfLabel) + ')';
+              }).join(' · ');
+              attribEl.innerHTML = ah;
+            } else {
+              attribEl.hidden = true;
+            }
+          }
+          data.layers.forEach(function (l) {
+            var lab = document.getElementById('tv-toggle-' + l.id + '-label');
+            if (lab) lab.textContent = l.label;
+          });
+        }
+
+        function wireToggles() {
+          ['permits', 'weather'].forEach(function (id) {
+            var box = document.getElementById('tv-toggle-' + id);
+            if (!box) return;
+            box.addEventListener('change', function () {
+              var group = layerGroups[id];
+              if (!group) return;
+              if (box.checked) { group.addTo(map); } else { map.removeLayer(group); }
+            });
+          });
+        }
+
+        var b = map.getBounds();
+        var bounds = { north: b.getNorth(), south: b.getSouth(), east: b.getEast(), west: b.getWest() };
+        window.TwistorTvOverlays.load(bounds).then(function (data) {
+          data.layers.forEach(function (layer) {
+            var group = renderPins(layer);
+            layerGroups[layer.id] = group;
+            group.addTo(map);
+          });
+          renderChrome(data);
+          wireToggles();
+          setAriaLabel(data);
+        }).catch(function () {
+          // Loader never rejects by contract; this is a last-resort guard.
+          showFallback();
         });
       })();
     </script>
