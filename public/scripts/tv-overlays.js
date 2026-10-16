@@ -14,7 +14,13 @@
 (function () {
   'use strict';
 
-  var REAL_SRC = '/scripts/tv-overlays-real.js';
+  // Base-aware: derive the script's own base so the real-overlay module
+  // resolves under both root-domain (/) and project-page (/twistor-website/) deploys.
+  var REAL_SRC = (function () {
+    var me = document.currentScript && document.currentScript.src;
+    if (me) { return me.replace(/tv-overlays\.js(\?.*)?$/, 'tv-overlays-real.js'); }
+    return 'tv-overlays-real.js';
+  })();
   var LAYER_TIMEOUT_MS = 8000;
 
   // ---- stub layers (sample data, always labeled) ---------------------------

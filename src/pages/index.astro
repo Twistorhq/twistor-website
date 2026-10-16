@@ -379,17 +379,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <h2 id="tv-heading">Trade View: the shape of your leak map</h2>
         <p class="lede" id="tv-lede">
           Sample pins showing the shape of what Trade View watches for your
-          shop, every morning. Live public signals connect here soon — your
+          shop, every morning. Live public signals connect here soon: your
           shop's private leak map is one click away.
         </p>
-        <p><span class="sample-tag" id="tv-data-tag">Sample data — fictional shops</span></p>
+        <p><span class="sample-tag" id="tv-data-tag">Sample data: fictional shops</span></p>
         <div class="tv-grid">
           <div>
             <div id="tv-map" role="img" aria-label="Sample map of the Denver metro area with pins showing fictional missed-revenue amounts"></div>
             <p class="sr-only" aria-live="polite" id="tv-status"></p>
             <div class="tv-map-fallback" id="tv-map-fallback">
               The interactive map needs a network connection. The sample totals
-              are listed here instead — and your shop's real map is one click away.
+              are listed here instead, and your shop's real map is one click away.
             </div>
             <div class="tv-toggles" role="group" aria-label="Map layers" id="tv-toggles" hidden>
               <label><input type="checkbox" id="tv-toggle-permits" checked> <span id="tv-toggle-permits-label">Building permits</span></label>
@@ -413,7 +413,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <h3>Live public signals</h3>
             <p class="tv-sub">Public data, Denver metro. Fetched live from public sources.</p>
             <div id="tv-live-rows"></div>
-            <p class="tv-note" style="margin-top: auto; padding-top: 16px;">Your shop's private leak map — missed follow-ups, stale quotes, at-risk customers — is one click away.</p>
+            <p class="tv-note" style="margin-top: auto; padding-top: 16px;">Your shop's private leak map (missed follow-ups, stale quotes, at-risk customers) is one click away.</p>
           </div>
         </div>
         <div class="tv-cta-row">
@@ -457,7 +457,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
               what your missed calls are costing and what Twistor would catch.
             </p>
           </div>
-          <a class="btn btn-primary" href="mailto:twistorhq@gmail.com?subject=Demo%20request%20%E2%80%94%20Twistor">Email us to book</a>
+          <a class="btn btn-primary" href="mailto:twistorhq@gmail.com?subject=Demo%20request:%20Twistor">Email us to book</a>
         </div>
       </section>
     </main>
@@ -469,7 +469,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <script is:inline src={base + "/vendor/leaflet/leaflet.js"}></script>
     <script is:inline src={base + "/scripts/tv-overlays.js"}></script>
     <script is:inline>
-      // Mini Trade View teaser — real public overlays when available (TW-446),
+      // Mini Trade View teaser: real public overlays when available (TW-446),
       // clearly-labeled sample pins otherwise (TW-448). Deliberately a taste
       // of the real /app/tradeview: pins + toggles + legend, no dossiers,
       // no data connection. One layer failing never breaks the map.
@@ -556,10 +556,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           if (tagEl) {
             if (anyLive) {
               tagEl.className = 'live-tag';
-              tagEl.textContent = 'Live public data — Denver metro';
+              tagEl.textContent = 'Live public data: Denver metro';
             } else {
               tagEl.className = 'sample-tag';
-              tagEl.textContent = 'Sample data — fictional shops';
+              tagEl.textContent = 'Sample data: fictional shops';
             }
           }
           var showLive = anyLive;

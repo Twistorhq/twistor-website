@@ -1,12 +1,13 @@
 ---
 import '../../styles/trades-launch.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Twistor Trades — Every request. A clear next step.</title>
+    <title>Twistor Trades: Every request. A clear next step.</title>
     <meta name="description" content="Twistor Trades connects residents, property teams, and trusted service providers in one place. Every request has a clear next step. Prelaunch preview." />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#091526" />
@@ -14,7 +15,7 @@ import '../../styles/trades-launch.css';
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="shell masthead">
-      <a class="wordmark" href="/" aria-label="Twistor home"><span class="brand-icon" aria-hidden="true">t</span> twistor<span class="brand-product">/ trades</span></a>
+      <a class="wordmark" href={base + "/"} aria-label="Twistor home"><span class="brand-icon" aria-hidden="true">t</span> twistor<span class="brand-product">/ trades</span></a>
       <nav aria-label="Main navigation"><a class="nav-cta" href="#concept">How it works <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main">
@@ -22,7 +23,7 @@ import '../../styles/trades-launch.css';
         <div class="hero-copy">
           <p class="eyebrow"><span class="signal" aria-hidden="true"></span> PROPERTY MAINTENANCE. CONNECTED.</p>
           <h1 id="hero-title">Every request.<br/><span>A clear next step.</span></h1>
-          <p class="lede">Property maintenance moves forward—from the first report to the finished job.</p>
+          <p class="lede">Property maintenance moves forward, from the first report to the finished job.</p>
           <p class="hero-detail">Twistor Trades connects residents, property teams, and trusted service providers in one place.</p>
           <div class="hero-actions"><a class="button primary" href="#early-access" aria-describedby="signup-opening">Get early access <span aria-hidden="true">↗</span></a><a class="provider-link" href="#provider-access" aria-describedby="signup-opening">Bring your trade business <span aria-hidden="true">↗</span></a></div>
           <p class="release-note" id="signup-opening">PRELAUNCH PREVIEW · REGISTRATION IS CLOSED</p>
