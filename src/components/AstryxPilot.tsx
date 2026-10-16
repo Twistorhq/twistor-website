@@ -25,14 +25,14 @@ const PRODUCTS = [
     name: 'Dental AI Front Office',
     tagline: 'Never lose a patient to voicemail again.',
     blurb:
-      'AI answers every call, confirms appointments, and texts back missed calls in under a minute — with a monthly report showing recovered revenue.',
+      'AI answers every call, confirms appointments, and texts back missed calls in under a minute, with a monthly report showing recovered revenue.',
     badge: 'Coming soon',
   },
   {
     name: 'Dispatch OS',
     tagline: 'One board that runs your phones and your schedule.',
     blurb:
-      'Jobs arrive by phone, email, or web. AI answers, triages, schedules, and confirms — while you watch a single dispatch board.',
+      'Jobs arrive by phone, email, or web. AI answers, triages, schedules, and confirms while you watch a single dispatch board.',
     badge: 'Flagship',
   },
 ];
@@ -61,7 +61,7 @@ export default function AstryxPilot() {
         <h2 id="buttons-heading">Buttons</h2>
         <p>
           Primary and secondary actions use the Twistor accent token, overridden
-          from Astryx&rsquo;s neutral theme on this page — no fork, no wrapper.
+          from Astryx&rsquo;s neutral theme on this page: no fork, no wrapper.
         </p>
         <div className="pilot-row">
           <Button label="Book a demo" clickAction={() => {}} />
@@ -74,13 +74,13 @@ export default function AstryxPilot() {
       <section aria-labelledby="form-heading">
         <h2 id="form-heading">Request-a-demo form</h2>
         <p>
-          Labels are required by the component API and always rendered — the
+          Labels are required by the component API and always rendered; the
           accessible name comes for free, not as an afterthought.
         </p>
         {submitted && (
           <Banner
             status="success"
-            title="Pilot received — this is a UI evaluation"
+            title="Pilot received: this is a UI evaluation"
             description="Nothing was sent anywhere. In production this form would need Dre's lead-capture API contract; that contract does not exist yet."
           />
         )}
@@ -117,7 +117,7 @@ export default function AstryxPilot() {
             label="What eats your front desk's time?"
             name="notes"
             isOptional
-            description="Missed calls, scheduling chaos, no-shows — give us the honest version."
+            description="Missed calls, scheduling chaos, no-shows: give us the honest version."
             placeholder="e.g. We miss calls every Saturday and nobody follows up."
           />
           <div className="pilot-row">

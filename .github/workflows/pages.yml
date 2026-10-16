@@ -29,8 +29,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-        env:
-          ASTRO_BASE: /twistor-website/
+        # Root-domain deploy (twistor.co): ASTRO_BASE unset => base '/'.
+        # For project-page preview builds, set ASTRO_BASE=/twistor-website/.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
