@@ -53,8 +53,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </main>
     <script type="module" data-base={base}>
       const base = document.currentScript.dataset.base || '';
+      const el = document.getElementById('game');
       import(base + '/games/tw-553-runner.js').then(m => {
-        m.mountRunner(document.getElementById('game'), { theme: 'trades' });
+        m.mountRunner(el, { theme: 'trades' });
+      }).catch(() => {
+        el.innerHTML = '<p style="color:#6b6252;font-size:14px">The game could not load, but the way back still works.</p>';
       });
     </script>
   </body>

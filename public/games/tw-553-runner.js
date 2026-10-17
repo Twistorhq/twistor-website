@@ -1,5 +1,5 @@
 /* TW-553: 404 Easter egg runner game. Vanilla JS + canvas, zero dependencies.
- * mountRunner(container, opts) — opts.theme: 'corporate' | 'trades'.
+ * mountRunner(container, opts): opts.theme 'corporate' or 'trades'.
  * Tap / click / Space / ArrowUp to jump. Score = distance. Best in localStorage.
  * Prepared by Twistor Holdings LLC.
  */
@@ -141,7 +141,7 @@ export function mountRunner(container, opts) {
     over.innerHTML =
       '<div class="tw553-card" role="alertdialog" aria-label="Game over">' +
       '<h3>Wiped out.</h3>' +
-      '<p>' + score + ' m' + (score >= best && score > 0 ? ' — new best.' : ' · Best ' + best + ' m.') + '</p>' +
+      '<p>' + score + ' m' + (score >= best && score > 0 ? ' · new best.' : ' · Best ' + best + ' m.') + '</p>' +
       '<button type="button">Run it back</button></div>'
     over.hidden = false
     const btn = over.querySelector('button')
@@ -336,10 +336,11 @@ export function mountRunner(container, opts) {
 
   const ro = new ResizeObserver(resize)
   ro.observe(stage)
-  document.addEventListener('visibilitychange', () => {
+  function onVis() {
     if (document.hidden) { running = false; cancelAnimationFrame(raf) }
     else if (!dead) { running = true; last = performance.now(); raf = requestAnimationFrame(tick) }
-  })
+  }
+  document.addEventListener('visibilitychange', onVis)
 
   resize()
   hud.textContent = '0 m'
@@ -352,6 +353,7 @@ export function mountRunner(container, opts) {
       cancelAnimationFrame(raf)
       ro.disconnect()
       window.removeEventListener('keydown', onKey)
+      document.removeEventListener('visibilitychange', onVis)
       container.innerHTML = ''
     },
     restart: reset
