@@ -1,6 +1,6 @@
 <!-- Prepared by Twistor Holdings LLC -->
 
-# TW-553 — 404 Easter egg games: TDD evidence
+# TW-553: 404 Easter egg games: TDD evidence
 
 Branch (website): `sofia/tw-553-404-games` (base `origin/main`).
 Branch (lbt-os): `sofia/tw-553-lbtos-404` (base `origin/main`).
@@ -25,7 +25,7 @@ Ticket: TW-553. Builder: Sofia Reyes. Date: 2026-10-16/17.
 | `npx astro build` (website) | 11 pages built, complete; `dist/404.html` + `dist/trades/404/index.html` emitted |
 | `npx vite build` (lbt-os frontend) | built in ~16s, complete |
 | `impeccable detect dist/404.html dist/trades/404/index.html` (post-fix) | exit 0, zero findings |
-| `grep —` over all touched files (js, astro, jsx) | zero em-dashes |
+| `grep` for em-dashes over all touched files (js, astro, jsx) | zero em-dashes |
 | Rosa independent verification | Astro builds at root and preview base, Vite build, headless smoke test of both games (start/jump/death/reset/restart, aim/shoot/settle), zero throws; `destroy()` removes keydown listener |
 
 ## Contrast (WCAG, computed from luminance)
