@@ -11,13 +11,16 @@
 Final 4 (per Justynn 2026-10-16 correction): car dodger, snake, hoops, boot-jump runner (trades theme). Corporate runner dropped from the rotation.
 
 ## Checks
-- `node --check` on all game files: pass (car, snake, runner, hoops)
+- `node --check` on all game files (web and app copies): pass
 - Em-dash grep on all touched files: zero matches
-- Headless logic test (`/tmp/tw572-headless-test.mjs`, minimal DOM stub): 9/10 pass
+- Headless logic test (`/tmp/tw572-headless-test.mjs` run against the WEB copies,
+  `/tmp/tw572-headless-test-app.mjs` run against the APP copies — minimal DOM stub): 9/10 on both
   - Caught and fixed a real bug: snake array uninitialized at mount (steer-before-restart crashed `step()`); fixed by calling `reset()` at mount end
+  - Rosa round 1 caught that the fix initially landed only in the web copy; the app copy was re-synced byte-identical and re-tested against the app copy (same 9/10)
   - The 1 non-pass: "best persisted" — wall-death with score 0 correctly skips the localStorage write (`score > best` is `0 > 0`); persist path is byte-identical to the TW-553-verified runner pattern
   - Car: 10 simulated seconds, score advanced to 340 m, tap steering clean, destroy clean
   - Snake: wall death shows game-over card, restart button resets, swipe steering clean
+- Rosa round-1 nit fixed: "new best." no longer shows on a score tie (both games now use an `isBest` flag captured before the best update); web and app copies verified byte-identical for snake and car
 
 ## Builds
 - Astro build (`npx astro build`): PASS — 11 pages, both 404s built, all 4 game files in dist/games/
