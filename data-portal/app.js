@@ -1,4 +1,4 @@
-/* Twistor Data portal — minimal interactions. No dependencies. */
+/* Twistor Data portal - minimal interactions. No dependencies. */
 (function () {
   "use strict";
 
@@ -14,6 +14,13 @@
       if (e.target.tagName === "A") {
         navList.classList.remove("open");
         toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && navList.classList.contains("open")) {
+        navList.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.focus();
       }
     });
   }
@@ -61,7 +68,7 @@
       ].join("\n");
       var note = document.getElementById("form-note");
       if (note) {
-        note.textContent = "Opening your email client with the request prefilled — send it and we will provision your access.";
+        note.textContent = "Opening your email client with the request prefilled - send it and we will provision your access.";
       }
       window.location.href =
         "mailto:holla@twistor.co?subject=" + encodeURIComponent(subject) +

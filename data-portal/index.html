@@ -150,24 +150,15 @@
         <div class="pricing-card">
           <h3>API access</h3>
           <p class="price">Toll-metered</p>
-          <p>Every call is metered against your subscription. Rates fall as your volume rises: full rate under $50 a month, down to 70 percent of list past $1,000. Large datasets are API-only.</p>
+          <p>Every call is metered against your subscription. Micro-tolls are priced so that pulling a dataset through the API costs the same as downloading it. The choice is about workflow, not price. Large datasets are API-only.</p>
         </div>
         <div class="pricing-card">
           <h3>Excel downloads</h3>
           <p class="price">One-time fee</p>
-          <p>Download a versioned spreadsheet on top of your subscription. Priced by size tier, capped at 500,000 rows per download: beyond that, use the API.</p>
-          <table class="fee-table">
-            <caption>Per-download fees</caption>
-            <thead><tr><th scope="col">Tier</th><th scope="col">Rows</th><th scope="col">Fee</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Small</th><td>Under 100k</td><td>$6.00</td></tr>
-              <tr><th scope="row">Medium</th><td>100k to 1M</td><td>$8.50</td></tr>
-              <tr><th scope="row">Large</th><td>Over 1M</td><td>$22.50</td></tr>
-            </tbody>
-          </table>
+          <p>Download a versioned spreadsheet on top of your subscription. Pricing follows a dynamic volume curve: pennies while a dataset is new and unproven, scaling with downloads, never unaffordable. The exact fee is shown before you pay, every time.</p>
         </div>
       </div>
-      <p class="pricing-note">Grant-funded? Good: the pricing assumes it. If your lab needs an institutional quote, say so in the access request.</p>
+      <p class="pricing-note">A Twistor subscription is required for everything, API and downloads alike. Grant-funded? Good: the pricing assumes it. If your lab needs an institutional quote, say so in the access request.</p>
     </div>
   </section>
 
@@ -241,6 +232,7 @@
         </div>
         <button class="btn btn-primary" type="submit">Request access</button>
         <p class="form-note" id="form-note" role="status"></p>
+        <noscript><p class="form-note">JavaScript is off: email your request directly to holla@twistor.co with your name, institution, and dataset of interest.</p></noscript>
       </form>
     </div>
   </section>
@@ -259,7 +251,7 @@
         </details>
         <details>
           <summary>What does the subscription cost?</summary>
-          <p>Subscription tiers are set at provisioning based on your lab's expected volume. API tolls and Excel fees are always stated before you incur them: no surprise billing.</p>
+          <p>Access is gated on an active subscription: the gate is binary, on or off. On top of that, everything you pull is metered. API calls by volume, downloads by a dynamic curve. Both are computed automatically and stated before you incur them. No surprise billing.</p>
         </details>
         <details>
           <summary>Can my whole lab share one subscription?</summary>

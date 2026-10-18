@@ -1,5 +1,5 @@
-/* Twistor Data portal — hand-built, zero dependencies.
-   Brand: corporate face — white, clean, minimal. Near-black ink,
+/* Twistor Data portal - hand-built, zero dependencies.
+   Brand: corporate face - white, clean, minimal. Near-black ink,
    solid indigo-violet accent. No gradients, no glass, no pills. */
 
 :root {
@@ -168,11 +168,6 @@ a { color: var(--violet-deep); }
 .pricing-card h3 { margin-bottom: 0.3em; }
 .pricing-card .price { font-size: 1.6rem; font-weight: 700; color: var(--violet-deep); margin-bottom: 0.6em; }
 .pricing-card p { color: var(--ink-soft); font-size: 0.97rem; }
-.fee-table { width: 100%; border-collapse: collapse; margin-top: 1.2em; font-size: 0.92rem; }
-.fee-table caption { text-align: left; font-weight: 700; margin-bottom: 0.6em; }
-.fee-table th, .fee-table td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
-.fee-table thead th { color: var(--ink-faint); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
-.fee-table tbody th { font-weight: 600; }
 .pricing-note { margin-top: 2em; color: var(--ink-faint); font-size: 0.95rem; }
 
 /* ---------- docs / code ---------- */
