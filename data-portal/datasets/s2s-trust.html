@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S2S-TRUST v1 | Twistor Data</title>
+<meta name="description" content="Subseasonal prediction data, weeks 2 to 6, with truth lineage and a sealed benchmark harness.">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="Twistor Data home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6" fill="#5b4fd6"/><path d="M9 19V9l10 10V9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name">Twistor <strong>Data</strong></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list" class="nav-list">
+        <li><a href="../index.html#datasets">Datasets</a></li>
+        <li><a href="../index.html#trust">Why trust it</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#docs">API docs</a></li>
+        <li><a class="nav-cta" href="../index.html#access">Get access</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="dataset-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../index.html#datasets">Datasets</a></li>
+    <li aria-current="page">Weather and climate</li>
+  </ol>
+</nav>
+      <h1>S2S-TRUST v1</h1>
+      <p class="lede">Subseasonal prediction, weeks 2 to 6, the predictability desert, with truth-lineage schema, a quarantine for incomplete provenance, and a sealed-window benchmark harness.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="../index.html#access">Get access</a>
+        <a class="btn btn-ghost" href="#endpoints">API endpoints</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>What is in it</h2>
+      <p>Forecast and verification data across the subseasonal range, built on ERA5 reanalysis, ECMWF reforecasts, and NOAA GEFS. Every record carries its truth source: the verification data a forecast is scored against is named, versioned, and traceable, so you always know what "correct" meant.</p>
+      <h2>The trust story</h2>
+      <p>Subseasonal skill claims are easy to inflate: pick the right truth dataset and any model looks good. S2S-TRUST labels the truth lineage on every record and quarantines anything with incomplete provenance before it can reach the gold tier. The sealed-window benchmark harness scores predictions against held-out windows on a fixed schedule: no peeking, no re-rolling.</p>
+      <h2>Versions</h2>
+      <table class="version-table">
+        <thead><tr><th scope="col">Version</th><th scope="col">Tier</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">v1.0</th><td>Small: API + Excel</td><td>Current (synthetic-labeled seed)</td></tr>
+        </tbody>
+      </table>
+      <p class="v1-note">V1 rows are synthetic and labeled as such. Real-data ingestion from open reanalysis and forecast archives is underway.</p>
+    </div>
+  </section>
+
+  <section id="endpoints" class="section">
+    <div class="wrap narrow">
+      <h2>Endpoints</h2>
+      <div class="endpoint-list">
+        <div class="endpoint"><code>GET /data/v1/science/subseasonal/datasets</code><span>List versions</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/subseasonal/datasets/{version}</code><span>Snapshot metadata</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/subseasonal/query</code><span>Query gold records</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/subseasonal/datasets/{version}/download</code><span>Excel download (one-time fee)</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/subseasonal/benchmarks</code><span>Open benchmarks and leaderboard</span></div>
+      </div>
+      <h2>Cite it</h2>
+      <p>DOI issued per release. Cite the version: <code>S2S-TRUST v1.0</code>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Prepared by Twistor Holdings LLC</p>
+    <p class="footer-note">Twistor Data is the scientific data layer from Twistor.</p>
+  </div>
+</footer>
+
+<script src="../app.js"></script>
+</body>
+</html>
