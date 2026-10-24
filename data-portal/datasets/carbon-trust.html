@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARBON-TRUST v1 | Twistor Data</title>
+<meta name="description" content="Harmonized carbon-sequestration evidence with method-code comparability gating and the MRV-BLIND benchmark.">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="Twistor Data home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6" fill="#5b4fd6"/><path d="M9 19V9l10 10V9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name">Twistor <strong>Data</strong></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list" class="nav-list">
+        <li><a href="../index.html#datasets">Datasets</a></li>
+        <li><a href="../index.html#trust">Why trust it</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#docs">API docs</a></li>
+        <li><a class="nav-cta" href="../index.html#access">Get access</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="dataset-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../index.html#datasets">Datasets</a></li>
+    <li aria-current="page">Carbon</li>
+  </ol>
+</nav>
+      <h1>CARBON-TRUST v1</h1>
+      <p class="lede">Harmonized carbon-sequestration evidence: soil profiles, flux towers, biomass pixels, and a biochar stability annex, with method-code comparability gating and MRV-BLIND, the first falsifiable soil-carbon MRV scoreboard.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="../index.html#access">Get access</a>
+        <a class="btn btn-ghost" href="#endpoints">API endpoints</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>What is in it</h2>
+      <p>Five record classes, one harmonized schema. Carbon pools cover soil-organic, aboveground and belowground biomass, biochar-stable, harvested wood, and peat. The biochar stability annex carries feedstock, pyrolysis temperature and residence time, H/C and O/C ratios, aromatic carbon, certification status, and 100-year persistence estimates with the method attached.</p>
+      <h2>The trust story</h2>
+      <p>Soil carbon data has a comparability problem. A Walkley-Black measurement and a dry-combustion measurement are different numbers for the same soil, and most datasets pool them silently. CARBON-TRUST gates on the analytical method code at three layers. Ingest quarantines anything missing or unknown, the gold tier rejects unknown methods outright, and every query surfaces the method on every row with a comparability-group filter. Walkley-Black and dry-combustion never share a group.</p>
+      <h2>MRV-BLIND</h2>
+      <p>The open challenge for soil-carbon MRV methods: sealed plots, predict-then-measure, scored only against dry-combustion-anchored revealed plots. Planted additionality-failure cases keep honest methods honest. Scoring is a pure function (interval score, coverage penalty, reversion bonus), published with the benchmark.</p>
+      <h2>Versions</h2>
+      <table class="version-table">
+        <thead><tr><th scope="col">Version</th><th scope="col">Rows</th><th scope="col">Tier</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">v1.0</th><td>36</td><td>Small: API + Excel</td><td>Current (synthetic-labeled seed)</td></tr>
+        </tbody>
+      </table>
+      <p class="v1-note">V1 rows are synthetic and labeled as such. Real-data ingestion from open soil, flux, and biomass sources is underway.</p>
+    </div>
+  </section>
+
+  <section id="endpoints" class="section">
+    <div class="wrap narrow">
+      <h2>Endpoints</h2>
+      <div class="endpoint-list">
+        <div class="endpoint"><code>GET /data/v1/science/carbon/datasets</code><span>List versions</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/carbon/datasets/{version}</code><span>Snapshot metadata</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/carbon/query</code><span>Query gold records, filterable by method and comparability group</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/carbon/datasets/{version}/download</code><span>Excel download (one-time fee)</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/carbon/benchmarks</code><span>Open benchmarks and leaderboard</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/carbon/benchmarks/mrv-blind/plots</code><span>Sealed challenge plots</span></div>
+        <div class="endpoint"><code>POST /data/v1/science/carbon/benchmarks/mrv-blind/submit</code><span>Challenge submission (API key, lineage required)</span></div>
+      </div>
+      <h2>Cite it</h2>
+      <p>DOI issued per release. Cite the version: <code>CARBON-TRUST v1.0</code>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Prepared by Twistor Holdings LLC</p>
+    <p class="footer-note">Twistor Data is the scientific data layer from Twistor.</p>
+  </div>
+</footer>
+
+<script src="../app.js"></script>
+</body>
+</html>

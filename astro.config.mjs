@@ -9,5 +9,9 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://twistor.co',
+  // Base path for project-page deploys (twistorhq.github.io/twistor-website/).
+  // Set ASTRO_BASE=/twistor-website/ in the Pages workflow; leave unset for
+  // root-domain deploys (twistor.co) — no code change needed at cutover.
+  base: process.env.ASTRO_BASE || '/',
   integrations: [react()],
 });

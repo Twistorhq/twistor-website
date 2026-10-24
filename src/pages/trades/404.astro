@@ -1,0 +1,101 @@
+---
+import '../../styles/trades-launch.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404: Job site not found | Twistor Trades</title>
+    <meta name="description" content="This trades page does not exist. Hop the cones while you wait, then head back." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f4efe4" />
+    <style>
+      .nf-wrap { width: min(880px, calc(100% - 48px)); margin: 0 auto; padding: 24px 0 64px; }
+      .nf-code { font: 800 clamp(72px, 14vw, 120px)/1 ui-monospace, Menlo, monospace; letter-spacing: -5px; margin: 40px 0 8px; color: #2b2118; }
+      .nf-code span { color: #b23f0a; }
+      .nf-wrap h1 { font-size: clamp(26px, 4.4vw, 38px); letter-spacing: -1px; margin: 0 0 10px; color: #2b2118; }
+      .nf-lede { font-size: 16px; line-height: 1.6; color: #6b6252; max-width: 560px; margin: 0 0 24px; }
+      .nf-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
+      .nf-btn { display: inline-flex; align-items: center; min-height: 48px; padding: 14px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; }
+      .nf-btn-primary { background: #b23f0a; color: #fff; }
+      .nf-btn-primary:focus-visible { outline: 3px solid #b23f0a; outline-offset: 3px; }
+      .nf-btn-ghost { border: 1px solid #d8cfbb; color: #2b2118; }
+      .nf-btn-ghost:focus-visible { outline: 3px solid #b23f0a; outline-offset: 3px; }
+      .nf-foot { margin-top: 40px; font-size: 12px; color: #6b6252; }
+      .masthead .nav-cta { font-size: 12px; }
+      /* page-scoped light theme overrides for the 404 */
+      body.nf-light { background: #f4efe4; color: #2b2118; }
+      body.nf-light .masthead { border-bottom-color: #d8cfbb; }
+      body.nf-light .wordmark { color: #2b2118; }
+      body.nf-light .brand-product { color: #6b6252; }
+      body.nf-light .brand-icon { background: #b23f0a; color: #fff; }
+      body.nf-light .nav-cta { border-color: #b9ad93; color: #2b2118; }
+    </style>
+  </head>
+  <body class="nf-light">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="shell masthead nf-wrap" style="padding-bottom:20px">
+      <a class="wordmark" href={base + "/trades/"} aria-label="Twistor Trades home"><span class="brand-icon" aria-hidden="true">t</span> twistor<span class="brand-product">/ trades</span></a>
+      <nav aria-label="Main navigation"><a class="nav-cta" href={base + "/trades/"}>Back to trades</a></nav>
+    </header>
+    <main id="main" class="nf-wrap">
+      <p class="nf-code" aria-hidden="true">4<span>0</span>4</p>
+      <h1>This job site does not exist.</h1>
+      <p class="nf-lede">Wrong address on the work order. Kill time on the clock with a random game. Hit shuffle for another one.</p>
+      <div id="game"></div>
+      <div style="margin-top:12px"><button type="button" id="shuffle" class="nf-btn nf-btn-ghost">Another game</button></div>
+      <div class="nf-actions">
+        <a class="nf-btn nf-btn-primary" href={base + "/trades/"}>Back to trades</a>
+        <a class="nf-btn nf-btn-ghost" href={base + "/"}>Twistor home</a>
+      </div>
+      <p class="nf-foot">Prepared by Twistor Holdings LLC</p>
+    </main>
+    <script type="module" data-base={base}>
+      const base = document.currentScript.dataset.base || '';
+      const el = document.getElementById('game');
+      const shuffleBtn = document.getElementById('shuffle');
+      let current = null;
+      let currentIdx = -1;
+
+      // Trades 404: the four Easter egg games. Car and snake take trades
+      // themes; hoops takes trades-matched colors; the runner is the
+      // trades-theme boot jumper.
+      const HOOPS_TRADES = {
+        sky: '#f4efe4', text: '#2b2118', muted: '#6b6252',
+        ball: '#e8722a', ballLine: '#b34d12', rim: '#b23f0a',
+        board: '#e2d9c6', boardEdge: '#b9ad93', net: '#d8cfbb',
+        accent: '#b23f0a', panel: '#faf7ef', panelBorder: '#d8cfbb'
+      };
+      const GAMES = [
+        { file: '/games/tw-553-car.js', mount: m => m.mountCar(el, { theme: 'trades' }) },
+        { file: '/games/tw-553-snake.js', mount: m => m.mountSnake(el, { theme: 'trades' }) },
+        { file: '/games/tw-553-hoops.js', mount: m => m.mountHoops(el, HOOPS_TRADES) },
+        { file: '/games/tw-553-runner.js', mount: m => m.mountRunner(el, { theme: 'trades' }) },
+      ];
+
+      async function load(idx) {
+        if (current) { try { current.destroy(); } catch (e) {} current = null; }
+        el.innerHTML = '';
+        currentIdx = idx;
+        try {
+          const m = await import(base + GAMES[idx].file);
+          if (currentIdx !== idx) return;
+          current = GAMES[idx].mount(m);
+        } catch (err) {
+          el.innerHTML = '<p style="color:#6b6252;font-size:14px">The game could not load, but the way back still works.</p>';
+        }
+      }
+
+      function roll() {
+        let i = Math.floor(Math.random() * GAMES.length);
+        while (GAMES.length > 1 && i === currentIdx) i = Math.floor(Math.random() * GAMES.length);
+        load(i);
+      }
+
+      shuffleBtn.addEventListener('click', roll);
+      roll();
+    </script>
+  </body>
+</html>

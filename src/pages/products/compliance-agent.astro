@@ -1,29 +1,45 @@
 ---
+import '@fontsource/bricolage-grotesque/700.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
     <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
-    <title>Compliance Evidence Agent — Twistor</title>
+    <meta property="og:title" content="Compliance Evidence Agent | Twistor" />
+    <meta property="og:description" content="Your audit evidence, collected continuously." />
+    <meta property="og:url" content="https://twistor.co/products/compliance-agent/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Compliance Evidence Agent | Twistor" />
+    <meta name="twitter:description" content="Your audit evidence, collected continuously." />
+    <title>Compliance Evidence Agent | Twistor</title>
     <meta name="description" content="Your audit evidence, collected continuously." />
     <style>
-      body { font-family: system-ui, -apple-system, sans-serif; margin: 0; color: #0f172a; line-height: 1.6; }
+      :root { --bg: #FAF7F2; --surface: #FFFFFF; --ink: #1C1A17; --muted: #5F5A54; --accent: #FF5A1F; --accent-text: #B5430E; --line: #E5DFD5; }
+      body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; margin: 0; color: var(--ink); background: var(--bg); line-height: 1.6; font-size: 1rem; }
       header, main, footer { max-width: 800px; margin: 0 auto; padding: 0 24px; }
       header { padding-top: 24px; padding-bottom: 8px; }
-      header a { color: #2563eb; text-decoration: none; font-weight: 600; }
-      h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin: 24px 0 8px; }
-      .tagline { color: #2563eb; font-weight: 600; font-size: 1.15rem; margin: 0 0 16px; }
-      .price { display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 16px; font-weight: 700; margin: 8px 0 24px; }
+      header a { color: var(--accent-text); text-decoration: none; font-weight: 600; }
+      a:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 4px; }
+      h1, h2 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+      h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin: 24px 0 8px; font-weight: 700; }
+      h2 { font-size: 1.5rem; margin: 32px 0 8px; font-weight: 700; }
+      .tagline { color: var(--accent-text); font-weight: 600; font-size: 1.15rem; margin: 0 0 16px; }
+      .price { display: inline-block; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 16px; font-weight: 700; margin: 8px 0 24px; font-size: 1rem; }
+      p { font-size: 1rem; color: var(--muted); }
       ul { padding-left: 20px; }
-      li { margin-bottom: 8px; }
-      .placeholder { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; color: #64748b; margin: 24px 0; }
-      footer { padding: 40px 24px; color: #64748b; font-size: 0.9rem; border-top: 1px solid #e2e8f0; margin-top: 48px; }
+      li { margin-bottom: 8px; color: var(--ink); font-size: 1rem; }
+      li::marker { color: var(--accent); }
+      .cta-link { color: var(--accent-text); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+      .cta-link:hover { text-decoration: underline; }
+      footer { padding: 40px 24px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); margin-top: 48px; }
     </style>
   </head>
   <body>
-    <header><a href="/">← Twistor</a></header>
+    <header><a href={base + "/"}>← Twistor</a></header>
     <main>
       <h1>Compliance Evidence Agent</h1>
       <p class="tagline">Your audit evidence, collected continuously.</p>
@@ -32,21 +48,16 @@
       <ul>
           <li>Agent lives in your repos and cloud accounts</li>
           <li>Continuously collects SOC 2 / HIPAA evidence</li>
-          <li>Opens PRs when controls drift — before the auditor finds it</li>
+          <li>Opens PRs when controls drift, before the auditor finds it.</li>
           <li>Evidence graph with full audit trail</li>
           <li>Flat monthly pricing vs. five-figure annual platforms</li>
       </ul>
       <h2>Who it's for</h2>
       <p>Startups that need SOC 2 or HIPAA posture without a full-time compliance hire.</p>
-      <div class="placeholder">
-        <strong>[PLACEHOLDER — demo video / screenshots]</strong><br />
-        Product demo goes here once the pilot build is running.
-      </div>
-      <div class="placeholder">
-        <strong>[PLACEHOLDER — proof]</strong><br />
-        Client results appear here only after real deployments produce real numbers. Nothing invented.
-      </div>
+      <h2>Talk to us</h2>
+      <p>Tell us about your shop. We reply within one business day.</p>
+      <p><a class="cta-link" href="mailto:holla@twistor.co?subject=Demo%20request:%20Twistor">Email us to book a demo →</a></p>
     </main>
-    <footer>© 2026 Twistor LLC · Built on Twistor Core</footer>
+    <footer>© 2026 Twistor Holdings LLC · Built on Twistor Core</footer>
   </body>
 </html>

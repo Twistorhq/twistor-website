@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLIMATESHIFT-1 v1 | Twistor Data</title>
+<meta name="description" content="Crop performance under a shifting climate, hemp-first, with compliance-grade provenance and a rolling forward-year benchmark.">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="Twistor Data home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6" fill="#5b4fd6"/><path d="M9 19V9l10 10V9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name">Twistor <strong>Data</strong></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list" class="nav-list">
+        <li><a href="../index.html#datasets">Datasets</a></li>
+        <li><a href="../index.html#trust">Why trust it</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#docs">API docs</a></li>
+        <li><a class="nav-cta" href="../index.html#access">Get access</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="dataset-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../index.html#datasets">Datasets</a></li>
+    <li aria-current="page">Crops and climate</li>
+  </ol>
+</nav>
+      <h1>CLIMATESHIFT-1 v1</h1>
+      <p class="lede">Crop performance under a shifting climate, hemp-first. Thirty trials with full trait panels and compliance-grade provenance, plus a rolling forward-year benchmark.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="../index.html#access">Get access</a>
+        <a class="btn btn-ghost" href="#endpoints">API endpoints</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>What is in it</h2>
+      <p>Genotype-by-environment-by-management trial data, starting with hemp. Each trial carries its trait panel: THC, CBD, CBG: plus lab accreditation, certificate-of-analysis hashes, and the management practices behind the numbers. Built to harmonize with G2F and GRIN as the corpus grows.</p>
+      <h2>The trust story</h2>
+      <p>Crop trial data rots when management context goes missing. A yield number without its practices is a rumor. CLIMATESHIFT-1 codes management on every record and quarantines anything incomplete. The rolling forward-year benchmark never lets the test set leak into training: each year predicts the next, in order, the way a breeder actually works.</p>
+      <h2>Versions</h2>
+      <table class="version-table">
+        <thead><tr><th scope="col">Version</th><th scope="col">Rows</th><th scope="col">Tier</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">v1.0</th><td>70</td><td>Small: API + Excel</td><td>Current (synthetic-labeled seed)</td></tr>
+        </tbody>
+      </table>
+      <p class="v1-note">V1 rows are synthetic and labeled as such. Real-data ingestion from open trial networks is underway.</p>
+    </div>
+  </section>
+
+  <section id="endpoints" class="section">
+    <div class="wrap narrow">
+      <h2>Endpoints</h2>
+      <div class="endpoint-list">
+        <div class="endpoint"><code>GET /data/v1/science/crop_climate/datasets</code><span>List versions</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/crop_climate/datasets/{version}</code><span>Snapshot metadata</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/crop_climate/query</code><span>Query gold records</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/crop_climate/datasets/{version}/download</code><span>Excel download (one-time fee)</span></div>
+        <div class="endpoint"><code>GET /data/v1/science/crop_climate/benchmarks</code><span>Open benchmarks and leaderboard</span></div>
+      </div>
+      <h2>Cite it</h2>
+      <p>DOI issued per release. Cite the version: <code>CLIMATESHIFT-1 v1.0</code>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Prepared by Twistor Holdings LLC</p>
+    <p class="footer-note">Twistor Data is the scientific data layer from Twistor.</p>
+  </div>
+</footer>
+
+<script src="../app.js"></script>
+</body>
+</html>

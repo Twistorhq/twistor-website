@@ -11,6 +11,7 @@ import DispatchBoard from '../../components/DispatchBoard';
 import '@astryxdesign/core/reset.css';
 import '@astryxdesign/theme-neutral/theme.css';
 import '../../styles/astryx-twistor-tokens.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <html lang="en">
@@ -18,8 +19,8 @@ import '../../styles/astryx-twistor-tokens.css';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
-    <title>Dispatch board — Twistor interactive surface</title>
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
+    <title>Dispatch board: Twistor interactive surface</title>
     <meta
       name="description"
       content="Internal adoption surface: Twistor Trades dispatch board built on the Astryx design system. Sample data only, not a production surface."
@@ -65,7 +66,7 @@ import '../../styles/astryx-twistor-tokens.css';
   </head>
   <body>
     <div class="surface-banner" role="note">
-      <strong>Adoption surface</strong> — Dispatch board on Astryx (TW-150).
+      <strong>Adoption surface</strong>: Dispatch board on Astryx (TW-150).
       Sample data only. Not linked from any marketing page.
     </div>
     <div class="surface-shell twistor-brand" data-astryx-theme="neutral">
@@ -74,13 +75,13 @@ import '../../styles/astryx-twistor-tokens.css';
         <p>
           First interactive surface adopted on the Astryx design system, styled
           with Twistor brand tokens. Search and status filters work live;
-          advancing a job updates local state only — nothing is sent anywhere.
+          advancing a job updates local state only. Nothing is sent anywhere.
         </p>
         <DispatchBoard client:load />
       </main>
     </div>
     <footer class="surface-footer">
-      Twistor Astryx adoption — branch <code>rollout/tw-150-astryx</code>.
+      Twistor Astryx adoption, branch <code>rollout/tw-150-astryx</code>.
       Adoption guide: <code>docs/astryx-adoption.md</code>.
     </footer>
   </body>

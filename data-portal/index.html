@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twistor Data: The trusted data layer for scientific AI</title>
+<meta name="description" content="Provenance-stamped scientific datasets with blind benchmarks. API access and Excel downloads for university researchers.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Twistor Data home">
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6" fill="#5b4fd6"/><path d="M9 19V9l10 10V9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name">Twistor <strong>Data</strong></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list" class="nav-list">
+        <li><a href="#datasets">Datasets</a></li>
+        <li><a href="#trust">Why trust it</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#docs">API docs</a></li>
+        <li><a class="nav-cta" href="#access">Get access</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <h1>The data layer researchers<br>come to first.</h1>
+      <p class="lede">Provenance-stamped datasets with blind, falsifiable benchmarks. When your model trains on Twistor data, you know exactly where every row came from, how it was measured, and what it can be compared with.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#datasets">Browse the datasets</a>
+        <a class="btn btn-ghost" href="#trust">How the trust works</a>
+      </div>
+      <dl class="hero-facts">
+        <div><dt>3</dt><dd>Wave 1 datasets, live in V1</dd></div>
+        <div><dt>100%</dt><dd>of rows carry a method code</dd></div>
+        <div><dt>0</dt><dd>silent mixing of incomparable methods</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="datasets" class="section">
+    <div class="wrap">
+      <h2>The Wave 1 collection</h2>
+      <p class="section-lede">Three datasets, each built around the same principle: lineage-stamped records plus a blind benchmark nobody can game.</p>
+
+      <article class="dataset-row">
+        <div class="dataset-body">
+          <p class="dataset-lane">Weather and climate</p>
+          <h3><a href="datasets/s2s-trust.html">S2S-TRUST v1</a></h3>
+          <p>Subseasonal prediction, weeks 2 to 6: the 50-year predictability desert. Truth-lineage schema, a quarantine for incomplete provenance, and a sealed-window benchmark harness. Built on ERA5, ECMWF reforecasts, and NOAA GEFS.</p>
+          <ul class="dataset-points">
+            <li>Sealed scoring windows, scored weekly</li>
+            <li>Every forecast traceable to its truth source</li>
+          </ul>
+          <a class="text-link" href="datasets/s2s-trust.html">Dataset detail and access</a>
+        </div>
+        <div class="dataset-meta">
+          <dl>
+            <div><dt>Version</dt><dd>v1.0</dd></div>
+            <div><dt>Delivery</dt><dd>API + Excel</dd></div>
+            <div><dt>Benchmark</dt><dd>Sealed S2S harness</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="dataset-row flip">
+        <div class="dataset-body">
+          <p class="dataset-lane">Crops and climate</p>
+          <h3><a href="datasets/climateshift-1.html">CLIMATESHIFT-1 v1</a></h3>
+          <p>Crop performance under a shifting climate, hemp-first. Thirty trials with full trait panels: THC, CBD, CBG, lab accreditation, certificate-of-analysis hashes: and a rolling forward-year benchmark that never lets the test set leak into training.</p>
+          <ul class="dataset-points">
+            <li>Genotype-by-environment-by-management design</li>
+            <li>Compliance-grade provenance on every trial</li>
+          </ul>
+          <a class="text-link" href="datasets/climateshift-1.html">Dataset detail and access</a>
+        </div>
+        <div class="dataset-meta">
+          <dl>
+            <div><dt>Version</dt><dd>v1.0</dd></div>
+            <div><dt>Delivery</dt><dd>API + Excel</dd></div>
+            <div><dt>Benchmark</dt><dd>Forward-year, rolling</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="dataset-row">
+        <div class="dataset-body">
+          <p class="dataset-lane">Carbon</p>
+          <h3><a href="datasets/carbon-trust.html">CARBON-TRUST v1</a></h3>
+          <p>Harmonized carbon-sequestration evidence: soil profiles, flux towers, biomass pixels, and a biochar stability annex. Method-code comparability gating means Walkley-Black and dry-combustion records are never silently pooled: plus MRV-BLIND, the first falsifiable soil-carbon MRV scoreboard.</p>
+          <ul class="dataset-points">
+            <li>Blind predict-then-measure challenge</li>
+            <li>Registry crosswalks with credibility grading</li>
+          </ul>
+          <a class="text-link" href="datasets/carbon-trust.html">Dataset detail and access</a>
+        </div>
+        <div class="dataset-meta">
+          <dl>
+            <div><dt>Version</dt><dd>v1.0</dd></div>
+            <div><dt>Delivery</dt><dd>API + Excel</dd></div>
+            <div><dt>Benchmark</dt><dd>MRV-BLIND</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <p class="v1-note"><strong>An honest note on V1:</strong> the current seeds are synthetic and labeled as such on every row. Real-data ingestion is underway. We would rather tell you that plainly than let you discover it.</p>
+    </div>
+  </section>
+
+  <section id="trust" class="section section-dark">
+    <div class="wrap">
+      <h2>Why scientists can trust it</h2>
+      <p class="section-lede">The field's number one weakness is data provenance. Multi-lab studies keep training models on noise. We built the layer that fixes that.</p>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <h3>Medallion lineage</h3>
+          <p>Raw instrument and literature data lands in bronze. Cleaning and provenance attachment happens in silver. Only benchmark-ready, fully-attributed records reach gold. Nothing floats without a source.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Method codes on every row</h3>
+          <p>Every measurement carries its analytical method as a first-class field. Records with missing or unknown methods quarantine automatically: they are never silently mixed into your analysis.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Blind benchmarks</h3>
+          <p>Each dataset ships with a sealed, falsifiable benchmark. Predict first, measure later, score against lab-grade truth. Leaderboards are versioned and citable.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Versioned and citable</h3>
+          <p>Every release gets a version and a DOI. Cite the exact data your paper ran on, and anyone can reproduce it: the version never changes under you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <div class="wrap">
+      <h2>Pricing, stated plainly</h2>
+      <p class="section-lede">Everything sits behind the paywall. A Twistor subscription is required, and on top of that you pay for what you use.</p>
+      <div class="pricing-cols">
+        <div class="pricing-card">
+          <h3>API access</h3>
+          <p class="price">Toll-metered</p>
+          <p>Every call is metered against your subscription. Micro-tolls are priced so that pulling a dataset through the API costs the same as downloading it. The choice is about workflow, not price. Large datasets are API-only.</p>
+        </div>
+        <div class="pricing-card">
+          <h3>Excel downloads</h3>
+          <p class="price">One-time fee</p>
+          <p>Download a versioned spreadsheet on top of your subscription. Pricing follows a dynamic volume curve: pennies while a dataset is new and unproven, scaling with downloads, never unaffordable. The exact fee is shown before you pay, every time.</p>
+        </div>
+      </div>
+      <p class="pricing-note">A Twistor subscription is required for everything, API and downloads alike. Grant-funded? Good: the pricing assumes it. If your lab needs an institutional quote, say so in the access request.</p>
+    </div>
+  </section>
+
+  <section id="docs" class="section">
+    <div class="wrap">
+      <h2>API quickstart</h2>
+      <p class="section-lede">Reads need your org ID and an active subscription. Mutations need an API key. Base URL is configured per deployment.</p>
+      <div class="code-block">
+        <div class="code-head">
+          <span>List dataset versions</span>
+          <button class="copy-btn" data-copy-target="code-1">Copy</button>
+        </div>
+<pre id="code-1"><code>curl -H "X-Org-Id: your-org-id" \
+  https://api.twistor.example/data/v1/science/carbon/datasets</code></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-head">
+          <span>Query with method comparability</span>
+          <button class="copy-btn" data-copy-target="code-2">Copy</button>
+        </div>
+<pre id="code-2"><code>curl -H "X-Org-Id: your-org-id" \
+  "https://api.twistor.example/data/v1/science/carbon/query?carbon_pool=soil-organic&amp;comparable_group=dry-combustion"</code></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-head">
+          <span>Download the Excel version</span>
+          <button class="copy-btn" data-copy-target="code-3">Copy</button>
+        </div>
+<pre id="code-3"><code>curl -H "X-Org-Id: your-org-id" \
+  https://api.twistor.example/data/v1/science/carbon/datasets/v1.0/download \
+  --output carbon-trust-v1.xlsx</code></pre>
+      </div>
+      <p class="docs-note">Full endpoint reference ships with each dataset page. The base URL above is a placeholder until the production API deploys.</p>
+    </div>
+  </section>
+
+  <section id="access" class="section section-dark">
+    <div class="wrap">
+      <h2>Get access</h2>
+      <p class="section-lede">Tell us who you are and what you are working on. We provision subscriptions and API keys for research teams directly.</p>
+      <form class="access-form" id="access-form" action="#" method="post">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-name">Full name</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="f-email">University email</label>
+            <input id="f-email" name="email" type="email" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-org">University or institution</label>
+            <input id="f-org" name="org" type="text" required autocomplete="organization">
+          </div>
+          <div class="form-field">
+            <label for="f-dataset">Dataset of interest</label>
+            <select id="f-dataset" name="dataset" required>
+              <option value="">Choose one</option>
+              <option value="s2s-trust">S2S-TRUST v1: subseasonal prediction</option>
+              <option value="climateshift-1">CLIMATESHIFT-1 v1: crops and climate</option>
+              <option value="carbon-trust">CARBON-TRUST v1: carbon sequestration</option>
+              <option value="all">All three</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="f-use">What are you researching?</label>
+          <textarea id="f-use" name="use" rows="4" required placeholder="A sentence or two is plenty."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Request access</button>
+        <p class="form-note" id="form-note" role="status"></p>
+        <noscript><p class="form-note">JavaScript is off: email your request directly to holla@twistor.co with your name, institution, and dataset of interest.</p></noscript>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Questions researchers ask</h2>
+      <div class="faq">
+        <details>
+          <summary>Is the data real?</summary>
+          <p>V1 seeds are synthetic and labeled as such on every row: we say so upfront. Real-data ingestion is underway, and versions will always tell you exactly what you are looking at.</p>
+        </details>
+        <details>
+          <summary>How do I cite a dataset?</summary>
+          <p>Every release carries a version and a DOI. Cite the version your work ran on; it is immutable and reproducible.</p>
+        </details>
+        <details>
+          <summary>What does the subscription cost?</summary>
+          <p>Access is gated on an active subscription: the gate is binary, on or off. On top of that, everything you pull is metered. API calls by volume, downloads by a dynamic curve. Fees are stated before you incur them. No surprise billing.</p>
+        </details>
+        <details>
+          <summary>Can my whole lab share one subscription?</summary>
+          <p>Yes. Subscriptions are per organization; API keys are issued per key with lane scopes and rate limits.</p>
+        </details>
+        <details>
+          <summary>Do you take data contributions?</summary>
+          <p>Yes: signed lab ingestion with calibration chains is how the gold tier grows. Talk to us about becoming a contributing lab.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Prepared by Twistor Holdings LLC</p>
+    <p class="footer-note">Twistor Data is the scientific data layer from Twistor. Datasets are versioned, provenance-stamped, and paywalled.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -146,8 +146,8 @@ export default function DispatchBoard() {
   return (
     <div className="board-stack">
       <NoticeBanner
-        title="Adoption surface — sample data only"
-        description="Built on Astryx through Twistor's ui/ wrapper layer (TW-150). Job data is fictional; the production jobs API contract is ticketed to Dre (TW-152). Status changes here update local UI state only — nothing is sent anywhere."
+        title="Adoption surface: sample data only"
+        description="Built on Astryx through Twistor's ui/ wrapper layer (TW-150). Job data is fictional; the production jobs API contract is ticketed to Dre (TW-152). Status changes here update local UI state only. Nothing is sent anywhere."
       />
 
       <section aria-labelledby="board-heading">
@@ -216,7 +216,7 @@ export default function DispatchBoard() {
                           onPress={() => advance(job.id)}
                         />
                       ) : (
-                        <p className="job-done">Finished — no further action.</p>
+                        <p className="job-done">Finished. No further action.</p>
                       )}
                     </article>
                   </TwCard>

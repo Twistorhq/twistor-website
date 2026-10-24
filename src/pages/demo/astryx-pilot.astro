@@ -6,6 +6,7 @@ import AstryxPilot from '../../components/AstryxPilot';
 import '@astryxdesign/core/reset.css';
 import '@astryxdesign/theme-neutral/theme.css';
 import '../../styles/astryx-twistor-tokens.css'; // shared Twistor brand tokens (TW-150)
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <html lang="en">
@@ -13,8 +14,8 @@ import '../../styles/astryx-twistor-tokens.css'; // shared Twistor brand tokens 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
-    <title>Astryx pilot — Twistor design evaluation</title>
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
+    <title>Astryx pilot: Twistor design evaluation</title>
     <meta
       name="description"
       content="Internal evaluation of the Astryx design system against Twistor brand tokens. Not a production surface."
@@ -44,22 +45,22 @@ import '../../styles/astryx-twistor-tokens.css'; // shared Twistor brand tokens 
   </head>
   <body>
     <div class="demo-banner" role="note">
-      <strong>Internal evaluation</strong> — Astryx design-system pilot (TW-140).
+      <strong>Internal evaluation</strong>: Astryx design-system pilot (TW-140).
       This page is not linked from anywhere and ships nothing to production.
     </div>
     <div class="demo-shell twistor-brand" data-astryx-theme="neutral">
       <main>
         <h1>Astryx pilot under Twistor brand</h1>
         <p>
-          Representative Astryx components — buttons, form inputs, cards, and
-          navigation — rendered with Twistor&rsquo;s brand tokens to test
+          Representative Astryx components: buttons, form inputs, cards, and
+          navigation, rendered with Twistor&rsquo;s brand tokens to test
           theming effort, accessibility posture, and fit for Twistor products.
         </p>
         <AstryxPilot client:load />
       </main>
     </div>
     <footer class="demo-footer">
-      Twistor design evaluation — branch <code>sofia/tw-140-astryx</code>.
+      Twistor design evaluation, branch <code>sofia/tw-140-astryx</code>.
       Nothing here is a production surface.
     </footer>
   </body>
