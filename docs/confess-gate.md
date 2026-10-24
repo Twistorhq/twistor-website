@@ -78,5 +78,13 @@ design: a skip you cannot see is a gate you cannot trust.
 
 ## Live proof (TW-696, 2026-10-24)
 
-Wired and fired in this repo on branch `jalen/tw-696-confess-gate`.
+Wired and fired in this repo on branch `jalen/tw-696-confess-gate`:
+
+- Push of a marker-free commit: silent pass, no pause (selectivity).
+- Push of a `Co-Authored-By: Claude` commit: blocked, three answers
+  recorded to `CONFESSIONS.md`, push held until the confession was
+  committed.
+- Re-push after committing the confession: passed with no second pause
+  (the recorded SHA is never blocked twice).
+
 Full transcript: `docs/evidence/TW-696-confess-gate.tdd.md`.
