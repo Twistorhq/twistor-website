@@ -16,8 +16,14 @@
     "dev": "astro dev",
     "guard": "node scripts/check-astryx-scope.mjs",
     "preview": "astro preview",
-    "test": "node tests/tv-overlays.test.cjs && node tests/tv-overlays-fallback.test.cjs"
+    "test": "node tests/tv-overlays.test.cjs && node tests/tv-overlays-fallback.test.cjs",
+    "test:a11y": "node --test scripts/accessibility/*.test.mjs",
+    "audit:a11y": "node scripts/accessibility/collect.mjs"
   },
   "type": "module",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "axe-core": "4.14.0"
+  }
 }
