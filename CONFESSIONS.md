@@ -10,3 +10,6 @@ The README renders as the public repo home page, so a broken relative link or ma
 ### How would you verify it's correct in under 5 minutes?
 After the push, open the README on the branch, click the Confess gate link to confirm it lands on docs/confess-gate.md, and check git log for the branch to confirm the Co-Authored-By trailer survived. Two minutes, no build required.
 
+## 2026-10-24T13:57:30.356454+00:00 — `384d7646eedd`
+**SKIPPED**: TW-696 live proof of the auditable skip path; change is docs-only and its explanation is in docs/evidence/TW-696-confess-gate.tdd.md
+
