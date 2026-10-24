@@ -30,3 +30,16 @@ npm run build   # static build to dist/
 
 Static hosting (target: Fly.io static or Cloudflare Pages — decided at launch).
 Custom domain goes live once Justynn secures it.
+
+## Contributing: the Confess gate
+
+This repo runs Confess, a local pre-push gate for AI-assisted work.
+Commits carrying an AI co-author marker pause at push time until the
+pusher answers three questions in their own words; answers are logged
+to `CONFESSIONS.md`. Enable it once per checkout:
+
+```bash
+sh tools/confess/enable.sh
+```
+
+Full details: [docs/confess-gate.md](docs/confess-gate.md).
