@@ -15,7 +15,8 @@
     "build": "npm run guard && astro build",
     "dev": "astro dev",
     "guard": "node scripts/check-astryx-scope.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "node tests/tv-overlays.test.cjs && node tests/tv-overlays-fallback.test.cjs"
   },
   "type": "module",
   "version": "0.1.0"

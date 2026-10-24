@@ -17,7 +17,7 @@ export function SearchInput({label, value, onSearch, placeholder, name}: SearchI
     <AstryxTextInput
       label={label}
       name={name}
-      type="text"
+      type="search"
       value={value}
       onChange={(v) => onSearch(v)}
       placeholder={placeholder}
