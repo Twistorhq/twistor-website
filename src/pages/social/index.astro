@@ -1,0 +1,531 @@
+---
+import '@fontsource/bricolage-grotesque/500.css';
+import '@fontsource/bricolage-grotesque/700.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
+    <link rel="canonical" href="https://social.twistor.co/" />
+    <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
+    <meta property="og:title" content="Twistor Social | Go meet them in person" />
+    <meta property="og:description" content="Twistor Social is a groups first social app being built in Denver. Meetups in real rooms, identity checked at the door by design. Join the launch list." />
+    <meta property="og:url" content="https://social.twistor.co/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Twistor Social | Go meet them in person" />
+    <meta name="twitter:description" content="Twistor Social is a groups first social app being built in Denver. Meetups in real rooms, identity checked at the door by design. Join the launch list." />
+    <title>Twistor Social | Go meet them in person</title>
+    <meta name="description" content="Twistor Social is a groups first social app being built in Denver. Meetups in real rooms, identity checked at the door by design. Join the launch list for launch news." />
+    <style>
+      :root {
+        --bg: #141210;
+        --surface: #1E1A16;
+        --ink: #F5F2EA;
+        --muted: #A8A29A;
+        --accent: #E2572B;
+        --accent-ink: #141210;
+        --gold: #C9A24B;
+        --line: rgb(245 242 234 / 0.14);
+        --curve: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        margin: 0;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.5;
+        font-size: 1rem;
+      }
+      h1, h2, h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; text-wrap: balance; }
+      p { text-wrap: pretty; }
+      a { color: var(--gold); }
+      a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .skip {
+        position: absolute;
+        left: 16px;
+        top: -96px;
+        z-index: 20;
+        background: var(--surface);
+        color: var(--ink);
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: top 300ms var(--curve);
+      }
+      .skip:focus { top: 12px; }
+      .shell { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+      /* Floating navigation, per the vendored motion and nav rules. */
+      .nav-wrap { position: sticky; top: 12px; z-index: 10; padding: 12px 24px 0; }
+      .nav {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        background: rgb(30 26 22 / 0.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 8px 12px;
+      }
+      .wordmark {
+        font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 1.25rem;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .wordmark .dot { color: var(--accent); }
+      .wordmark .product { color: var(--muted); font-weight: 500; }
+      .nav-links { display: flex; align-items: center; gap: 12px; }
+      .nav-links a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
+      .nav-links a:hover { color: var(--gold); }
+      .nav-links .nav-cta {
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 8px;
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        transition: transform 300ms var(--curve), background 300ms var(--curve);
+      }
+      .nav-links .nav-cta:hover { color: var(--accent-ink); transform: translateY(-1px); }
+      .nav-links .nav-cta:active { transform: scale(0.98); }
+
+      /* Hero, mobile first. */
+      .hero { padding: 48px 0 64px; }
+      .hero h1 {
+        font-size: 2.25rem;
+        line-height: 1.11;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin: 0 0 16px;
+        max-width: 680px;
+      }
+      .hero h1 .accent-line { color: var(--accent); }
+      .lede { font-size: 1.25rem; line-height: 1.4; color: var(--ink); margin: 0 0 16px; max-width: 680px; }
+      .hero-detail { color: var(--muted); margin: 0 0 32px; max-width: 680px; }
+      .status-line { color: var(--muted); font-size: 0.875rem; margin: 16px 0 0; }
+      .status-line strong { color: var(--gold); font-weight: 600; }
+
+      /* Waitlist form. */
+      .waitlist-form { max-width: 560px; }
+      .waitlist-form label { display: block; font-weight: 600; margin-bottom: 8px; }
+      .form-row { display: flex; flex-direction: column; gap: 12px; }
+      .waitlist-form input[type="email"] {
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+        font-size: 1rem;
+        font-family: inherit;
+      }
+      .waitlist-form input[type="email"]::placeholder { color: var(--muted); }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: transform 300ms var(--curve), background 300ms var(--curve);
+      }
+      .btn-primary:hover { transform: translateY(-1px); }
+      .btn-primary:active { transform: scale(0.98); }
+      .form-note { color: var(--muted); font-size: 0.875rem; margin: 12px 0 0; max-width: 560px; }
+      .form-status { font-size: 0.875rem; margin: 12px 0 0; min-height: 20px; }
+      .form-status[data-state="error"] { color: var(--accent); font-weight: 600; }
+      .form-status[data-state="ok"] { color: var(--gold); font-weight: 600; }
+
+      /* Sample meetup panel. A concept sample, labeled as one. */
+      .sample-panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+        margin-top: 48px;
+      }
+      .sample-panel h2 { font-size: 1.5rem; line-height: 1.33; margin: 0 0 8px; font-weight: 700; }
+      .sample-meta { color: var(--muted); margin: 0 0 24px; }
+      .sample-host { margin: 0 0 8px; }
+      .sample-host span { color: var(--muted); }
+      .crew { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; padding: 0; list-style: none; }
+      .crew li {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 4px 12px 4px 4px;
+        font-size: 0.875rem;
+      }
+      .avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: var(--accent-ink);
+        flex: none;
+      }
+      .avatar-a { background: var(--accent); }
+      .avatar-b { background: var(--gold); }
+      .avatar-c { background: #8A5A2B; color: var(--ink); }
+      .sample-note { color: var(--muted); font-size: 0.875rem; margin: 0; }
+
+      /* Tagline reveal, vendored rule B11. Words start muted and
+         activate one at a time in reading order as they scroll in. */
+      .tagline-reveal { padding: 64px 0; }
+      .tagline-reveal p {
+        font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+        font-size: 2.25rem;
+        line-height: 1.11;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        max-width: 680px;
+        margin: 0;
+      }
+      .tagline-reveal [data-reveal-word] {
+        color: var(--ink);
+        opacity: 0.55;
+        transition: color 500ms var(--curve), opacity 500ms var(--curve);
+      }
+      .tagline-reveal [data-reveal-word].on { color: var(--ink); opacity: 1; }
+
+      section.block { padding: 48px 0; }
+      .section-title { font-size: 1.875rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 16px; font-weight: 700; }
+      .section-sub { color: var(--muted); margin: 0 0 32px; max-width: 640px; }
+      .section-sub strong { color: var(--ink); font-weight: 600; }
+
+      .steps { display: grid; gap: 32px; }
+      .step h3 { font-size: 1.25rem; line-height: 1.4; margin: 0 0 8px; font-weight: 700; color: var(--gold); }
+      .step p { color: var(--muted); margin: 0; }
+      .step p strong { color: var(--ink); font-weight: 600; }
+
+      .diff-rows { border-top: 1px solid var(--line); }
+      .diff-row { padding: 24px 0; border-bottom: 1px solid var(--line); }
+      .diff-row h3 { font-size: 1.25rem; line-height: 1.4; margin: 0 0 8px; font-weight: 700; }
+      .diff-row p { color: var(--muted); margin: 0; max-width: 640px; }
+      .diff-row p strong { color: var(--ink); font-weight: 600; }
+
+      .door-panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      .door-panel p { color: var(--muted); }
+      .door-panel p strong { color: var(--ink); font-weight: 600; }
+      .door-status { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 24px; }
+      .door-status p { margin: 0; font-size: 0.875rem; }
+
+      .faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+      .faq summary { font-weight: 600; font-size: 1.125rem; line-height: 1.55; cursor: pointer; }
+      .faq details p { color: var(--muted); margin: 8px 0 0; max-width: 640px; }
+
+      .join-panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      .join-panel .waitlist-form input[type="email"] { background: var(--bg); }
+
+      /* Scroll reveal for sections, one time only. */
+      .reveal { opacity: 0; transform: translateY(32px); transition: opacity 700ms var(--curve), transform 700ms var(--curve); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      footer { border-top: 1px solid var(--line); margin-top: 48px; }
+      .foot-inner { padding: 40px 24px; color: var(--muted); font-size: 0.875rem; }
+      .foot-inner p { margin: 0 0 8px; }
+      .foot-inner a { color: var(--ink); }
+
+      @media (min-width: 48rem) {
+        .nav { padding: 8px 16px; }
+        .nav-links { gap: 24px; }
+        .hero { padding: 64px 0 80px; }
+        .hero h1 { font-size: 3rem; line-height: 1; }
+        .tagline-reveal p { font-size: 3rem; line-height: 1; }
+        .form-row { flex-direction: row; }
+        .form-row input[type="email"] { flex: 1; }
+        .sample-panel, .door-panel, .join-panel { padding: 32px; }
+        section.block { padding: 64px 0; }
+      }
+      @media (min-width: 64rem) {
+        .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: start; }
+        .hero h1 { font-size: 3.75rem; }
+        .sample-panel { margin-top: 0; }
+        .steps { grid-template-columns: repeat(3, 1fr); }
+        .tagline-reveal { padding: 96px 0; }
+        .tagline-reveal p { font-size: 3.75rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        .tagline-reveal [data-reveal-word] { transition: none; }
+        .btn-primary, .nav-links .nav-cta, .skip { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="nav-wrap">
+      <nav class="nav" aria-label="Twistor Social">
+        <a class="wordmark" href="https://social.twistor.co/" aria-current="page">twistor<span class="dot">.</span> <span class="product">social</span></a>
+        <div class="nav-links">
+          <a href="#how">How it will work</a>
+          <a class="nav-cta" href="#join">Get launch news</a>
+        </div>
+      </nav>
+    </div>
+
+    <main id="main">
+      <section class="shell hero" aria-labelledby="hero-title">
+        <div class="hero-grid">
+          <div>
+            <h1 id="hero-title">Your people are out there.<br /><span class="accent-line">Go meet them<br />in person.</span></h1>
+            <p class="lede">Twistor Social is the real social app we are building in Denver: groups first, meetups in real rooms, and identity checked at the door by design.</p>
+            <p class="hero-detail">It is being built for one reason. Get people off the couch, out of the feed, and back into rooms with each other.</p>
+            <form class="waitlist-form" id="hero-form" novalidate>
+              <label for="hero-email">Email for launch news</label>
+              <div class="form-row">
+                <input id="hero-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="hero-note hero-status" />
+                <button class="btn-primary" type="submit">Get launch news</button>
+              </div>
+              <p class="form-note" id="hero-note">Launch news only. Joining this list is not an account and it is not verification. This page does not collect or store your email on a server. The button opens your email app with a note to us, ready to send.</p>
+              <p class="form-status" id="hero-status" aria-live="polite"></p>
+              <noscript><p class="form-note">Form needs JavaScript in this preview. You can still reach us at <a href="mailto:holla@twistor.co?subject=Twistor%20Social%20launch%20news">holla@twistor.co</a>.</p></noscript>
+            </form>
+            <p class="status-line"><strong>Status:</strong> in development now, and Denver is first. The launch list hears real news first, when there is news worth sending.</p>
+          </div>
+          <div class="sample-panel" role="region" aria-label="Sample meetup">
+            <h2>Sample meetup: Saturday Vinyl Swap</h2>
+            <p class="sample-meta">RiNo, Denver · Saturday morning · A public room with tables, coffee, and crates of records</p>
+            <p class="sample-host">Hosted by Marisol <span>(a fictional host, drawn to picture the idea)</span></p>
+            <ul class="crew" aria-label="Sample attendee list">
+              <li><span class="avatar avatar-a" aria-hidden="true">M</span> Marisol</li>
+              <li><span class="avatar avatar-b" aria-hidden="true">D</span> Deja</li>
+              <li><span class="avatar avatar-c" aria-hidden="true">A</span> Andre</li>
+              <li><span class="avatar avatar-b" aria-hidden="true">T</span> Tomás</li>
+              <li><span class="avatar avatar-a" aria-hidden="true">K</span> Keiko</li>
+              <li><span class="avatar avatar-c" aria-hidden="true">J</span> Jamal</li>
+            </ul>
+            <p class="sample-note">Sample meetup, drawn to picture the idea. Names are fictional, no event is scheduled, and nobody pictured here is a customer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell tagline-reveal" aria-label="The point of Twistor Social">
+        <p>
+          <span data-reveal-word>The</span> <span data-reveal-word>feed</span> <span data-reveal-word>can</span> <span data-reveal-word>wait.</span><br />
+          <span data-reveal-word>The</span> <span data-reveal-word>room</span> <span data-reveal-word>is</span> <span data-reveal-word>the</span> <span data-reveal-word>point.</span>
+        </p>
+      </section>
+
+      <section class="shell block reveal" aria-labelledby="problem-title">
+        <h2 class="section-title" id="problem-title">Social got loud. Life got quiet.</h2>
+        <p class="section-sub">The average night now ends the same way it started, alone with a screen, watching other people live. <strong>Twistor Social is being built to flip that.</strong> Less feed, more rooms. Less audience, more people who actually know your name by the second meetup.</p>
+      </section>
+
+      <section class="shell block reveal" id="how" aria-labelledby="how-title">
+        <h2 class="section-title" id="how-title">How it will work</h2>
+        <p class="section-sub">Three moves, in order. Find the group, show up, know the room.</p>
+        <div class="steps">
+          <article class="step">
+            <h3>Find your group</h3>
+            <p>Groups come first, organized around the things people already love. Vinyl and vintage. Pickup runs at dawn. New parents who need adult conversation. <strong>You join a group, not a feed.</strong></p>
+          </article>
+          <article class="step">
+            <h3>Show up in person</h3>
+            <p>Groups meet in real rooms and public places, on a rhythm you can plan a life around. You RSVP, you show up, you talk to people standing next to you. <strong>The app ends at the door. The night does not.</strong></p>
+          </article>
+          <article class="step">
+            <h3>Know the room</h3>
+            <p>The design puts identity at the door of every meetup, so the person who walks in is the person who signed up. <strong>Safety is the mission here, not a setting buried in a menu.</strong> It is being built into the foundation, and the next section says plainly where it stands.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="shell block reveal" aria-labelledby="door-title">
+        <div class="door-panel">
+          <h2 class="section-title" id="door-title">ID at the door, by design</h2>
+          <p>Twistor Social is being built around one rule: <strong>the person who shows up is the person who signed up.</strong> Identity checks are designed into the front door of the product, run by Twistor, because a room feels different when everyone in it is accountable for being who they say they are. Anonymous accounts get the lobby view only. The full room is for people who stand behind their name.</p>
+          <div class="door-status">
+            <p><strong>Where that stands:</strong> verification is being built and tested now. It is not live today, and this page will not pretend otherwise. It opens only when it is ready. Joining the launch list does not verify you, and it does not create an account.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell block reveal" aria-labelledby="diff-title">
+        <h2 class="section-title" id="diff-title">Why Twistor Social is different</h2>
+        <div class="diff-rows">
+          <div class="diff-row">
+            <h3>Safety is the design, not a setting</h3>
+            <p>Most apps bolt safety on after the harm. <strong>Here, verified identity is the reason the product exists.</strong> The whole shape of it, groups, hosts, doors, standing, grows out of that one decision.</p>
+          </div>
+          <div class="diff-row">
+            <h3>Groups first, feeds last</h3>
+            <p>There is no infinite scroll to win. <strong>The product succeeds when you close it and go somewhere.</strong> Groups are small enough that people notice when you are gone, and hosts are real people with a name on the night.</p>
+          </div>
+          <div class="diff-row">
+            <h3>Built for everyone in the room</h3>
+            <p>Couples can link up and arrive together. Solo members are first class, never an afterthought. <strong>Nobody is a plus one in their own social life.</strong></p>
+          </div>
+          <div class="diff-row">
+            <h3>Showing up counts</h3>
+            <p>The design rewards the people who actually show up. <strong>Standing comes from being there, meetup after meetup. It is earned in rooms, and it is never for sale.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell block reveal faq" aria-labelledby="faq-title">
+        <h2 class="section-title" id="faq-title">Questions, answered plainly</h2>
+        <details>
+          <summary>What is Twistor Social?</summary>
+          <p>A groups first social app being built by Twistor in Denver. Groups host meetups in real rooms and public places. The mission is simple: get people off the couch and back into the real world, with safety through verified identity designed in from the start.</p>
+        </details>
+        <details>
+          <summary>When does it launch?</summary>
+          <p>No date is promised on this page, on purpose. The product is in development, and a date gets announced when the work earns one. The launch list hears it first.</p>
+        </details>
+        <details>
+          <summary>Does joining this list verify my identity?</summary>
+          <p>No. Joining the list is not an account and it is not verification of your identity. It is launch news only. Verification belongs to the product itself, when it opens, and it will be explained in full before anyone is asked to use it.</p>
+        </details>
+        <details>
+          <summary>Where does it start?</summary>
+          <p>Denver first. Groups meet in public venues around the metro, and the city is the proving ground before anywhere else gets a turn.</p>
+        </details>
+        <details>
+          <summary>What does it cost to show up?</summary>
+          <p>By design, showing up stays free for the people who attend. The cost sits with the hosts and organizers who run groups and put nights on the calendar.</p>
+        </details>
+        <details>
+          <summary>What about Door Pass?</summary>
+          <p>Door Pass is a separate venue idea from the same team. It is still at the concept stage, it is not part of Twistor Social, and joining this list does not sign you up for it.</p>
+        </details>
+      </section>
+
+      <section class="shell block reveal" id="join" aria-labelledby="join-title">
+        <div class="join-panel">
+          <h2 class="section-title" id="join-title">Be in the room when it opens</h2>
+          <p class="section-sub">One list, one purpose. Launch news for Twistor Social, sent when there is news worth sending. No spam, no noise, no selling your address.</p>
+          <form class="waitlist-form" id="final-form" novalidate>
+            <label for="final-email">Email for launch news</label>
+            <div class="form-row">
+              <input id="final-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="final-note final-status" />
+              <button class="btn-primary" type="submit">Get launch news</button>
+            </div>
+            <p class="form-note" id="final-note">Launch news only. Joining this list is not an account and it is not verification. This page does not collect or store your email on a server. The button opens your email app with a note to us, ready to send.</p>
+            <p class="form-status" id="final-status" aria-live="polite"></p>
+            <noscript><p class="form-note">Form needs JavaScript in this preview. You can still reach us at <a href="mailto:holla@twistor.co?subject=Twistor%20Social%20launch%20news">holla@twistor.co</a>.</p></noscript>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell foot-inner">
+        <p><a href="https://twistor.co/">Twistor</a> · Denver, Colorado</p>
+        <p>Twistor Social is in development. Nothing on this page is a live service.</p>
+        <p>Prepared by Twistor Holdings LLC</p>
+        <p>© 2026 Twistor Holdings LLC · Built on Twistor Core</p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      // TW737_LOCAL_HANDLER: the twistor-website repo has no form backend
+      // and no list service (every existing page uses a mailto CTA). This
+      // handler is therefore local by design: it validates the address,
+      // then hands off through the site mailto pattern so the interest
+      // actually reaches Twistor. This page collects nothing, stores
+      // nothing, and sends nothing to any server or third party.
+      (function () {
+        var forms = document.querySelectorAll('.waitlist-form');
+        forms.forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var input = form.querySelector('input[type="email"]');
+            var status = form.querySelector('.form-status');
+            var email = (input.value || '').trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              status.textContent = 'Enter a valid email address so we can reach you.';
+              status.setAttribute('data-state', 'error');
+              input.focus();
+              return;
+            }
+            var subject = encodeURIComponent('Twistor Social launch news');
+            var body = encodeURIComponent(
+              'Please add me to the Twistor Social launch list.\n\nEmail: ' + email +
+              '\n\nI understand joining is launch news only. It is not an account and not verification.'
+            );
+            status.textContent = 'Your email app is opening with a note to us, ready to send. Sending that note adds you to the launch list. This page did not upload or store anything.';
+            status.setAttribute('data-state', 'ok');
+            window.location.href = 'mailto:holla@twistor.co?subject=' + subject + '&body=' + body;
+          });
+        });
+
+        // Section reveals: once each, IntersectionObserver only.
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var revealed = document.querySelectorAll('.reveal');
+        if (reduced || !('IntersectionObserver' in window)) {
+          revealed.forEach(function (el) { el.classList.add('in'); });
+          document.querySelectorAll('[data-reveal-word]').forEach(function (w) { w.classList.add('on'); });
+          return;
+        }
+        var sectionObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              sectionObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealed.forEach(function (el) { sectionObserver.observe(el); });
+
+        // Tagline words activate one at a time in reading order (B11).
+        var wordObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('on');
+              wordObserver.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -38% 0px', threshold: 0 });
+        document.querySelectorAll('[data-reveal-word]').forEach(function (w, i) {
+          w.style.transitionDelay = (i * 60) + 'ms';
+          wordObserver.observe(w);
+        });
+      })();
+    </script>
+  </body>
+</html>
