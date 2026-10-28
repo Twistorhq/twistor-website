@@ -209,9 +209,10 @@ described by notes and status, visible focus ring on links, buttons,
 inputs, and summaries, all contrast pairs AA per the table above,
 48px touch targets, keyboard reachable FAQ details elements, reduced
 motion path verified in the tall mobile screenshot (forced reduced
-motion, all reveal content fully visible), screenshots inspected at
-390px and 1280px with no overlap, no horizontal scroll, no wrapped
-wordmark after the nav fix.
+motion, all reveal content fully visible). An earlier draft of this
+section also claimed the 390px shots were clean; Rosa's review showed
+they were not (nav CTA clipped, section gutter lost). That claim is
+withdrawn; the corrected 390px proof is in the fix round below.
 
 ## Screenshots
 
@@ -235,3 +236,87 @@ Rendered from the built `dist/` served locally, headless Chromium.
 4. **Deploy word** for the website, separate from the merge word.
 5. Optional later ticket: a real waitlist backend, if mailto capture
    is ever outgrown. Nothing in this page depends on it.
+
+## Fix round (Rosa review: REQUEST CHANGES, 0 blockers, 2 majors, 2 nits)
+
+Rosa verified the build herself and found two real layout defects at
+390px, both visible in the original mobile screenshots. Both are
+fixed here, plus both nits. No Python files were authored or edited
+in this round, so the ruff gate has no files to run on; the edited
+JavaScript test file passes `node --check`.
+
+**M1, nav CTA clipped at 390px.** The flex row (wordmark, "How it
+will work" link, "Get launch news" CTA, all `white-space: nowrap`)
+was wider than the nav box, so the CTA rendered as "Get launch".
+Fix: the how link carries a `nav-how` class and is `display: none`
+below 48rem (its section is one scroll away); it returns at 48rem
+and up, where Rosa confirmed the row fits. My re-render probe at
+390px: CTA right edge 353px in a 390px viewport (nav box edge is
+366px), and `getComputedStyle` on the how link reports `none`.
+
+**M2, shell gutter overridden.** `.shell` sets `padding: 0 24px`, but
+the equal-specificity `.hero`, `.tagline-reveal`, and `section.block`
+shorthands come later in the file and zeroed the horizontal value,
+so mobile section text ran flush to the screen edges. Fix: the 24px
+horizontal value is restored in those shorthands at every breakpoint
+(base 48px/64px verticals, the 48rem hero and block overrides, and
+the 64rem tagline override). The 390px probe reads the h1 left edge
+at exactly 24px, and both re-shot mobile screenshots show every
+section inside the gutter.
+
+**N1, twitter card type.** `twitter:card` is now `summary`, matching
+the logo mark og:image that exists today. A `summary_large_image`
+card returns only when a real large card asset is produced; that is
+go-live asset work, noted here rather than claimed.
+
+**N2, email-input contract check.** The old single expression
+(`A && B || C && D`) did not enforce the label requirement when its
+right clause passed. It is replaced by four explicit checks: label
+element with a `for` target, email input exists, required attribute
+present on that input, and the input `id` matching the label target.
+
+**Receipts (fix round):**
+
+```
+$ node --check tests/tw737-social-page.test.cjs        (clean)
+$ node tests/tw737-social-page.test.cjs
+tw737-social-page: 63 passed, 0 failed   (exit 0)
+```
+
+52 original checks, minus the one mush expression, plus its 4
+explicit replacements, plus 8 new fix-round checks (card type, how
+link hidden below 48rem, how link restored at 48rem, gutter kept on
+hero, tagline, and block sections at base, 48rem, and 64rem rules).
+
+```
+$ npm run build
+Astryx scope guard: OK, marketing routes Astryx-free, boundary intact.
+[build] 12 page(s) built, /social/index.html generated.   exit 0
+
+$ npx impeccable detect dist/social/index.html
+(no findings)   exit 0
+
+$ npm test        (repo overlays suites)   exit 0
+```
+
+`check_spec` re-run on the same spec recorded above (palette
+mofongo, the six hexes, the seven contrast pairs; spec inputs
+reconstructed from this document, no spec file was committed with
+the original build): **PASSES: True**, exactly one warning, the
+kept-on-purpose typeface call from precedence item 1. Zero
+em-dashes in the page source and in the built HTML, both grepped
+after this round's edits.
+
+**Re-shot screenshots** (same shapes as the originals, rendered from
+the rebuilt `dist/` served locally, headless Chromium):
+`mobile-hero.png` (390 by 844) and `mobile-tall.png` (390 by 3400,
+reduced motion forced) now show the full CTA inside the nav and the
+24px gutter on every section. The two desktop shots (1280 by 800,
+1280 by 900) were also re-shot from the same build, since the gutter
+restoration applies at the 48rem and 64rem breakpoints too; the
+desktop nav keeps the how link, as the probe's companion render
+confirms visually.
+
+Status after this round: ready for Rosa spot-verification. Not
+merged, not pushed, not deployed, no DNS touched; the go-live steps
+above are unchanged and remain Justynn's separate words.

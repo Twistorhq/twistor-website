@@ -16,7 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta property="og:description" content="Twistor Social is a groups first social app being built in Denver. Meetups in real rooms, identity checked at the door by design. Join the launch list." />
     <meta property="og:url" content="https://social.twistor.co/" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Twistor Social | Go meet them in person" />
     <meta name="twitter:description" content="Twistor Social is a groups first social app being built in Denver. Meetups in real rooms, identity checked at the door by design. Join the launch list." />
     <title>Twistor Social | Go meet them in person</title>
@@ -94,6 +94,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       .nav-links { display: flex; align-items: center; gap: 12px; }
       .nav-links a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
       .nav-links a:hover { color: var(--gold); }
+      /* Below 48rem the full row (wordmark + how link + CTA) is wider
+         than the nav box and clipped the CTA. The how link drops out
+         on small screens; its section is one scroll away. */
+      .nav-links .nav-how { display: none; }
       .nav-links .nav-cta {
         background: var(--accent);
         color: var(--accent-ink);
@@ -109,7 +113,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       .nav-links .nav-cta:active { transform: scale(0.98); }
 
       /* Hero, mobile first. */
-      .hero { padding: 48px 0 64px; }
+      .hero { padding: 48px 24px 64px; }
       .hero h1 {
         font-size: 2.25rem;
         line-height: 1.11;
@@ -204,7 +208,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
       /* Tagline reveal, vendored rule B11. Words start muted and
          activate one at a time in reading order as they scroll in. */
-      .tagline-reveal { padding: 64px 0; }
+      .tagline-reveal { padding: 64px 24px; }
       .tagline-reveal p {
         font-family: 'Bricolage Grotesque', system-ui, sans-serif;
         font-size: 2.25rem;
@@ -221,7 +225,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       }
       .tagline-reveal [data-reveal-word].on { color: var(--ink); opacity: 1; }
 
-      section.block { padding: 48px 0; }
+      section.block { padding: 48px 24px; }
       .section-title { font-size: 1.875rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 16px; font-weight: 700; }
       .section-sub { color: var(--muted); margin: 0 0 32px; max-width: 640px; }
       .section-sub strong { color: var(--ink); font-weight: 600; }
@@ -272,20 +276,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       @media (min-width: 48rem) {
         .nav { padding: 8px 16px; }
         .nav-links { gap: 24px; }
-        .hero { padding: 64px 0 80px; }
+        .nav-links .nav-how { display: inline; }
+        .hero { padding: 64px 24px 80px; }
         .hero h1 { font-size: 3rem; line-height: 1; }
         .tagline-reveal p { font-size: 3rem; line-height: 1; }
         .form-row { flex-direction: row; }
         .form-row input[type="email"] { flex: 1; }
         .sample-panel, .door-panel, .join-panel { padding: 32px; }
-        section.block { padding: 64px 0; }
+        section.block { padding: 64px 24px; }
       }
       @media (min-width: 64rem) {
         .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: start; }
         .hero h1 { font-size: 3.75rem; }
         .sample-panel { margin-top: 0; }
         .steps { grid-template-columns: repeat(3, 1fr); }
-        .tagline-reveal { padding: 96px 0; }
+        .tagline-reveal { padding: 96px 24px; }
         .tagline-reveal p { font-size: 3.75rem; }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -302,7 +307,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <nav class="nav" aria-label="Twistor Social">
         <a class="wordmark" href="https://social.twistor.co/" aria-current="page">twistor<span class="dot">.</span> <span class="product">social</span></a>
         <div class="nav-links">
-          <a href="#how">How it will work</a>
+          <a class="nav-how" href="#how">How it will work</a>
           <a class="nav-cta" href="#join">Get launch news</a>
         </div>
       </nav>

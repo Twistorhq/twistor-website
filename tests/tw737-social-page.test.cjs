@@ -76,7 +76,17 @@ ok('no launch date promise', !/(launch|opens|arrives) (on )?(january|february|ma
 ok('waitlist form present', /<form[^>]*class="[^"]*waitlist-form/.test(src));
 ok('form is marked as a local handler in code', src.includes('TW737_LOCAL_HANDLER'));
 ok('form posts nowhere external', !/<form[^>]*action="https?:/.test(src));
-ok('email input is typed, required, and labeled', /<label for="[^"]+">/.test(src) && /type="email"[^>]*required|required[^>]*type="email"/.test(src) || /type="email"/.test(src) && /required/.test(src));
+{
+  // Explicit, separately enforced checks (Rosa TW-737 N2: the previous
+  // A && B || C && D expression let the label requirement slip when the
+  // right clause passed on its own).
+  const labelMatch = src.match(/<label for="([^"]+)">Email for launch news<\/label>/);
+  const inputMatch = src.match(/<input[^>]*type="email"[^>]*>/);
+  ok('email field has a label element with a for target', !!labelMatch);
+  ok('email input element exists', !!inputMatch);
+  ok('email input carries the required attribute', !!inputMatch && /\brequired\b/.test(inputMatch[0]));
+  ok('email input id matches its label for target', !!labelMatch && !!inputMatch && inputMatch[0].includes(`id="${labelMatch[1]}"`));
+}
 ok('inline status region for form feedback', src.includes('aria-live="polite"'));
 ok('client side validation message text exists', lower.includes('enter a valid email'));
 ok('site mailto pattern is the delivery path', src.includes('mailto:holla@twistor.co'));
@@ -88,6 +98,16 @@ ok('faq section present', /<h2[^>]*>[^<]*questions/.test(lower));
 ok('tagline reveal section present (B11)', src.includes('tagline-reveal') && src.includes('data-reveal-word'));
 ok('sample meetup clearly labeled as a sample', lower.includes('sample meetup'));
 ok('fictional names labeled as fictional', lower.includes('names are fictional'));
+
+// --- Fix round (Rosa TW-737 review): nav fit, shell gutter, card type ---
+ok('twitter card is summary until a real large card asset exists', src.includes('name="twitter:card" content="summary"') && !src.includes('summary_large_image'));
+ok('how link hidden below 48rem so the nav CTA cannot clip', /\.nav-links \.nav-how \{\s*display: none;/.test(src));
+ok('how link restored at 48rem and up', /@media \(min-width: 48rem\) \{[\s\S]*?\.nav-links \.nav-how \{\s*display: inline;/.test(src));
+ok('hero keeps the 24px shell gutter', /\.hero \{\s*padding: 48px 24px 64px;/.test(src));
+ok('tagline keeps the 24px shell gutter', /\.tagline-reveal \{\s*padding: 64px 24px;/.test(src));
+ok('block sections keep the 24px shell gutter', /section\.block \{\s*padding: 48px 24px;/.test(src));
+ok('48rem hero and block rules keep the gutter', /\.hero \{\s*padding: 64px 24px 80px;/.test(src) && /section\.block \{\s*padding: 64px 24px;/.test(src));
+ok('64rem tagline rule keeps the gutter', /\.tagline-reveal \{\s*padding: 96px 24px;/.test(src));
 
 // --- Marketing boundary (repo guard rules, checked here too) ---
 ok('no astryx mention on a marketing route', !/astryx/i.test(src));
