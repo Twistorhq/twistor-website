@@ -1,0 +1,13 @@
+{
+  "round": 3,
+  "level": "faithful",
+  "pass": true,
+  "overall": 100,
+  "axes": {
+    "layout": 100,
+    "style": 100,
+    "pixels": 100
+  },
+  "clone": "http://127.0.0.1:8932/index.html",
+  "at": "2026-11-03T13:31:32.456Z"
+}
