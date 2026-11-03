@@ -1,0 +1,3 @@
+{"round":1,"level":"faithful","pass":false,"overall":88.91,"axes":{"layout":97.13,"style":100,"pixels":69.59},"clone":"http://127.0.0.1:8932/index.html","at":"2026-11-03T13:29:19.266Z"}
+{"round":2,"level":"faithful","pass":true,"overall":100,"axes":{"layout":100,"style":100,"pixels":100},"clone":"http://127.0.0.1:8932/index.html","at":"2026-11-03T13:30:24.964Z"}
+{"round":3,"level":"faithful","pass":true,"overall":100,"axes":{"layout":100,"style":100,"pixels":100},"clone":"http://127.0.0.1:8932/index.html","at":"2026-11-03T13:31:32.456Z"}
