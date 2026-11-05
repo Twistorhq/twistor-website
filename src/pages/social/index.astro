@@ -132,7 +132,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       .waitlist-form { max-width: 560px; }
       .waitlist-form label { display: block; font-weight: 600; margin-bottom: 8px; }
       .form-row { display: flex; flex-direction: column; gap: 12px; }
-      .waitlist-form input[type="email"] {
+      .waitlist-form input[type="email"], .waitlist-form input[type="tel"] {
         width: 100%;
         min-height: 48px;
         padding: 12px 16px;
@@ -143,7 +143,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         font-size: 1rem;
         font-family: inherit;
       }
-      .waitlist-form input[type="email"]::placeholder { color: var(--muted); }
+      .waitlist-form input[type="email"]::placeholder, .waitlist-form input[type="tel"]::placeholder { color: var(--muted); }
       .btn-primary {
         display: inline-flex;
         align-items: center;
@@ -163,6 +163,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       .btn-primary:hover { transform: translateY(-1px); }
       .btn-primary:active { transform: scale(0.98); }
       .form-note { color: var(--muted); font-size: 0.875rem; margin: 12px 0 0; max-width: 560px; }
+      .form-fields { display: grid; gap: 16px; margin-bottom: 16px; }
+      .form-fields label { margin-bottom: 8px; }
+      .consent { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; max-width: 560px; }
+      .consent input[type="checkbox"] { width: 24px; height: 24px; flex: none; margin: 2px 0 0; accent-color: var(--accent); }
+      .consent label { font-weight: 400; font-size: 0.875rem; color: var(--muted); margin: 0; }
       .form-status { font-size: 0.875rem; margin: 12px 0 0; min-height: 20px; }
       .form-status[data-state="error"] { color: var(--accent); font-weight: 600; }
       .form-status[data-state="ok"] { color: var(--gold); font-weight: 600; }
@@ -262,7 +267,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         border-radius: 16px;
         padding: 24px;
       }
-      .join-panel .waitlist-form input[type="email"] { background: var(--bg); }
+      .join-panel .waitlist-form input[type="email"], .waitlist-form input[type="tel"] { background: var(--bg); }
 
       /* Scroll reveal for sections, one time only. */
       .reveal { opacity: 0; transform: translateY(32px); transition: opacity 700ms var(--curve), transform 700ms var(--curve); }
@@ -321,14 +326,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <p class="lede">Twistor Social is the real social app we are building in Denver: groups first, meetups in real rooms, and identity checked at the door by design.</p>
             <p class="hero-detail">It is being built for one reason. Get people off the couch, out of the feed, and back into rooms with each other.</p>
             <form class="waitlist-form" id="hero-form" novalidate>
-              <label for="hero-email">Email for launch news</label>
-              <div class="form-row">
-                <input id="hero-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="hero-note hero-status" />
-                <button class="btn-primary" type="submit">Get launch news</button>
+              <div class="form-fields">
+                <div>
+                  <label for="hero-email">Email for launch news</label>
+                  <input id="hero-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="hero-note hero-status" />
+                </div>
+                <div>
+                  <label for="hero-phone">Phone for launch news</label>
+                  <input id="hero-phone" name="phone" type="tel" required autocomplete="tel" placeholder="(720) 555-0101" aria-describedby="hero-note hero-status" />
+                </div>
               </div>
-              <p class="form-note" id="hero-note">Launch news only. Joining this list is not an account and it is not verification. This page does not collect or store your email on a server. The button opens your email app with a note to us, ready to send.</p>
+              <div class="consent">
+                <input id="hero-consent" name="consent" type="checkbox" required aria-describedby="hero-note hero-status" />
+                <label for="hero-consent">I agree that Twistor may contact me by email and by phone (call or text) at the email and phone number I provide, with Twistor Social launch news. Message and data rates may apply. Joining this list is not an account and it is not verification.</label>
+              </div>
+              <button class="btn-primary" type="submit">Get launch news</button>
+              <p class="form-note" id="hero-note">Launch news only. Joining this list is not an account and it is not verification. When you submit, your email, phone number, and consent are stored by Twistor so we can send launch news and count launch signups. We do not sell your information.</p>
               <p class="form-status" id="hero-status" aria-live="polite"></p>
-              <noscript><p class="form-note">Form needs JavaScript in this preview. You can still reach us at <a href="mailto:holla@twistor.co?subject=Twistor%20Social%20launch%20news">holla@twistor.co</a>.</p></noscript>
+              <noscript><p class="form-note">Form needs JavaScript for the stored signup. You can still reach us at <a href="mailto:holla@twistor.co?subject=Twistor%20Social%20launch%20news">holla@twistor.co</a>.</p></noscript>
             </form>
             <p class="status-line"><strong>Status:</strong> in development now, and Denver is first. The launch list hears real news first, when there is news worth sending.</p>
           </div>
@@ -445,15 +460,25 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <h2 class="section-title" id="join-title">Be in the room when it opens</h2>
           <p class="section-sub">One list, one purpose. Launch news for Twistor Social, sent when there is news worth sending. No spam, no noise, no selling your address.</p>
           <form class="waitlist-form" id="final-form" novalidate>
-            <label for="final-email">Email for launch news</label>
-            <div class="form-row">
-              <input id="final-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="final-note final-status" />
+              <div class="form-fields">
+                <div>
+                  <label for="final-email">Email for launch news</label>
+                  <input id="final-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="final-note final-status" />
+                </div>
+                <div>
+                  <label for="final-phone">Phone for launch news</label>
+                  <input id="final-phone" name="phone" type="tel" required autocomplete="tel" placeholder="(720) 555-0101" aria-describedby="final-note final-status" />
+                </div>
+              </div>
+              <div class="consent">
+                <input id="final-consent" name="consent" type="checkbox" required aria-describedby="final-note final-status" />
+                <label for="final-consent">I agree that Twistor may contact me by email and by phone (call or text) at the email and phone number I provide, with Twistor Social launch news. Message and data rates may apply. Joining this list is not an account and it is not verification.</label>
+              </div>
               <button class="btn-primary" type="submit">Get launch news</button>
-            </div>
-            <p class="form-note" id="final-note">Launch news only. Joining this list is not an account and it is not verification. This page does not collect or store your email on a server. The button opens your email app with a note to us, ready to send.</p>
-            <p class="form-status" id="final-status" aria-live="polite"></p>
-            <noscript><p class="form-note">Form needs JavaScript in this preview. You can still reach us at <a href="mailto:holla@twistor.co?subject=Twistor%20Social%20launch%20news">holla@twistor.co</a>.</p></noscript>
-          </form>
+              <p class="form-note" id="final-note">Launch news only. Joining this list is not an account and it is not verification. When you submit, your email, phone number, and consent are stored by Twistor so we can send launch news and count launch signups. We do not sell your information.</p>
+              <p class="form-status" id="final-status" aria-live="polite"></p>
+              <noscript><p class="form-note">Form needs JavaScript for the stored signup. You can still reach us at <a href="mailto:holla@twistor.co?subject=Twistor%20Social%20launch%20news">holla@twistor.co</a>.</p></noscript>
+            </form>
         </div>
       </section>
     </main>
@@ -468,34 +493,77 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </footer>
 
     <script is:inline>
-      // TW737_LOCAL_HANDLER: the twistor-website repo has no form backend
-      // and no list service (every existing page uses a mailto CTA). This
-      // handler is therefore local by design: it validates the address,
-      // then hands off through the site mailto pattern so the interest
-      // actually reaches Twistor. This page collects nothing, stores
-      // nothing, and sends nothing to any server or third party.
+      // TW942_STORED_HANDLER: replaces the TW-737 mailto hand-off.
+      // The form now POSTs the signup (email, phone, and the exact
+      // consent shown on the page) to /api/waitlist, served by the
+      // minimal zero-dependency Node server in server/waitlist-server.mjs
+      // with the store logic in src/lib/waitlist/waitlist-core.mjs.
+      // Signups persist as JSON Lines outside the built site, duplicate
+      // emails are reported instead of stored twice, and the admin
+      // export lives in scripts/export-waitlist.mjs. The static build
+      // alone cannot answer this endpoint: the host must run that
+      // server at deploy time (Justynn's separate TW-737 deploy words).
       (function () {
+        var CONSENT_TEXT = "I agree that Twistor may contact me by email and by phone (call or text) at the email and phone number I provide, with Twistor Social launch news. Message and data rates may apply. Joining this list is not an account and it is not verification.";
         var forms = document.querySelectorAll('.waitlist-form');
         forms.forEach(function (form) {
           form.addEventListener('submit', function (event) {
             event.preventDefault();
-            var input = form.querySelector('input[type="email"]');
+            var emailInput = form.querySelector('input[type="email"]');
+            var phoneInput = form.querySelector('input[type="tel"]');
+            var consentInput = form.querySelector('input[type="checkbox"]');
+            var button = form.querySelector('button[type="submit"]');
             var status = form.querySelector('.form-status');
-            var email = (input.value || '').trim();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-              status.textContent = 'Enter a valid email address so we can reach you.';
+            function fail(message, field) {
+              status.textContent = message;
               status.setAttribute('data-state', 'error');
-              input.focus();
+              if (field) field.focus();
+            }
+            var email = (emailInput.value || '').trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              fail('Enter a valid email address so we can reach you.', emailInput);
               return;
             }
-            var subject = encodeURIComponent('Twistor Social launch news');
-            var body = encodeURIComponent(
-              'Please add me to the Twistor Social launch list.\n\nEmail: ' + email +
-              '\n\nI understand joining is launch news only. It is not an account and not verification.'
-            );
-            status.textContent = 'Your email app is opening with a note to us, ready to send. Sending that note adds you to the launch list. This page did not upload or store anything.';
+            var phone = (phoneInput.value || '').trim();
+            var phoneDigits = phone.replace(/[^\d]/g, '');
+            if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+              fail('Enter a valid phone number so we can reach you.', phoneInput);
+              return;
+            }
+            if (!consentInput.checked) {
+              fail('Please check the consent box so we can contact you about launch news.', consentInput);
+              return;
+            }
+            if (button) button.disabled = true;
+            status.textContent = 'Saving your signup.';
             status.setAttribute('data-state', 'ok');
-            window.location.href = 'mailto:holla@twistor.co?subject=' + subject + '&body=' + body;
+            return fetch('/api/waitlist', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({
+                email: email,
+                phone: phone,
+                consent: true,
+                consentText: CONSENT_TEXT,
+                source: form.id
+              })
+            }).then(function (response) {
+              return response.json().catch(function () { return {}; }).then(function (data) {
+                if (button) button.disabled = false;
+                if (response.ok && data.status === 'created') {
+                  status.textContent = 'You are on the launch list. Your signup was stored by Twistor and launch news will come to your email and phone.';
+                  status.setAttribute('data-state', 'ok');
+                } else if (response.ok && data.status === 'duplicate') {
+                  status.textContent = 'You are already on the launch list. Your earlier signup is the one stored, so there is nothing more to do.';
+                  status.setAttribute('data-state', 'ok');
+                } else {
+                  fail('We could not save your signup just now. Nothing was stored. Try again, or email us at holla@twistor.co.', emailInput);
+                }
+              });
+            }).catch(function () {
+              if (button) button.disabled = false;
+              fail('We could not save your signup just now. Nothing was stored. Try again, or email us at holla@twistor.co.', emailInput);
+            });
           });
         });
 

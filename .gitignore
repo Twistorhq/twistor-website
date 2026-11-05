@@ -5,3 +5,5 @@ dist/
 .DS_Store
 artifacts/
 .replica/
+# TW-942: live waitlist signups (personal data) are never committed.
+data/
