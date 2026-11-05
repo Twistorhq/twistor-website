@@ -43,13 +43,27 @@ export function validateSignup(input) {
 }
 
 export function createWaitlistStore(filePath) {
+  // TW-942 fix round 1 (Rosa must-fix 2): a torn write (crash mid-append)
+  // must never brick the store. Unparseable lines are quarantined:
+  // skipped on read and counted, so list/count/add keep working and
+  // the damage is visible via badLineCount() instead of fatal.
+  let badLines = 0;
   function list() {
-    if (!fs.existsSync(filePath)) return [];
-    return fs
-      .readFileSync(filePath, 'utf8')
-      .split('\n')
-      .filter((line) => line.trim())
-      .map((line) => JSON.parse(line));
+    if (!fs.existsSync(filePath)) { badLines = 0; return []; }
+    const records = [];
+    badLines = 0;
+    for (const line of fs.readFileSync(filePath, 'utf8').split('\n')) {
+      if (!line.trim()) continue;
+      try {
+        records.push(JSON.parse(line));
+      } catch {
+        badLines++;
+      }
+    }
+    return records;
+  }
+  function badLineCount() {
+    return badLines;
   }
   function count() {
     return list().length;
@@ -69,14 +83,35 @@ export function createWaitlistStore(filePath) {
       createdAt: new Date().toISOString(),
     };
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    fs.appendFileSync(filePath, JSON.stringify(record) + '\n', 'utf8');
+    // If the store's last line is torn (crash mid-append left no
+    // trailing newline), start the new record on its own line so it
+    // is not glued onto the quarantined fragment and lost with it.
+    let prefix = '';
+    if (fs.existsSync(filePath)) {
+      const existing = fs.readFileSync(filePath, 'utf8');
+      if (existing.length && !existing.endsWith('\n')) prefix = '\n';
+    }
+    fs.appendFileSync(filePath, prefix + JSON.stringify(record) + '\n', 'utf8');
     return { status: 'created', record };
   }
-  return { add, list, count, filePath };
+  return { add, list, count, badLineCount, filePath };
 }
 
 function csvCell(value) {
-  const text = String(value == null ? '' : value);
+  let text = String(value == null ? '' : value);
+  // TW-942 fix round 1 (Rosa must-fix 5): CSV formula injection.
+  // Per OWASP guidance, a cell whose first character (after any
+  // leading tab/CR, which spreadsheets strip) is = + - or @ would
+  // execute as a formula when the seeding CSV is opened. Prefix an
+  // apostrophe so the cell renders as literal text instead.
+  const stripped = text.replace(/^[\t\r]+/, '');
+  // Exception: a sign followed by digits only (+17205550101, a stored
+  // phone) is a plain number, not a formula expression, and is left
+  // untouched so the seeding export keeps dialable phone numbers.
+  const plainSignedNumber = /^[+-]\d+$/.test(stripped);
+  if (!plainSignedNumber && (/^[=+\-@]/.test(stripped) || /^[\t\r]/.test(text))) {
+    text = "'" + text;
+  }
   return /[",\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
 }
 

@@ -153,4 +153,93 @@ ruff gate has no files to run on; stated plainly rather than
 claimed. All new JS passes `node --check` (core, server, export
 script, both test files).
 
+## Fix round 1 (Rosa REQUEST CHANGES on 3a74b84)
+
+Rosa's verdict was proven live by her, and she was right on all
+seven must-fixes. Each was taken RED-first with a probe in the new
+suite `tests/tw942-server.test.mjs` (HTTP-level, real server,
+ephemeral port, temp store, synthetic data only), written before
+the fixes: the RED run failed 11 named checks and the harness then
+died on the oversized-body probe because the old server destroyed
+the socket, which was itself one of the bugs.
+
+1. **Admin gate fail-open (BLOCKER): closed.** `isAdmin` no longer
+   returns true when `WAITLIST_ADMIN_TOKEN` is unset. With no token
+   configured the admin routes refuse with 503 (`disabled`, audited);
+   a wrong token is 401; the right token is 200. The unauthenticated
+   export attempt from Rosa's probe now returns no PII (suite
+   scenario B asserts the seeded email is absent from the body).
+   Public signup still works with the token unset.
+2. **Malformed store line (BLOCKER): closed.** `list()` in
+   waitlist-core.mjs parses line by line, skips and counts
+   unparseable lines (`store.badLineCount()`), so count/list/add all
+   survive a torn write. `add()` also starts a new record on its own
+   line when the file's last line is torn, so the new signup is not
+   glued onto the fragment and lost. On the HTTP side the whole
+   handler and the POST end-handler are wrapped: a store error
+   returns 500 JSON, never process death (suite scenario C asserts
+   count 200, POST 201, and the child process still alive).
+3. **Timing-safe compare (MAJOR): closed.** The token check uses
+   `crypto.timingSafeEqual` over UTF-8 buffers with an explicit
+   length guard first.
+4. **Audit trail (MAJOR, TW-801 gate): closed via the audit-event
+   route.** Every admin read and every failed or disabled auth
+   attempt appends one JSON line to `<store>.audit.jsonl` (override:
+   `WAITLIST_AUDIT_FILE`): timestamp, route, outcome
+   (ok/denied/disabled), signup count for count reads, row count for
+   exports. Never the PII itself; the suite asserts the stored email
+   and phone digits do not appear anywhere in the audit log. Audit
+   append failures are logged to stderr and never fail the request.
+5. **CSV formula injection (MAJOR): closed.** `csvCell` prefixes an
+   apostrophe when a cell (after stripping leading tab/CR, which
+   spreadsheets drop) leads with `=`, `+`, `-`, or `@`, per OWASP.
+   One documented exception: a sign followed by digits only (a
+   stored phone like +17205550101) is a plain number, not a formula
+   expression, and stays dialable in the seeding export. Suite
+   covers `=`, `+2+5`, `-2+5`, `@`, tab-led, and CR-led payloads via
+   both the core export and the CLI export script.
+6. **Consent single-source as mechanism (MAJOR): closed.** The
+   TW-942 suite now asserts EACH of the two visible checkbox labels
+   equals the core `CONSENT_TEXT` verbatim (exact case), and that
+   the page JS `CONSENT_TEXT` constant posted with the signup also
+   equals it verbatim. Label drift fails the suite.
+7. **Server automated tests (MAJOR): closed.** New suite
+   `tests/tw942-server.test.mjs` (37 checks) spawns the real server
+   and covers the 401 gate (no token, wrong token, right token),
+   the unset-token fail-closed case, HTTP duplicate behavior,
+   malformed JSON (400), oversized body, the truncated-line case
+   over HTTP, the audit assertions, and the CSV cases. Wired into
+   `npm run test:waitlist`. Correction to the round-0 evidence
+   above: it claimed handler "stored/duplicate responses" were
+   covered; the DOM stub only ever returned `created`. The stub is
+   now switchable and the duplicate branch is genuinely exercised
+   in `tests/tw942-waitlist.test.mjs`.
+
+Nits taken in the same round: oversized body now gets a real 413
+response (the handler drains and answers instead of destroying the
+socket); count and export responses carry `Cache-Control: no-store`;
+the join-panel CSS tel selector is panel-scoped again. The rate
+limit / whole-file re-read nit is left for the deploy ticket, as
+Rosa scoped it.
+
+**Fix-round rerun (all green):**
+
+```
+$ node tests/tw942-waitlist.test.mjs   -> 47 passed, 0 failed
+$ node tests/tw942-server.test.mjs     -> 37 passed, 0 failed
+$ node tests/tw737-social-page.test.cjs -> 59 passed, 0 failed
+$ npm test                             -> pass (repo overlay suites)
+$ npm run test:waitlist                -> 47 + 37 + 59, all pass
+$ node --check on core, server, export script, both TW-942 suites -> clean
+```
+
+CLI probe against a store holding one good row, a torn trailing
+line, and a formula-leading source: `--count` prints 1 and the CSV
+export shows the source neutralized as `'=2+5` with the phone
+number intact. Build not re-run in this round: this worktree has
+no node_modules (the same limitation Rosa recorded on round 0);
+the only page change is the one-selector CSS scoping fix, covered
+by the contract suites. No Python authored, ruff N/A as before.
+Not merged, not pushed, not deployed.
+
 Prepared by Twistor Holdings LLC

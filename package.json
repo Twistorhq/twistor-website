@@ -19,7 +19,7 @@
     "test": "node tests/tv-overlays.test.cjs && node tests/tv-overlays-fallback.test.cjs",
     "test:a11y": "node --test scripts/accessibility/*.test.mjs",
     "audit:a11y": "node scripts/accessibility/collect.mjs",
-    "test:waitlist": "node tests/tw942-waitlist.test.mjs && node tests/tw737-social-page.test.cjs"
+    "test:waitlist": "node tests/tw942-waitlist.test.mjs && node tests/tw942-server.test.mjs && node tests/tw737-social-page.test.cjs"
   },
   "type": "module",
   "version": "0.1.0",

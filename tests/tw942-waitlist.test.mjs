@@ -63,6 +63,19 @@ if (fs.existsSync(corePath)) {
     typeof core.CONSENT_TEXT === 'string' && lower.includes(core.CONSENT_TEXT.toLowerCase()));
   ok('core exports a consent version', typeof core.CONSENT_VERSION === 'string' && core.CONSENT_VERSION.length > 0);
 
+  // Fix round 1 (Rosa must-fix 6): consent single-source as a MECHANISM.
+  // EACH visible checkbox label must equal CONSENT_TEXT verbatim (exact
+  // case, byte for byte), and so must the page JS constant that is
+  // actually posted. Label drift now fails this suite, not just a
+  // page-contains-it-once check that the JS const alone could satisfy.
+  const consentLabels = [...src.matchAll(/<label for="(?:hero|final)-consent">([^<]*)<\/label>/g)].map((m) => m[1]);
+  ok('fix6: exactly two consent labels are on the page (one per form)', consentLabels.length === 2);
+  ok('fix6: EACH consent label equals CONSENT_TEXT verbatim',
+    consentLabels.length === 2 && consentLabels.every((label) => label === core.CONSENT_TEXT));
+  const jsConst = src.match(/var CONSENT_TEXT = "([^"]*)";/);
+  ok('fix6: the posted JS CONSENT_TEXT constant equals the core text verbatim',
+    !!jsConst && jsConst[1] === core.CONSENT_TEXT);
+
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tw942-'));
   const file = path.join(dir, 'waitlist.jsonl');
   const store = core.createWaitlistStore(file);
@@ -125,14 +138,19 @@ if (fs.existsSync(corePath)) {
       },
     };
     const fetchCalls = [];
+    // Fix round 1 (Rosa must-fix 7): the stub response is switchable so
+    // the handler's DUPLICATE branch is exercised, not only 'created'
+    // (the original evidence claimed both; only created was covered).
+    let stubResult = { status: 'created', count: 1 };
+    let stubStatus = 201;
     const fakeWindow = {
       matchMedia: () => ({ matches: true }),
       location: {},
       fetch(url, opts) {
         fetchCalls.push({ url, opts });
         return Promise.resolve({
-          ok: true, status: 201,
-          json: () => Promise.resolve({ status: 'created', count: 1 }),
+          ok: stubStatus >= 200 && stubStatus < 300, status: stubStatus,
+          json: () => Promise.resolve(stubResult),
         });
       },
     };
@@ -162,6 +180,12 @@ if (fs.existsSync(corePath)) {
         JSON.parse(fetchCalls[0].opts.body).phone === '+1 720 555 0101' &&
         JSON.parse(fetchCalls[0].opts.body).consent === true);
       ok('created response is reported as stored', status.attrs['data-state'] === 'ok' && status.textContent.toLowerCase().includes('stored'));
+      stubResult = { status: 'duplicate', count: 1 };
+      stubStatus = 200;
+      await submitHandler(event);
+      ok('duplicate response branch is exercised over the handler',
+        fetchCalls.length === 2 && status.attrs['data-state'] === 'ok' &&
+        status.textContent.toLowerCase().includes('already on the launch list'));
     }
   }
 }
