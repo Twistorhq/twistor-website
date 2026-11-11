@@ -1,0 +1,394 @@
+{
+  "guide": {
+    "asset": "assets/guide/twistor-mark-object",
+    "id": "guide-twistor-mark",
+    "label": "Twistor twisted-T mark"
+  },
+  "hotspots": [
+    {
+      "fact": "missed-call-cost",
+      "h": 48,
+      "id": "hs-missed-call",
+      "state": "trades",
+      "w": 48
+    },
+    {
+      "fact": "booking-flow",
+      "h": 48,
+      "id": "hs-booking",
+      "state": "trades",
+      "w": 48
+    },
+    {
+      "fact": "invoice-paid",
+      "h": 48,
+      "id": "hs-invoice",
+      "state": "trades",
+      "w": 48
+    }
+  ],
+  "meta": {
+    "engineJsGzipBytes": 4762,
+    "name": "twistor.co homepage: the services journey (TW-1050 full cinematic rebuild)",
+    "note": "MEASURED values from manifest.json (TW-1050 render, CS-P3): Tier A streamed counts the AVIF rung only (the browser fetches one format; the WebP fallback, 25729612 B on disk, is reported separately in the manifest). preScrubBytes follows CS-B1 and the engine preload code: poster 75508 + engine gzip 4762 + CSS gzip 1364 + the awaited priority frames of segment 1 (indices divisible by 8, 6 frames, 469000 B) = 550634 B of the 3.5 MB ceiling. Tier D posters were re-encoded at WebP quality 50 (the ladder default q82 set summed 559172 B, over the 400000 B ceiling); all other rungs are the kit ladder verbatim.",
+    "owner": "Sofia Reyes, Twistor frontend",
+    "posterBytes": 75508,
+    "preScrubBytes": 550634,
+    "surface": "https://twistor.co/ homepage (full rebuild; TW-1048 hero scene is this scene's opening movement)",
+    "tw1050": {
+      "constants": {
+        "badge park/drift positions": "ESTIMATE composition targets (teardown section 2: prop lower-left, offset ~0.10-0.13 widths, ~half hero scale); recorded per segment in build/render_config.json and pixel-checked by CS-Q6",
+        "dwell frames 24 each": "DERIVED: the teardown section 6 trim lever, pre-pulled per the TW-1050 ticket (dwells are near-static; the guide drift is slow). 228 frames total against the hero's 264 for a longer journey",
+        "guide.parallax=0.2": "DERIVED: carried from TW-1048 (midpoint of the teardown section 2 bracket 0.15-0.25)",
+        "ken burns moves": "Build decision, ESTIMATE: photographic sources, slow push/pan per segment, dwells near-static (scale change at most 2 percent)",
+        "path.strokeWidthPct=9": "ESTIMATE: inside the teardown section 2 bracket 8-11 pct of screen width (carried from TW-1048)",
+        "photo sources": "Real Pexels photography, licensed, per PHOTO-MANIFEST.md in this folder. No AI imagery anywhere in the scene",
+        "stroke draw-on": "Build decision: the stroke reveals with local progress and the guide rides its tip (teardown section 2: the capsule IS the tip)"
+      },
+      "pattern": "Guide-object journey at site scale, MOTION-TEARDOWN-SLICK-2026-11-11 section 6, opening movement = TW-1048 hero scene (establish + enter + first dwell carried over)",
+      "segmentMap": "ESTABLISH + TRAVEL + DWELL + TRAVEL + DWELL + DWELL = the CS-S1 six-segment cap. The guide-law chain FLOAT -> PATH_TIP -> PARK -> PATH_TIP -> PARK -> DRIFT is legal in both scroll directions under the TW-1048 transition table (PARK -> DRIFT is the SLICK 02 dwell drift). RETURN is the stack's full reversibility (teardown section 6 RETURN row; every segment reversible, CS-Q4 verifies). Dental and Compliance ride the structured work index below the flight, per teardown sections 5 and 8."
+    }
+  },
+  "overlays": [
+    {
+      "facts": [
+        "brand",
+        "cta-book-a-demo"
+      ],
+      "interactive": true,
+      "state": "ALL",
+      "type": "PersistentNav"
+    },
+    {
+      "facts": [],
+      "interactive": false,
+      "state": "establish",
+      "type": "ScrollHint"
+    },
+    {
+      "facts": [
+        "missed-call-cost",
+        "booking-flow",
+        "invoice-paid"
+      ],
+      "interactive": false,
+      "lines": [
+        {
+          "accent": false,
+          "revealFrame": 6,
+          "text": "The phone rings."
+        },
+        {
+          "accent": false,
+          "revealFrame": 18,
+          "text": "The shop is under a truck."
+        },
+        {
+          "accent": false,
+          "revealFrame": 30,
+          "text": "The caller books somebody else."
+        },
+        {
+          "accent": true,
+          "revealFrame": 42,
+          "text": "Unless Twistor answers first."
+        }
+      ],
+      "mask": "rise",
+      "state": "enter",
+      "type": "KineticHeadline"
+    },
+    {
+      "facts": [
+        "missed-call-cost",
+        "booking-flow",
+        "invoice-paid"
+      ],
+      "interactive": false,
+      "state": "trades",
+      "type": "ProgressCard"
+    },
+    {
+      "facts": [
+        "missed-call-cost",
+        "booking-flow",
+        "invoice-paid"
+      ],
+      "interactive": true,
+      "state": "trades",
+      "type": "HotspotLayer"
+    },
+    {
+      "facts": [
+        "prop-dispatch-board"
+      ],
+      "interactive": false,
+      "state": "trades",
+      "type": "RoomLabel"
+    },
+    {
+      "facts": [
+        "trades",
+        "dispatch",
+        "data"
+      ],
+      "interactive": true,
+      "state": "trades",
+      "type": "PillNav"
+    },
+    {
+      "direction": "left",
+      "facts": [
+        "trades-front-office",
+        "dispatch-os",
+        "data-analytics",
+        "compliance-agent"
+      ],
+      "interactive": false,
+      "items": [
+        "trades-front-office",
+        "dispatch-os",
+        "data-analytics",
+        "compliance-agent"
+      ],
+      "state": "road",
+      "type": "TickerBand"
+    },
+    {
+      "facts": [
+        "prop-headset"
+      ],
+      "interactive": false,
+      "state": "dispatch",
+      "type": "RoomLabel"
+    },
+    {
+      "facts": [
+        "trades",
+        "dispatch",
+        "data"
+      ],
+      "interactive": true,
+      "state": "dispatch",
+      "type": "PillNav"
+    },
+    {
+      "facts": [
+        "prop-data-pipeline"
+      ],
+      "interactive": false,
+      "state": "data",
+      "type": "RoomLabel"
+    },
+    {
+      "facts": [
+        "trades",
+        "dispatch",
+        "data"
+      ],
+      "interactive": true,
+      "state": "data",
+      "type": "PillNav"
+    },
+    {
+      "facts": [
+        "trades"
+      ],
+      "interactive": true,
+      "state": "data",
+      "type": "BackControl"
+    }
+  ],
+  "segments": [
+    {
+      "field": {
+        "bg": "tokens/field-dawn",
+        "wipeFrames": 0,
+        "wipeIn": "NONE"
+      },
+      "fps": 24,
+      "frames": 48,
+      "guide": {
+        "mode": "FLOAT",
+        "parallax": 0.2,
+        "scale": 1.0
+      },
+      "id": "establish",
+      "reversible": true,
+      "summary": "Rooftop wide at working height: two techs at an open package unit under a big sky, Twistor wordmark nav on top, the twisted-T floating center. Poster frame = this segment's first frame.",
+      "type": "ESTABLISH"
+    },
+    {
+      "field": {
+        "bg": "tokens/field-shop-interior",
+        "wipeFrames": 0,
+        "wipeIn": "NONE"
+      },
+      "fps": 12,
+      "frames": 72,
+      "guide": {
+        "mode": "PATH_TIP",
+        "parallax": 0.2,
+        "scale": 1.0
+      },
+      "id": "enter",
+      "path": {
+        "colorRule": "field-contrast",
+        "geometryRef": "curve/hero-flight-path",
+        "strokeWidthPct": 9
+      },
+      "reversible": true,
+      "summary": "The drill goes in: the path stroke draws across the unit and the guide rides its tip while the kinetic headline builds the missed-call story. Travel segments sample at 12 fps per REA 3.1.",
+      "type": "TRAVEL"
+    },
+    {
+      "field": {
+        "bg": "tokens/field-board",
+        "wipeFrames": 18,
+        "wipeIn": "RISE"
+      },
+      "fps": 24,
+      "frames": 24,
+      "guide": {
+        "anchorProp": "prop-dispatch-board",
+        "mode": "PARK",
+        "parallax": 0.2,
+        "scale": 0.5
+      },
+      "id": "trades",
+      "props": [
+        {
+          "figLabel": "FIG. 01 / Dispatch board",
+          "id": "prop-dispatch-board",
+          "kind": "dispatch-board",
+          "label": "Dispatch board"
+        }
+      ],
+      "reversible": true,
+      "summary": "01 Trades AI Front Office. The gauges read right because the call was answered: ProgressCard counts the money story (missed call, booked job, paid invoice), hotspots on the three proof points.",
+      "type": "DWELL"
+    },
+    {
+      "field": {
+        "bg": "tokens/field-road",
+        "wipeFrames": 0,
+        "wipeIn": "NONE"
+      },
+      "fps": 12,
+      "frames": 36,
+      "guide": {
+        "mode": "PATH_TIP",
+        "parallax": 0.2,
+        "scale": 0.75
+      },
+      "id": "road",
+      "path": {
+        "colorRule": "field-contrast",
+        "geometryRef": "curve/service-road",
+        "strokeWidthPct": 9
+      },
+      "reversible": true,
+      "summary": "The road between services: hands tape the line set while the stroke carries the guide onward and the ticker names the product line. The divider panel of the reference folds into this travel, per the teardown.",
+      "type": "TRAVEL"
+    },
+    {
+      "field": {
+        "bg": "tokens/field-office",
+        "wipeFrames": 18,
+        "wipeIn": "RISE"
+      },
+      "fps": 24,
+      "frames": 24,
+      "guide": {
+        "anchorProp": "prop-headset",
+        "mode": "PARK",
+        "parallax": 0.2,
+        "scale": 0.5
+      },
+      "id": "dispatch",
+      "props": [
+        {
+          "figLabel": "FIG. 02 / The answered call",
+          "id": "prop-headset",
+          "kind": "headset",
+          "label": "The answered call"
+        }
+      ],
+      "reversible": true,
+      "summary": "02 Dispatch OS. The human on the headset is the product working: one board runs the phones and the schedule.",
+      "type": "DWELL"
+    },
+    {
+      "field": {
+        "bg": "tokens/field-panel",
+        "wipeFrames": 18,
+        "wipeIn": "RISE"
+      },
+      "fps": 24,
+      "frames": 24,
+      "guide": {
+        "anchorProp": "prop-data-pipeline",
+        "mode": "DRIFT",
+        "parallax": 0.2,
+        "scale": 0.5
+      },
+      "id": "data",
+      "props": [
+        {
+          "figLabel": "FIG. 03 / Data, wired clean",
+          "id": "prop-data-pipeline",
+          "kind": "data-pipeline",
+          "label": "Data, wired clean"
+        }
+      ],
+      "reversible": true,
+      "summary": "03 Managed Data + Analytics. The guide drifts past the panel the way the SLICK capsule drifts its dwell: the systems underneath, wired clean, reported in plain English.",
+      "type": "DWELL"
+    }
+  ],
+  "structuredFacts": [
+    "brand",
+    "cta-book-a-demo",
+    "missed-call-cost",
+    "booking-flow",
+    "invoice-paid",
+    "trades-front-office",
+    "dispatch-os",
+    "dental-front-office",
+    "compliance-agent",
+    "data-analytics",
+    "twistor-core",
+    "trades",
+    "dispatch",
+    "data",
+    "prop-dispatch-board",
+    "prop-headset",
+    "prop-data-pipeline",
+    "The phone rings.",
+    "The shop is under a truck.",
+    "The caller books somebody else.",
+    "Unless Twistor answers first."
+  ],
+  "tiers": {
+    "A": {
+      "ring": 17,
+      "rung": "1600w AVIF, WebP fallback",
+      "streamedBytes": 15353992
+    },
+    "B": {
+      "ring": 9,
+      "rung": "1024w WebP, full sequence (travel frame sampling evaluated, not needed: 13.2 MB of the 16 MB ceiling)",
+      "streamedBytes": 13226968
+    },
+    "C": {
+      "ring": 0,
+      "rung": "H.264 ambient cut, played not scrubbed",
+      "streamedBytes": 2228573
+    },
+    "D": {
+      "ring": 0,
+      "rung": "poster WebP set over structured view",
+      "streamedBytes": 299710
+    }
+  }
+}

@@ -1,0 +1,84 @@
+/* Twistor Cinematic Kit overlay base styles. Prepared by Twistor Holdings LLC.
+   Brand tokens come from the surface's own brand board; this file carries
+   only structure: pinning, overlay placement, touch floors, focus, and the
+   reduced-motion contract (CS-A1). No gradients, no glass, no glow. */
+
+.flight-track { position: relative; }
+.flight-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.flight-sticky canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-overlay] { position: absolute; z-index: 2; }
+[data-overlay][hidden] { display: none; }
+
+/* CS-S5: dwell controls meet the 44px touch floor. */
+[data-interactive="true"] button,
+[data-interactive="true"] a,
+button[data-overlay] {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* CS-A3 + accessibility: focus is always visible, in both scene themes. */
+[data-overlay] :focus-visible,
+button[data-overlay]:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* KineticHeadline (CS-S2 amendment, TW-1048): mask-rise lines. The
+   line box clips; the inner span rises into it when the engine flips
+   data-revealed at the line's reveal frame, and falls back on reverse
+   scroll (the transition runs both ways). The accent line takes the
+   serif register and the field-contrast color from the surface's
+   brand tokens, never a literal color here. */
+.kh-line { overflow: hidden; margin: 0; }
+.kh-line-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.45s ease-out;
+}
+.kh-line-inner[data-revealed="true"] { transform: translateY(0); }
+.kh-accent .kh-line-inner {
+  font-family: var(--brand-serif, serif);
+  font-style: italic;
+  color: var(--field-contrast, currentColor);
+}
+
+/* TickerBand (CS-S2 amendment, TW-1048): a divider band, never a
+   section. The track holds the item list twice; the -50% translate
+   loops it seamlessly. Marquee duration is a build decision
+   (teardown section 5: speed is not measurable from the reference),
+   set per surface via --ticker-duration. */
+[data-overlay="TickerBand"] { overflow: hidden; }
+.ticker-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: ticker-move var(--ticker-duration, 30s) linear infinite;
+}
+@keyframes ticker-move {
+  to { transform: translateX(-50%); }
+}
+
+/* CS-A1: reduced motion unpins the flight. The page serves segment
+   posters over the structured view instead; nothing is scrubbed. */
+@media (prefers-reduced-motion: reduce) {
+  .flight-sticky { position: static; height: auto; }
+  .flight-sticky canvas { display: none; }
+  /* TW-1048 components under reduced motion: headline lines rest in
+     place, and the ticker renders as a static line of the same items
+     (teardown section 7.1). No exceptions for the guide pattern. */
+  .kh-line-inner { transition: none; transform: none; }
+  .ticker-track { animation: none; flex-wrap: wrap; width: auto; }
+}
