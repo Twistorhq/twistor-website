@@ -31,14 +31,17 @@ Photo", "Free download", photographer credit) is the badge evidence.
 | 8867479 | YES: Free Stock Photo, Free download | Yan Krukau |
 | 8486972 | YES: Free Stock Photo, Free download | Kindel Media |
 | 5463580 | YES: Free Stock Photo, Free download | José Andrés Pacheco Cortes |
-| 8005397 | **NO: page removed from Pexels** (see flag 5) | Emmanuel Ikwuegbu (per citations, flag 5) |
+| 21812146 | YES: Free Stock Photo (page title/badge read live 2026-11-11) | Shameer Vayalakkad Hydrose |
 
 At build time the photo pages could not be re-read from this sandbox
 (HTTP 403 to the fetcher, ERR_TUNNEL_CONNECTION_FAILED in Chromium,
 the TW-1037 wall); the build-stage verification was CDN resolution,
 the full-size downloads from images.pexels.com on 2026-11-11, and a
 visual read of every frame before assignment. The integration-round
-check above supersedes that status for eight of the nine picks.
+check above superseded that status for eight of the nine picks. The
+fix round then replaced the ninth pick (8005397) with 21812146, whose
+page badge was also read live on 2026-11-11; the assigned set is now
+fully badge-verified.
 
 Canonical page URL for every pick: `https://www.pexels.com/photo/<id>/`
 (Pexels' ID-addressable page; it redirects to the titled page in a
@@ -54,7 +57,7 @@ browser).
 | 5463575 | José Andrés Pacheco Cortes | Tech reading manifold gauges on a rooftop condenser, mask and glasses. | 3200x2273 | DWELL trades |
 | 5463576 | José Andrés Pacheco Cortes | Tech taping insulation on a mini-split line set, face hidden by hat. (Founder-supplied title: "Man Taping a Hose".) | 3200x4800 | TRAVEL road |
 | 8867479 | Yan Krukau (verified 2026-11-11) | Dispatcher in profile, Black woman, hand on headset mic, focused. Portrait. | 3200x4800 | DWELL dispatch |
-| 8005397 | Emmanuel Ikwuegbu (per citations; page removed, flag 5) | Electrician at a wall panel, Black man, yellow hard hat, looking up from the work. | 3200x2136 | DWELL data |
+| 21812146 | Shameer Vayalakkad Hydrose | Electrician in a blue hard hat inspecting a wired industrial control panel from the right side of frame; the cabinet and cable modules fill the left side, so the guide's lower-left DRIFT path stays clear of the subject's face and hand. | 3072x4080 | DWELL data |
 
 ## Structured-view picks (Selected Work, below the flight)
 
@@ -76,7 +79,7 @@ browser).
 
 ## Flags for Rosa and the founder
 
-1. **5463577 (ESTABLISH) — FIXED 2026-11-11 per Rosa's ruling.**
+1. **5463577 (ESTABLISH): FIXED 2026-11-11 per Rosa's ruling.**
    The frame carried a clearly legible Walmart storefront sign
    mid-frame and the crew's shirt text with a phone number (a Mexican
    HVAC crew; the photographer shot his own trade). Rosa's TW-1050
@@ -99,31 +102,28 @@ browser).
    These are stock models and working techs, shown as themselves;
    no pick depicts or implies the founder.
 4. The set as assigned: HVAC crew (Latino techs), a Black woman
-   dispatcher, a Black electrician, a Black woman plumber. People of
+   dispatcher, a brown-skinned electrician, a Black woman plumber. People of
    color are the face of every segment; there is no white-only frame
    in the scene.
-5. **8005397 (DWELL data) — badge unreadable: the photo page has been
-   REMOVED from Pexels.** On 2026-11-11 the canonical slugged URL
-   (https://www.pexels.com/photo/an-electrician-repairing-a-fuse-box-8005397/)
-   returned Pexels' own notice "The photo you clicked on isn't around
-   anymore," and the bare-ID URL 404s. The photo file itself still
-   resolves on images.pexels.com (the original was downloaded from
-   the CDN on 2026-11-11, before this check). Corroboration that it
-   was a Pexels License photo by Emmanuel Ikwuegbu: two independent
-   publications cite the canonical URL with the credit "Photo by
-   Emmanuel Ikwuegbu" (Harlem World Magazine, 2024-09-18;
-   FindTheHomePros, fetched 2026-11-11). No live badge can be read,
-   so this pick's license posture rests on the Pexels License terms
-   (verified at the license page) plus that citation record, NOT on a
-   live page read. Decision left to the Rosa integration gate, stated
-   plainly rather than smoothed over: keep 8005397 on the citation
-   record, or direct a swap of the data dwell to a live-verified
-   alternate (a re-render of one 24-frame dwell plus ladder and
-   manifest, roughly an hour of pipeline time).
+5. **8005397 (DWELL data): REPLACED 2026-11-11 per Rosa's integration
+   gate.** Rosa's sole Major finding required a swap because the
+   8005397 Pexels page had been removed, so its license badge could
+   never be produced on demand. The replacement is 21812146 by
+   Shameer Vayalakkad Hydrose. Its Pexels page was read live on
+   2026-11-11 at
+   https://www.pexels.com/photo/electrician-in-helmet-working-with-cables-21812146/
+   and carries the title/badge "Electrician in Helmet Working with
+   Cables · Free Stock Photo". Composition was checked against the
+   rendered dwell before assignment: the electrician stands on the
+   right, the wired control cabinet fills the left, and the guide's
+   lower-left DRIFT path stays clear of the subject's face and hand.
+   8005397 is no longer assigned to any segment and is not part of
+   the shipped scene.
 
 ## Founder download list (only if a pick must be re-pulled at full size)
 
-All originals are already downloaded into `photos/` in this folder at
-3200w (film) and 1600w (structured view). Nothing is owed. The
-pre-deploy badge check is complete (table above); the only open item
-is the 8005397 removed-page decision in flag 5.
+All assigned originals are downloaded into `photos/` in this folder
+(film picks at 3200w where the source allows, structured view at
+1600w; 21812146's source is 3072px wide). Nothing is owed. The
+pre-deploy badge check is complete for the assigned set (table
+above); flag 5 records the completed 8005397 replacement.
