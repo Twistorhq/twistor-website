@@ -1,0 +1,90 @@
+---
+import '@fontsource/bricolage-grotesque/700.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/webp" href={base + "/logo-mark.webp"} />
+    <meta property="og:image" content="https://twistor.co/logo-mark.webp" />
+    <meta property="og:title" content="Photo Credits | Twistor" />
+    <meta property="og:description" content="Photography credits for twistor.co. Every photo is real stock photography under the Pexels License." />
+    <meta property="og:url" content="https://twistor.co/credits/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Photo Credits | Twistor" />
+    <meta name="twitter:description" content="Photography credits for twistor.co. Every photo is real stock photography under the Pexels License." />
+    <title>Photo Credits | Twistor</title>
+    <meta name="description" content="Photography credits for twistor.co. Every photo is real stock photography under the Pexels License." />
+    <style>
+      :root { --bg: #FAF7F2; --surface: #FFFFFF; --ink: #1C1A17; --muted: #5F5A54; --accent: #FF5A1F; --accent-text: #B5430E; --line: #E5DFD5; }
+      body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; margin: 0; color: var(--ink); background: var(--bg); line-height: 1.6; font-size: 1rem; }
+      header, main, footer { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+      header { padding-top: 24px; padding-bottom: 8px; }
+      header a { color: var(--accent-text); text-decoration: none; font-weight: 600; }
+      a:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 4px; }
+      h1, h2 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+      h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin: 24px 0 8px; font-weight: 700; }
+      h2 { font-size: 1.5rem; margin: 32px 0 8px; font-weight: 700; }
+      p { font-size: 1rem; color: var(--muted); }
+      ul { padding-left: 20px; }
+      li { margin-bottom: 14px; color: var(--ink); font-size: 1rem; }
+      li::marker { color: var(--accent); }
+      li span { color: var(--muted); }
+      li a { color: var(--accent-text); font-weight: 600; }
+      footer { padding: 40px 24px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); margin-top: 48px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href={base + "/"}>Twistor</a>
+    </header>
+    <main>
+      <h1>Photo Credits</h1>
+      <p>
+        Every photograph on twistor.co is real stock photography, licensed
+        under the <a href="https://www.pexels.com/license/">Pexels License</a>:
+        free for commercial use, attribution not required. We credit the
+        photographers anyway. No AI-generated imagery appears anywhere on
+        this site. The full verification record for the homepage set is in
+        the build's PHOTO-MANIFEST.md (TW-1146).
+      </p>
+      <h2>Homepage, the company journey</h2>
+      <ul>
+        <li>
+          Colleagues celebrating around a laptop (opening scene).
+          Photo by <a href="https://www.pexels.com/photo/cheerful-diverse-colleagues-celebrating-success-while-working-on-project-3866509/">Andrea Piacquadio</a> on Pexels.
+        </li>
+        <li>
+          A colleague presenting to the team (the journey).
+          Photo by <a href="https://www.pexels.com/photo/serious-man-explaining-information-to-coworkers-in-office-3860773/">Andrea Piacquadio</a> on Pexels.
+        </li>
+        <li>
+          A specialist on a headset, smiling mid-call (The front office).
+          Photo by <a href="https://www.pexels.com/photo/7689662/">Jep Gambardella</a> on Pexels.
+        </li>
+        <li>
+          Three colleagues walking an office hallway (the walk between rooms).
+          Photo by <a href="https://www.pexels.com/photo/successful-multiethnic-business-colleagues-in-modern-office-6457579/">Alexander Suhorucov</a> on Pexels.
+        </li>
+        <li>
+          A youth basketball team in a sideline huddle (Every season).
+          Photo by <a href="https://www.pexels.com/photo/basketball-team-huddle-during-outdoor-match-34515977/">Chris wade NTEZICIMPA</a> on Pexels.
+        </li>
+        <li>
+          An analyst at dual monitors (Twistor Data).
+          Photo by <a href="https://www.pexels.com/photo/african-american-woman-analyzing-data-on-computers-in-a-modern-office-8204353/">Kampus Production</a> on Pexels.
+        </li>
+      </ul>
+      <p>
+        The twisted-T mark that travels the homepage is Twistor's own logo.
+        Product pages keep their credits on this page as their photography
+        is added.
+      </p>
+    </main>
+    <footer>
+      <p>Prepared by Twistor Holdings LLC.</p>
+    </footer>
+  </body>
+</html>

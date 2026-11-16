@@ -14,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta property="og:title" content="Twistor | The company that does it all" />
     <meta
       property="og:description"
-      content="Twistor builds AI systems that answer your phones, recover your revenue, and run your operations. One platform, every product."
+      content="Twistor builds practical software that answers, organizes, and follows through: front-office agents, sports analytics, a living family archive, data products, and cinematic film. One platform, every product."
     />
     <meta property="og:url" content="https://twistor.co/" />
     <meta property="og:type" content="website" />
@@ -22,12 +22,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta name="twitter:title" content="Twistor | The company that does it all" />
     <meta
       name="twitter:description"
-      content="Twistor builds AI systems that answer your phones, recover your revenue, and run your operations. One platform, every product."
+      content="Twistor builds practical software that answers, organizes, and follows through: front-office agents, sports analytics, a living family archive, data products, and cinematic film. One platform, every product."
     />
     <title>Twistor | The company that does it all</title>
     <meta
       name="description"
-      content="Twistor builds AI systems that answer your phones, recover your revenue, and run your operations. One platform, every product."
+      content="Twistor builds practical software that answers, organizes, and follows through: front-office agents, sports analytics, a living family archive, data products, and cinematic film. One platform, every product."
     />
     <link rel="stylesheet" href={base + "/cinematic/engine/cinematic.css"} />
     <link rel="preload" as="image" href="cinematic/media/poster.webp" fetchpriority="high" />
@@ -42,11 +42,11 @@ header[data-overlay] nav a{margin-right:16px;color:inherit;text-decoration:none;
 #flight-track{height:calc(5472px + 100vh);}
 .flight-sticky{--field:#FAF7F2;--field-contrast:#1C1A17;background:var(--field);}
 .flight-sticky[data-state="establish"]{--field:#FAF7F2;--field-contrast:#1C1A17;}
-.flight-sticky[data-state="enter"]{--field:#1C1A17;--field-contrast:#FAF7F2;}
-.flight-sticky[data-state="trades"]{--field:#1C1A17;--field-contrast:#FF5A1F;}
+.flight-sticky[data-state="enter"]{--field:#FAF7F2;--field-contrast:#1C1A17;}
+.flight-sticky[data-state="front-office"]{--field:#FAF7F2;--field-contrast:#B5430E;}
 .flight-sticky[data-state="road"]{--field:#FAF7F2;--field-contrast:#1C1A17;}
-.flight-sticky[data-state="dispatch"]{--field:#FAF7F2;--field-contrast:#B5430E;}
-.flight-sticky[data-state="data"]{--field:#1C1A17;--field-contrast:#FF5A1F;}
+.flight-sticky[data-state="season"]{--field:#FAF7F2;--field-contrast:#B5430E;}
+.flight-sticky[data-state="data"]{--field:#FAF7F2;--field-contrast:#1C1A17;}
 .poster-first{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
 header[data-overlay="PersistentNav"]{position:fixed;top:0;left:0;right:0;z-index:6;background:var(--paper);border-bottom:2px solid var(--ink);}
 [data-overlay="ScrollHint"]{left:24px;bottom:24px;z-index:3;margin:0;font-weight:600;color:var(--field-contrast);}
@@ -80,8 +80,16 @@ html[data-tier="D"] #flight-canvas,html[data-reduced="true"] #flight-canvas{disp
 .money-story li{margin-bottom:8px;}
 #structured-view,section.work{max-width:1080px;margin:0 auto;padding:48px 24px;}
 #structured-view article{margin-bottom:20px;}
-.work img{max-width:100%;height:auto;border-radius:12px;}
-.credits{color:#5F5A54;font-size:0.9rem;}
+.lede{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin:0 0 12px;}
+.hub-group{margin-top:40px;}
+.hub-group h3{font-size:1.05rem;margin:0 0 4px;}
+.hub-row{display:grid;grid-template-columns:220px 1fr auto;gap:8px 24px;padding:20px 0;border-top:1px solid #D8D2C9;align-items:start;}
+.hub-row h4{margin:0;font-size:1.2rem;}
+.hub-row p{margin:0;}
+.hub-proof{color:#5F5A54;font-size:0.92rem;margin-top:6px;}
+.hub-link{display:inline-block;font-weight:600;color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:8px 16px;white-space:nowrap;}
+footer a{color:var(--ink);font-weight:600;}
+@media (max-width:640px){.hub-row{grid-template-columns:1fr;}}
 footer{max-width:1080px;margin:0 auto;padding:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
 /* Site type wiring (TW-1050 port): Bricolage Grotesque is the site's
    display face; the rebuild's body type stays system-ui as built. */
@@ -90,7 +98,7 @@ h1, h2, h3, .kh-line { font-family: 'Bricolage Grotesque', system-ui, sans-serif
     </style>
   </head>
   <body>
-<header data-overlay="PersistentNav" data-state="ALL" data-interactive="true"><p class="wordmark">Twistor<span>.</span></p><nav><a href="#fact-trades-front-office">Trades AI Front Office</a><a href="#fact-dispatch-os">Dispatch OS</a><a href="#fact-data-analytics">Managed Data + Analytics</a></nav><a class="cta" href="#fact-cta-book-a-demo">Book a demo</a></header>
+<header data-overlay="PersistentNav" data-state="ALL" data-interactive="true"><p class="wordmark">Twistor<span>.</span></p><nav><a href="#products">Products</a><a href={base + "/trades/"}>Twistor Trades</a><a href="https://social.twistor.co">Twistor Social</a></nav><a class="cta" href="#fact-cta-book-a-demo">Book a demo</a></header>
 <main>
   <div class="flight-track" id="flight-track">
     <div class="flight-sticky">
@@ -99,59 +107,83 @@ h1, h2, h3, .kh-line { font-family: 'Bricolage Grotesque', system-ui, sans-serif
       <canvas id="flight-canvas" width="1600" height="900"
               aria-label="Cinematic flight. All information in this flight is listed in text below."></canvas>
 <p data-overlay="ScrollHint" data-state="establish">Scroll to explore</p>
-<section data-overlay="KineticHeadline" data-state="enter"><p class="kh-line"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="6">The phone rings.</span></p><p class="kh-line"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="18">The shop is under a truck.</span></p><p class="kh-line"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="30">The caller books somebody else.</span></p><p class="kh-line kh-accent"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="42">Unless Twistor answers first.</span></p></section>
-<section data-overlay="ProgressCard" data-state="trades" aria-live="off"><ol class="money-story"><li><strong>The missed call</strong> Every missed call is a job somebody else books. For a working shop, the leak runs to thousands a month.</li><li><strong>Booked, not lost</strong> Twistor answers on the first ring, triages the urgency, and books the job straight onto your dispatch board.</li><li><strong>Invoice paid</strong> The job is dispatched, done, and invoiced. Nothing rots in a follow-up pile.</li></ol></section>
-<div data-overlay="HotspotLayer" data-state="trades" data-interactive="true"><button type="button" class="hotspot" data-fact="missed-call-cost" style="width:48px;height:48px" aria-label="The missed call">+</button><button type="button" class="hotspot" data-fact="booking-flow" style="width:48px;height:48px" aria-label="Booked, not lost">+</button><button type="button" class="hotspot" data-fact="invoice-paid" style="width:48px;height:48px" aria-label="Invoice paid">+</button></div>
-<p data-overlay="RoomLabel" data-state="trades">FIG. 01 / Dispatch board</p>
-<nav data-overlay="PillNav" data-state="trades" data-interactive="true" aria-label="Jump to a state"><button type="button" data-target="trades">Trades</button><button type="button" data-target="dispatch">Dispatch</button><button type="button" data-target="data">Data</button></nav>
-<div data-overlay="TickerBand" data-state="road" aria-hidden="true"><div class="ticker-track"><span class="ticker-item">Trades AI Front Office</span><span class="ticker-item">Dispatch OS</span><span class="ticker-item">Managed Data + Analytics</span><span class="ticker-item">Compliance Evidence Agent</span><span class="ticker-item">Trades AI Front Office</span><span class="ticker-item">Dispatch OS</span><span class="ticker-item">Managed Data + Analytics</span><span class="ticker-item">Compliance Evidence Agent</span></div></div>
-<p data-overlay="RoomLabel" data-state="dispatch">FIG. 02 / The answered call</p>
-<nav data-overlay="PillNav" data-state="dispatch" data-interactive="true" aria-label="Jump to a state"><button type="button" data-target="trades">Trades</button><button type="button" data-target="dispatch">Dispatch</button><button type="button" data-target="data">Data</button></nav>
+<section data-overlay="KineticHeadline" data-state="enter"><p class="kh-line"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="6">Every call answered.</span></p><p class="kh-line"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="18">Every season tracked.</span></p><p class="kh-line"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="30">Every record kept.</span></p><p class="kh-line kh-accent"><span class="kh-line-inner" data-line data-state="enter" data-reveal-frame="42">One company. Twistor.</span></p></section>
+<section data-overlay="ProgressCard" data-state="front-office" aria-live="off"><ol class="money-story"><li><strong>The missed call</strong> Every missed call is a job somebody else books. For a working business, the leak runs to thousands a month.</li><li><strong>Booked, not lost</strong> Twistor answers on the first ring, triages the urgency, and books the job straight onto your dispatch board.</li><li><strong>Invoice paid</strong> The job is dispatched, done, and invoiced. Nothing rots in a follow-up pile.</li></ol></section>
+<div data-overlay="HotspotLayer" data-state="front-office" data-interactive="true"><button type="button" class="hotspot" data-fact="missed-call-cost" style="width:48px;height:48px" aria-label="The missed call">+</button><button type="button" class="hotspot" data-fact="booking-flow" style="width:48px;height:48px" aria-label="Booked, not lost">+</button><button type="button" class="hotspot" data-fact="invoice-paid" style="width:48px;height:48px" aria-label="Invoice paid">+</button></div>
+<p data-overlay="RoomLabel" data-state="front-office">FIG. 01 / The front office</p>
+<nav data-overlay="PillNav" data-state="front-office" data-interactive="true" aria-label="Jump to a state"><button type="button" data-target="front-office">Front office</button><button type="button" data-target="season">Season</button><button type="button" data-target="data">Data</button></nav>
+<div data-overlay="TickerBand" data-state="road" aria-hidden="true"><div class="ticker-track"><span class="ticker-item">Twistor Trades</span><span class="ticker-item">Tori</span><span class="ticker-item">4SZNS</span><span class="ticker-item">Our LGCY</span><span class="ticker-item">Twistor Clips</span><span class="ticker-item">Twistor Social</span><span class="ticker-item">Twistor Data</span><span class="ticker-item">Twistor Cinematic</span><span class="ticker-item">Twistor Core</span><span class="ticker-item">Twistor Trades</span><span class="ticker-item">Tori</span><span class="ticker-item">4SZNS</span><span class="ticker-item">Our LGCY</span><span class="ticker-item">Twistor Clips</span><span class="ticker-item">Twistor Social</span><span class="ticker-item">Twistor Data</span><span class="ticker-item">Twistor Cinematic</span><span class="ticker-item">Twistor Core</span></div></div>
+<p data-overlay="RoomLabel" data-state="season">FIG. 02 / Every season</p>
+<nav data-overlay="PillNav" data-state="season" data-interactive="true" aria-label="Jump to a state"><button type="button" data-target="front-office">Front office</button><button type="button" data-target="season">Season</button><button type="button" data-target="data">Data</button></nav>
 <p data-overlay="RoomLabel" data-state="data">FIG. 03 / Data, wired clean</p>
-<nav data-overlay="PillNav" data-state="data" data-interactive="true" aria-label="Jump to a state"><button type="button" data-target="trades">Trades</button><button type="button" data-target="dispatch">Dispatch</button><button type="button" data-target="data">Data</button></nav>
-<button type="button" data-overlay="BackControl" data-state="data" data-interactive="true" data-target="trades">Back</button>
+<nav data-overlay="PillNav" data-state="data" data-interactive="true" aria-label="Jump to a state"><button type="button" data-target="front-office">Front office</button><button type="button" data-target="season">Season</button><button type="button" data-target="data">Data</button></nav>
+<button type="button" data-overlay="BackControl" data-state="data" data-interactive="true" data-target="front-office">Back</button>
     </div>
   </div>
-<section class="poster-set" aria-label="Segment posters"><figure><img src="cinematic/media/d/establish.webp" alt="Rooftop wide at working height: two techs at an open package unit under a big sky, Twistor wordmark nav on top, the twisted-T floating center. Poster frame = this segment&#x27;s first frame."><figcaption>establish: guide, Twistor twisted-T mark, FLOAT. Rooftop wide at working height: two techs at an open package unit under a big sky, Twistor wordmark nav on top, the twisted-T floating center. Poster frame = this segment&#x27;s first frame.</figcaption></figure><figure><img src="cinematic/media/d/enter.webp" alt="The drill goes in: the path stroke draws across the unit and the guide rides its tip while the kinetic headline builds the missed-call story. Travel segments sample at 12 fps per REA 3.1."><figcaption>enter: guide, Twistor twisted-T mark, PATH_TIP. The drill goes in: the path stroke draws across the unit and the guide rides its tip while the kinetic headline builds the missed-call story. Travel segments sample at 12 fps per REA 3.1.</figcaption></figure><figure><img src="cinematic/media/d/trades.webp" alt="01 Trades AI Front Office. The gauges read right because the call was answered: ProgressCard counts the money story (missed call, booked job, paid invoice), hotspots on the three proof points."><figcaption>trades: guide, Twistor twisted-T mark, PARK at prop-dispatch-board. 01 Trades AI Front Office. The gauges read right because the call was answered: ProgressCard counts the money story (missed call, booked job, paid invoice), hotspots on the three proof points.</figcaption></figure><figure><img src="cinematic/media/d/road.webp" alt="The road between services: hands tape the line set while the stroke carries the guide onward and the ticker names the product line. The divider panel of the reference folds into this travel, per the teardown."><figcaption>road: guide, Twistor twisted-T mark, PATH_TIP. The road between services: hands tape the line set while the stroke carries the guide onward and the ticker names the product line. The divider panel of the reference folds into this travel, per the teardown.</figcaption></figure><figure><img src="cinematic/media/d/dispatch.webp" alt="02 Dispatch OS. The human on the headset is the product working: one board runs the phones and the schedule."><figcaption>dispatch: guide, Twistor twisted-T mark, PARK at prop-headset. 02 Dispatch OS. The human on the headset is the product working: one board runs the phones and the schedule.</figcaption></figure><figure><img src="cinematic/media/d/data.webp" alt="03 Managed Data + Analytics. The guide drifts past the panel the way the SLICK capsule drifts its dwell: the systems underneath, wired clean, reported in plain English."><figcaption>data: guide, Twistor twisted-T mark, DRIFT at prop-data-pipeline. 03 Managed Data + Analytics. The guide drifts past the panel the way the SLICK capsule drifts its dwell: the systems underneath, wired clean, reported in plain English.</figcaption></figure></section>
+<section class="poster-set" aria-label="Segment posters"><figure><img src="cinematic/media/d/establish.webp" alt="A bright loft office: four colleagues around a laptop, mid-celebration, Twistor wordmark nav on top, the twisted-T floating over the white brick. Poster frame = this segment&#x27;s first frame."><figcaption>establish: guide, Twistor twisted-T mark, FLOAT. A bright loft office: four colleagues around a laptop, mid-celebration, Twistor wordmark nav on top, the twisted-T floating over the white brick. Poster frame = this segment&#x27;s first frame.</figcaption></figure><figure><img src="cinematic/media/d/enter.webp" alt="Deeper into the same loft: a colleague presents to the team while the path stroke draws across the tall windows and the guide rides its tip; the kinetic headline builds the company promise line by line. Travel segments sample at 12 fps per REA 3.1."><figcaption>enter: guide, Twistor twisted-T mark, PATH_TIP. Deeper into the same loft: a colleague presents to the team while the path stroke draws across the tall windows and the guide rides its tip; the kinetic headline builds the company promise line by line. Travel segments sample at 12 fps per REA 3.1.</figcaption></figure><figure><img src="cinematic/media/d/front-office.webp" alt="01 The front office. A specialist on a headset, smiling mid-call: the ProgressCard counts the front-office story (answered on the first ring, booked and confirmed, followed up), hotspots on the three proof points."><figcaption>front-office: guide, Twistor twisted-T mark, PARK at prop-front-office. 01 The front office. A specialist on a headset, smiling mid-call: the ProgressCard counts the front-office story (answered on the first ring, booked and confirmed, followed up), hotspots on the three proof points.</figcaption></figure><figure><img src="cinematic/media/d/road.webp" alt="The walk between rooms: three colleagues stride down a bright office hallway while the stroke carries the guide onward and the ticker names every Twistor product line."><figcaption>road: guide, Twistor twisted-T mark, PATH_TIP. The walk between rooms: three colleagues stride down a bright office hallway while the stroke carries the guide onward and the ticker names every Twistor product line.</figcaption></figure><figure><img src="cinematic/media/d/season.webp" alt="02 Every season. A youth basketball team in a sideline huddle with its coaches: 4SZNS tracks every possession and draws the Play Path, so the next teaching moment is already on film."><figcaption>season: guide, Twistor twisted-T mark, PARK at prop-season. 02 Every season. A youth basketball team in a sideline huddle with its coaches: 4SZNS tracks every possession and draws the Play Path, so the next teaching moment is already on film.</figcaption></figure><figure><img src="cinematic/media/d/data.webp" alt="03 Twistor Data. An analyst at dual monitors with the dashboards live: the guide drifts past the way clean data moves, wired clean and reported in plain English."><figcaption>data: guide, Twistor twisted-T mark, DRIFT at prop-data-pipeline. 03 Twistor Data. An analyst at dual monitors with the dashboards live: the guide drifts past the way clean data moves, wired clean and reported in plain English.</figcaption></figure></section>
   <section id="structured-view" aria-label="Full information in text form">
     <h2>Everything on this page, in plain text</h2>
-<article data-fact="brand" id="fact-brand"><h3>Twistor</h3><p>The company that does it all. Twistor builds AI systems that answer your phones, recover your revenue, and run your operations. One platform, every product.</p></article>
+<article data-fact="brand" id="fact-brand"><h3>Twistor</h3><p>The company that does it all. Twistor builds AI systems and products: agents that run your front office, analytics for every season, an archive for every family, and data you can read at a glance. One platform, every product.</p></article>
 <article data-fact="cta-book-a-demo" id="fact-cta-book-a-demo"><h3>Book a demo</h3><p>Book a demo: thirty minutes, your numbers, no pitch deck theater.</p></article>
-<article data-fact="missed-call-cost" id="fact-missed-call-cost"><h3>The missed call</h3><p>Every missed call is a job somebody else books. For a working shop, the leak runs to thousands a month.</p></article>
+<article data-fact="Every call answered." class="fact-line"><p>Every call answered.</p></article>
+<article data-fact="Every season tracked." class="fact-line"><p>Every season tracked.</p></article>
+<article data-fact="Every record kept." class="fact-line"><p>Every record kept.</p></article>
+<article data-fact="One company. Twistor." class="fact-line"><p>One company. Twistor.</p></article>
+<article data-fact="front-office" id="fact-front-office"><h3>Front office</h3><p>Segment: The front office.</p></article>
+<article data-fact="season" id="fact-season"><h3>Season</h3><p>Segment: Every season.</p></article>
+<article data-fact="data" id="fact-data"><h3>Data</h3><p>Segment: Managed Data + Analytics.</p></article>
+<article data-fact="missed-call-cost" id="fact-missed-call-cost"><h3>The missed call</h3><p>Every missed call is a job somebody else books. For a working business, the leak runs to thousands a month.</p></article>
 <article data-fact="booking-flow" id="fact-booking-flow"><h3>Booked, not lost</h3><p>Twistor answers on the first ring, triages the urgency, and books the job straight onto your dispatch board.</p></article>
 <article data-fact="invoice-paid" id="fact-invoice-paid"><h3>Invoice paid</h3><p>The job is dispatched, done, and invoiced. Nothing rots in a follow-up pile.</p></article>
-<article data-fact="trades-front-office" id="fact-trades-front-office"><h3>Trades AI Front Office</h3><p>For HVAC, plumbing, roofing, and electrical shops: AI reception that answers every call, triages urgency, and posts jobs straight to your dispatch board. Built for the trades first, because missed calls are missed revenue. Every call answered. Every urgent job triaged.</p></article>
+<article data-fact="trades-front-office" id="fact-trades-front-office"><h3>Twistor Trades</h3><p>The front office for home service shops: every call answered, every lead followed up, every job on one board, so a good shop never loses work to a ringing phone.</p></article>
+<article data-fact="tori" id="fact-tori"><h3>Tori</h3><p>A Twistor agent who works the phones and the inbox like a trusted front desk hire, standard for every customer and tailored by role for the shops that need more.</p></article>
+<article data-fact="4szns" id="fact-4szns"><h3>4SZNS</h3><p>Youth sports analytics for schools, districts, and leagues: tracked possessions, honest film, and numbers a coach can teach from, in every season.</p></article>
+<article data-fact="our-lgcy" id="fact-our-lgcy"><h3>Our LGCY</h3><p>A living family archive that turns records into a grandmother tree: every person documented, every fact cited, every story kept for the generations coming up behind us.</p></article>
+<article data-fact="twistor-clips" id="fact-twistor-clips"><h3>Twistor Clips</h3><p>Permission-first clipping as a service: send us your long video, get back short clips cut, captioned, and ready to post.</p></article>
+<article data-fact="twistor-social" id="fact-twistor-social"><h3>Twistor Social</h3><p>A groups-first meetup app built on verified identity and real accountability, made to get people off the couch and into the real world.</p></article>
+<article data-fact="data-analytics" id="fact-data-analytics"><h3>Twistor Data</h3><p>Data products and datasets with lineage you can audit: pay per use, priced in plain sight, and built on a collection system that runs every day.</p></article>
 <article data-fact="dispatch-os" id="fact-dispatch-os"><h3>Dispatch OS</h3><p>Jobs arrive by phone, email, or web. AI answers, triages, schedules, and confirms, while you watch a single dispatch board. One board that runs your phones and your schedule.</p></article>
 <article data-fact="dental-front-office" id="fact-dental-front-office"><h3>Dental AI Front Office</h3><p>AI answers every call, confirms appointments, texts back missed calls in under a minute, and books directly inside your practice management software, with a monthly report showing recovered revenue. Never lose a patient to voicemail again.</p></article>
 <article data-fact="compliance-agent" id="fact-compliance-agent"><h3>Compliance Evidence Agent</h3><p>An agent living in your repos and cloud accounts, continuously collecting SOC 2 and HIPAA evidence and opening PRs when something drifts.</p></article>
-<article data-fact="data-analytics" id="fact-data-analytics"><h3>Managed Data + Analytics</h3><p>Pipelines from your SaaS tools into a clean warehouse, dashboards you actually read, and a monthly KPI memo in plain English. Your data team, done for you.</p></article>
-<article data-fact="twistor-core" id="fact-twistor-core"><h3>Twistor Core</h3><p>Every product above runs on one platform underneath it all: Twistor Core. One data layer, one agent standard, one bill.</p></article>
-<article data-fact="trades" id="fact-trades"><h3>Trades</h3><p>Segment: Trades AI Front Office.</p></article>
-<article data-fact="dispatch" id="fact-dispatch"><h3>Dispatch</h3><p>Segment: Dispatch OS.</p></article>
-<article data-fact="data" id="fact-data"><h3>Data</h3><p>Segment: Managed Data + Analytics.</p></article>
-<article data-fact="prop-dispatch-board" id="fact-prop-dispatch-board"><h3>Dispatch board</h3><p>FIG. 01 / Dispatch board. The first stop on the flight: every answered call lands here as a booked job.</p></article>
-<article data-fact="prop-headset" id="fact-prop-headset"><h3>The answered call</h3><p>FIG. 02 / The answered call. The second stop on the flight: a person and an agent on the same board, on the same call.</p></article>
-<article data-fact="prop-data-pipeline" id="fact-prop-data-pipeline"><h3>Data, wired clean</h3><p>FIG. 03 / Data, wired clean. The third stop on the flight: the systems underneath the shop, wired into one clean pipeline.</p></article>
-<article data-fact="The phone rings." class="fact-line"><p>The phone rings.</p></article>
-<article data-fact="The shop is under a truck." class="fact-line"><p>The shop is under a truck.</p></article>
-<article data-fact="The caller books somebody else." class="fact-line"><p>The caller books somebody else.</p></article>
-<article data-fact="Unless Twistor answers first." class="fact-line"><p>Unless Twistor answers first.</p></article>
+<article data-fact="cinematic-films" id="fact-cinematic-films"><h3>Twistor Cinematic</h3><p>Cinematic video for business: scroll-driven websites and short films with a director&#x27;s discipline, offered as software on Twistor Core and as done-for-you productions.</p></article>
+<article data-fact="twistor-core" id="fact-twistor-core"><h3>Twistor Core</h3><p>The platform underneath everything we ship: one system for agents, billing, data, and delivery, so every Twistor product starts standing on solid ground.</p></article>
+<article data-fact="prop-front-office" id="fact-prop-front-office"><h3>The front office</h3><p>FIG. 01 / The front office. The first stop on the flight: every call answered on the first ring, booked, and followed up, every time.</p></article>
+<article data-fact="prop-season" id="fact-prop-season"><h3>Every season</h3><p>FIG. 02 / Every season. The second stop on the flight: 4SZNS tracks the possession, draws the Play Path, and hands the coach the teaching moment.</p></article>
+<article data-fact="prop-data-pipeline" id="fact-prop-data-pipeline"><h3>Data, wired clean</h3><p>FIG. 03 / Data, wired clean. The third stop on the flight: the systems underneath the business, wired into one clean pipeline.</p></article>
   </section>
-  <section class="work" aria-label="Selected work">
-    <h2>Selected work</h2>
-    <figure>
-      <img src="cinematic/media/work/8486972.jpg" alt="Plumber in a yellow hard hat and hi-vis vest, pipe wrench in hand, looking up at the work.">
-      <figcaption>The work itself. Photo by Kindel Media on Pexels.</figcaption>
-    </figure>
-    <figure>
-      <img src="cinematic/media/work/5463580.jpg" alt="Close-up of hands running a leak detector along a condenser coil.">
-      <figcaption>Evidence, collected by hand before it is collected by software. Photo by José Andrés Pacheco Cortes on Pexels.</figcaption>
-    </figure>
-  </section>
+<section class="work" id="products" aria-label="The Twistor product lineup">
+<h2>The Lineup</h2>
+<p class="lede">One company. Every tool your business has been asking for.</p>
+<p>From the phones at a family HVAC shop to analytics for a school district, Twistor builds practical software that answers, organizes, and follows through. Come see the whole lineup.</p>
+<div class="hub-group"><h3>Front Office</h3>
+<article class="hub-row" id="product-trades-front-office"><h4>Twistor Trades</h4><div><p>The front office for home service shops: every call answered, every lead followed up, every job on one board, so a good shop never loses work to a ringing phone.</p><p class="hub-proof">Live product demo published, with pricing set at $299 per month for Starter and $499 per month for Pro.</p></div><a class="hub-link" href={base + "/trades/"}>Watch the demo</a></article>
+<article class="hub-row" id="product-tori"><h4>Tori</h4><div><p>A Twistor agent who works the phones and the inbox like a trusted front desk hire, standard for every customer and tailored by role for the shops that need more.</p><p class="hub-proof">Outbound calling engine merged into the production codebase on November 1, 2026; Tailored Tori priced at $49 to $99 per month by role.</p></div><a class="hub-link" href="#fact-tori">See it on this page</a></article>
+<article class="hub-row" id="product-dispatch-os"><h4>Dispatch OS</h4><div><p>Jobs arrive by phone, email, or web. AI answers, triages, schedules, and confirms, while you watch a single dispatch board. One board that runs your phones and your schedule.</p></div><a class="hub-link" href={base + "/products/dispatch-os"}>Visit the product</a></article>
+<article class="hub-row" id="product-dental-front-office"><h4>Dental AI Front Office</h4><div><p>AI answers every call, confirms appointments, texts back missed calls in under a minute, and books directly inside your practice management software, with a monthly report showing recovered revenue. Never lose a patient to voicemail again.</p></div><a class="hub-link" href={base + "/products/dental-front-office"}>Visit the product</a></article>
+</div>
+<div class="hub-group"><h3>Content and Community</h3>
+<article class="hub-row" id="product-twistor-clips"><h4>Twistor Clips</h4><div><p>Permission-first clipping as a service: send us your long video, get back short clips cut, captioned, and ready to post.</p><p class="hub-proof">Private beta built and in first-user testing since October 31, 2026, at $299 per month for 20 clips.</p></div><a class="hub-link" href="#fact-twistor-clips">See it on this page</a></article>
+<article class="hub-row" id="product-twistor-social"><h4>Twistor Social</h4><div><p>A groups-first meetup app built on verified identity and real accountability, made to get people off the couch and into the real world.</p><p class="hub-proof">Live on the web since November 7, 2026.</p></div><a class="hub-link" href="https://social.twistor.co">Visit the product</a></article>
+</div>
+<div class="hub-group"><h3>Sports and Family</h3>
+<article class="hub-row" id="product-4szns"><h4>4SZNS</h4><div><p>Youth sports analytics for schools, districts, and leagues: tracked possessions, honest film, and numbers a coach can teach from, in every season.</p><p class="hub-proof">Infrastructure phase complete, with the build pipeline green since November 11, 2026; pricing set at $599 per team per season.</p></div><a class="hub-link" href="#fact-4szns">See it on this page</a></article>
+<article class="hub-row" id="product-our-lgcy"><h4>Our LGCY</h4><div><p>A living family archive that turns records into a grandmother tree: every person documented, every fact cited, every story kept for the generations coming up behind us.</p><p class="hub-proof">Reference corpus indexed and verified: 107,723 Dawes Final Rolls records, including 23,752 Freedmen records across five tribal nations.</p></div><a class="hub-link" href="https://twistorhq.github.io/ourlgcy-demo/">Watch the demo</a></article>
+</div>
+<div class="hub-group"><h3>Data and Film</h3>
+<article class="hub-row" id="product-data-analytics"><h4>Twistor Data</h4><div><p>Data products and datasets with lineage you can audit: pay per use, priced in plain sight, and built on a collection system that runs every day.</p><p class="hub-proof">The bronze data layer holds 141,600 source files and grows on a 15 minute collection cycle, counted November 16, 2026.</p></div><a class="hub-link" href="#fact-data-analytics">See it on this page</a></article>
+<article class="hub-row" id="product-cinematic-films"><h4>Twistor Cinematic</h4><div><p>Cinematic video for business: scroll-driven websites and short films with a director&#x27;s discipline, offered as software on Twistor Core and as done-for-you productions.</p><p class="hub-proof">This site runs on it: a 228 frame cinematic scroll build, shipped November 11, 2026.</p></div><a class="hub-link" href="#fact-cinematic-films">See it on this page</a></article>
+</div>
+<div class="hub-group"><h3>The Platform</h3>
+<article class="hub-row" id="product-twistor-core"><h4>Twistor Core</h4><div><p>The platform underneath everything we ship: one system for agents, billing, data, and delivery, so every Twistor product starts standing on solid ground.</p><p class="hub-proof">The costed plan rail shipped November 12, 2026: every agent action priced up front, capped at the quote, and settled only when the step completes.</p></div><a class="hub-link" href="#fact-twistor-core">See it on this page</a></article>
+<article class="hub-row" id="product-compliance-agent"><h4>Compliance Evidence Agent</h4><div><p>An agent living in your repos and cloud accounts, continuously collecting SOC 2 and HIPAA evidence and opening PRs when something drifts.</p></div><a class="hub-link" href={base + "/products/compliance-agent"}>Visit the product</a></article>
+</div>
+<div class="hub-group"><h3>Work With Us</h3><p>Book a demo: thirty minutes, your numbers, no pitch deck theater.</p><p><a class="hub-link" href="#fact-cta-book-a-demo">Book a demo</a></p></div>
+</section>
 </main>
 <footer>
   <button id="view-toggle" type="button">View: Full / Light</button>
-  <p class="credits">Photography: José Andrés Pacheco Cortes, Kindel Media, and Pexels contributors, under the Pexels License (credits in PHOTO-MANIFEST.md). Prepared by Twistor Holdings LLC.</p>
+  <p><a href={base + "/credits/"}>Photo Credits</a></p>
+  <p>Prepared by Twistor Holdings LLC.</p>
 </footer>
     <script src="../scripts/cinematic-home.js"></script>
   </body>
