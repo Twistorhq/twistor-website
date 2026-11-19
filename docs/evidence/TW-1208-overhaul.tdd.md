@@ -21,6 +21,22 @@ home page; nothing is deleted. Poster-first media and structured-view
 fact parity carry over: every fact on the page is plain HTML text, and
 every demo slot renders a still or panel until its film exists.
 
+Correction (fix round, 2026-11-19): the sentence above was false as
+first shipped. The original branch had in fact regenerated
+`public/cinematic/**` as a side effect of re-running the cinematic
+tooling: segments renamed (trades to front-office, dispatch to
+season), hotspot states rewritten, `manifest.json` regenerated, 150
+files deleted net including the trades and dispatch frame sequences.
+Rosa's gate caught the mismatch between this report and the diff
+(REQUEST CHANGES, one blocker). The fix round restored
+`public/cinematic/**` from main exactly: the branch diff against main
+now touches zero files under `public/cinematic` (verified with
+`git diff main...HEAD -- public/cinematic`, empty), so the archived
+cinematic build, the graphics asset the founder asked to keep, is
+byte-identical to main and the statement above holds as shipped. The
+review unit drops from 868 files to 19, which is the change actually
+being shipped.
+
 ## What changed
 
 - `src/pages/index.astro` rewritten whole: sticky header, type-led hero,
@@ -37,7 +53,14 @@ every demo slot renders a still or panel until its film exists.
   and the page says so.
 - Mobile sizing: fluid type with capped clamps (H1 measures 54.4px at
   1440 wide, 33.6px at 375), a 1120px container with 20 to 24px gutters,
-  single-column product rows under 760px, 44px minimum tap targets.
+  single-column product rows under 760px. Tap targets, measured in
+  Chromium on the built page after the fix round: primary buttons
+  52px, product links 44px, header nav links 44px at 1440 and 48px at
+  390/375. The footer's inline text link is standard text height
+  (20px) and is not counted in that minimum. (Fix round: product links
+  were padded with `inline-flex` and `min-height: 44px`, and desktop
+  nav padding raised from 6px to 8px, after Rosa's nit showed the
+  original blanket 44px claim did not hold for them.)
   Measured: document scrollWidth equals clientWidth at 1440, 390, and
   375 (no horizontal overflow).
 - Demo slots: the build checks `public/demos/<slug>.mp4` (poster
@@ -49,8 +72,11 @@ every demo slot renders a still or panel until its film exists.
   paper, the guide mark baked in) and read as broken in a plain slot, so
   the five homepage photographs were re-fetched as clean originals from
   Pexels, the same photos the credits page already credits, at 1200px
-  wide in `public/stills/`. The Cinematic slot keeps the build's own
-  contact sheet, which is the product's real work product.
+  wide in `public/stills/`. The Cinematic slot uses the archived
+  build's own contact sheet at `/cinematic/media/contact-sheet.jpg`,
+  restored byte-identical from main with the rest of the cinematic
+  tree in the fix round; it loads from the built site (natural width
+  1920 at 1440).
 - `src/pages/credits.astro`: scene descriptions updated to match the
   stills' new use; photographers and license unchanged.
 
@@ -77,6 +103,26 @@ every demo slot renders a still or panel until its film exists.
   fallback still. Nia's real films (TW-1212) need no page edit.
 - Before/after screenshots at 1440 and 375 in `qa-tw1208/` (before is a
   clean build of origin/main at 24bcfea, the live TW-1146 state).
+
+## Fix round gate results (Rosa REQUEST CHANGES, 2026-11-19)
+
+- Cinematic restore: 852 files restored to main exactly (148
+  branch-added files removed, 150 deleted files restored, 554 modified
+  files reverted). `git diff main...HEAD -- public/cinematic` is
+  empty; the restored tree carries the original segment names
+  (trades, dispatch) and the archived contact sheet serves from the
+  built site.
+- Build re-run: `npm run build` passes, including the Astryx scope
+  guard (13 pages).
+- Suites re-run: tv-overlays PASS, fallback-path PASS, accessibility
+  19/19, waitlist 47/47, server 37/37, social page 59/59. Same numbers
+  Rosa verified; no regressions from the restore or the tap-target
+  padding.
+- Agent-eyes strict re-run at 1440, 390, and 375: "no page errors, no
+  console errors, no server errors, no horizontal scroll, actions ok."
+  Screenshots in `qa-tw1208/fix-round-home-*.png`. H1 still measures
+  54.4px at 1440 and 33.6px at 375; the layout Rosa verified is
+  unchanged apart from the two padded link styles.
 
 ## Accessibility
 
